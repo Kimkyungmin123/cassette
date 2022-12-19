@@ -32,6 +32,9 @@
     "zustand": "^4.1.5"
   },
   "devDependencies": {
-    "husky": "^8.0.0"
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "eslint-plugin-simple-import-sort": "latest",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0"
   }
 }
