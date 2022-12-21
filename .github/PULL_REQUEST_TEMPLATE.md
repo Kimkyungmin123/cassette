@@ -1,7 +1,9 @@
 ## What is this PR do?
-- Introduction: 
-- Notion Ticket: notion link
-- Figma: figma link
+- [ ] New Features 
+- [ ] Fixed a bug
+- [ ] Refectoring
+- [ ] Style
+- [ ] Code Formatting
 
 ## Changes
 - [ ] : 변경 사항1
