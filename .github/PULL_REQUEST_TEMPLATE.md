@@ -4,13 +4,13 @@
 - Figma: figma link
 
 ## Changes
-[]:
-[]: 
+[ ]:
+[ ]: 
 
 ## Screenshot
 이미지 첨부
 
 ## Test Checklist
-[]: 
-[]: 
-[]: 
+[ ]: 
+[ ]: 
+[ ]: 
