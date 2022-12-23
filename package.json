@@ -18,6 +18,10 @@
     ]
   },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^11.10.0",
+    "@emotion/css": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@types/node": "^18.11.17",
     "emotion": "^11.0.0",
     "eslint": "8.29.0",
