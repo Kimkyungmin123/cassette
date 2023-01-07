@@ -9,7 +9,7 @@ const mainButton = css`
 `;
 
 const kakaoButton = css`
-  background-color: ${theme.colors.kakaobtn};
+  background-color: ${theme.colors.login_kakao};
 `;
 
 const geustButton = css`

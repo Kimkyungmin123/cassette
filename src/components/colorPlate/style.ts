@@ -6,7 +6,7 @@ export const ColorPlateStyle = styled.div`
   max-width: 327px;
   display: flex;
   gap: 16px;
-  background-color: ${theme.colors.tertiary};
+  background-color: ${theme.colors.color_pallet};
   flex-wrap: wrap;
   padding: 16px 22px;
   border-radius: 10px;

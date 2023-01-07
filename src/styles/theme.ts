@@ -2,31 +2,39 @@ import { DefaultTheme } from '@emotion/react';
 
 const colors = {
   primary: '#DA7433', // cassette orange
-  secondary: '#FFFFE0', // main button
-  tertiary: '#FCFCEE',
+  secondary: '#FFFFE0', // main_color
 
-  kakaobtn: '#FFE54A',
-  disabled: '#9C9C89',
-  input: '#424242',
-
-  // font color
+  black: '#000000',
+  black_900: '#212121',
+  black_800: '#424242',
+  gray_700: '#616161',
+  gray_600: '#757575',
+  gray_500: '#9E9E9E',
+  gray_400: '#BDBDBD',
+  gray_300: '#E0E0E0',
+  gray_200: '#EEEEEE',
+  gray_100: '#F5F5F5',
+  gray_50: '#FAFAFA',
   white: '#FFFFFF',
   mint: '#4DFFEB',
-  black: '#000000',
-  gray: '#757575', // 600
-  lightgray: '#BDBDBD', // 400
+
+  color_pallet: '#FCFCEE',
+  login_kakao: '#FFE54A',
+  disabled: '#9C9C89', // main_50%
+  warning_red: '#B91919',
+  record_red: '#CD0E00',
 
   // cassette color
   cassette_orange: '#DA7433',
-  tangerine: '#E9A133',
-  pink: '#F57797',
-  deep_pink: '#D25860',
-  purple: '#8C5488',
-  light_green: '#ACB21B',
-  olive: '#7C810B',
-  emerald: '#3ABEAB',
-  ceruleanblue: '#74A3B5',
-  brown: '#A7412E',
+  cassette_tangerine: '#E9A133',
+  cassette_pink: '#F57797',
+  cassette_darkpink: '#D25860',
+  cassette_purple: '#8C5488',
+  cassette_green: '#ACB21B',
+  cassette_olive: '#7C810B',
+  cassette_mint: '#3ABEAB',
+  cassette_blue: '#74A3B5',
+  cassette_red: '#A7412E',
 };
 
 const fontSize = {
@@ -36,7 +44,6 @@ const fontSize = {
   md: '16px',
   sm: '14px',
   xs: '12px',
-  xxs: '6px',
 };
 
 export type ColorsTypes = typeof colors;
