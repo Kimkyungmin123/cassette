@@ -1,8 +1,7 @@
 import { DefaultTheme } from '@emotion/react';
 
 const colors = {
-  primary: '#DA7433', // cassette orange
-  secondary: '#FFFFE0', // main_color
+  primary: '#FFFFE0', //   main_color
 
   black: '#000000',
   black_900: '#212121',
