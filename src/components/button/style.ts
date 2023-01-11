@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 import { ButtonProps } from '.';
 
 const mainButton = css`
-  background-color: ${theme.colors.secondary};
+  background-color: ${theme.colors.primary};
 `;
 
 const kakaoButton = css`
@@ -13,7 +13,6 @@ const kakaoButton = css`
 `;
 
 const geustButton = css`
-  background-color: ${theme.colors.primary};
   color: ${theme.colors.white};
 `;
 
@@ -34,6 +33,8 @@ export const ButtonLayout = styled.div<ButtonProps>`
   font-weight: 700;
   line-height: 19px;
   font-family: 'Pretendard-Regular';
+  background-color: ${({ color, variant }) =>
+    variant === 'guest' ? color && theme.colors[color] : null};
 
   &:hover {
     cursor: pointer;

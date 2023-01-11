@@ -1,5 +1,6 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { ButtonType } from 'types';
+import { useStore } from 'store';
+import { ButtonType, Color } from 'types';
 
 import { ButtonLayout } from './style';
 
@@ -8,12 +9,19 @@ export interface ButtonProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   disabled?: boolean;
   variant: ButtonType;
+  color?: Color;
 }
 
 const Button = ({ children, onClick, variant }: ButtonProps) => {
+  const { tapeColor } = useStore();
   return (
     <>
-      <ButtonLayout role="button" onClick={onClick} variant={variant}>
+      <ButtonLayout
+        role="button"
+        onClick={onClick}
+        variant={variant}
+        color={tapeColor}
+      >
         {children}
       </ButtonLayout>
     </>
