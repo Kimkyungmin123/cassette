@@ -1,26 +1,33 @@
 import Button from 'components/button';
-import ColorPlate from 'components/colorPlate';
 import Tape from 'components/tape';
+import Link from 'next/link';
+import { Container, Zone } from 'styles';
+
+import Kakao from '../../public/assets/kakao.svg';
 
 export default function Home() {
   return (
-    <div>
-      <h1>main page</h1>
-      <Button variant="main">
-        <div>내 테이프 만들기</div>
-      </Button>
-      <Button variant="kakao">
-        <div>카카오계정으로 로그인하기</div>
-      </Button>
-      투명 버튼 - 닫기
-      <Button variant="clear">
-        <div>닫기</div>
-      </Button>
-      <Button variant="guest">
-        <div>목소리 남겨주기</div>
-      </Button>
-      <ColorPlate />
-      <Tape title="나의 새로운 응원을 도전해줘!" date="21.01.01" sec="144" />
-    </div>
+    <Container>
+      <Zone css={{ gap: '32px' }}>
+        <div>
+          <h1>2023 Vioce Tape</h1>
+          <h3>내 목소리가 들리니?</h3>
+        </div>
+        <Tape title="2023 한정판 테이프" date="21.01.01" sec="144" />
+        <p>
+          평소 전하지 못했던 마음을
+          <br /> 목소리로 담아보세요 ♡
+        </p>
+      </Zone>
+      <Zone css={{ gap: '16px', paddingTop: ' 106px' }}>
+        <Button variant="kakao">
+          <Kakao />
+          카카오계정으로 로그인하기
+        </Button>
+        <Link href="/decorate-tape" css={{ maxWidth: '327px' }}>
+          <Button variant="main">내 테이프 만들기</Button>
+        </Link>
+      </Zone>
+    </Container>
   );
 }

@@ -20,6 +20,7 @@
     "simple-import-sort/exports": "error",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "no-unreachable": "off"
+    "no-unreachable": "off",
+    "react-hooks/rules-of-hooks": "warn"
   }
 }

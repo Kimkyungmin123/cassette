@@ -22,7 +22,7 @@ const Button = ({ children, onClick, variant }: ButtonProps) => {
         variant={variant}
         color={tapeColor}
       >
-        {children}
+        <div>{children}</div>
       </ButtonLayout>
     </>
   );

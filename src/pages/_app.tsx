@@ -1,4 +1,5 @@
 import { Global, ThemeProvider } from '@emotion/react';
+import Layout from 'components/layout';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { global } from 'styles/globals';
@@ -15,7 +16,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <Global styles={global} />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );

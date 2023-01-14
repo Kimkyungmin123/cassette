@@ -17,6 +17,7 @@ export const CircleStyle = styled.input<CircleProps>`
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  margin: 0;
   background-color: ${({ color }) => theme.colors[color]};
 
   &:hover {
