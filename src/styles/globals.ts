@@ -20,9 +20,23 @@ export const global = css`
   html {
     box-sizing: border-box;
   }
+
   body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
+  }
+
+  #__next {
+    width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0;
+    padding: 0;
   }
 
   button,

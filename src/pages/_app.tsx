@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <div id="modal" />
       </ThemeProvider>
     </>
   );

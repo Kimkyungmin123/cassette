@@ -8,17 +8,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return (
-    <>
-      <Image
-        src="/assets/backgroundImg.svg"
-        alt="배경 이미지"
-        fill
-        style={{ objectFit: 'cover' }}
-      />
-      <Children>{children}</Children>
-    </>
-  );
+  return <Children>{children}</Children>;
 };
 
 export default Layout;

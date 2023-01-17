@@ -35,7 +35,6 @@ export const ButtonLayout = styled.div<ButtonProps>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 327px;
   font-size: ${theme.fontSize.md};
   border-radius: 50px;
   padding: 17.5px 0;
