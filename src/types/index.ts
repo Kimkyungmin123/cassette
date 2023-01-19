@@ -11,3 +11,9 @@ export type Color =
   | 'cassette_red';
 
 export type ButtonType = 'main' | 'kakao' | 'guest' | 'clear';
+
+export interface UserClient {
+  nickname: string;
+  tapename: string;
+  tapeColor: Color;
+}
