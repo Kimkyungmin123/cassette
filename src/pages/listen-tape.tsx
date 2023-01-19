@@ -3,8 +3,9 @@ import Modal from 'components/modal';
 import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import theme from 'styles/theme';
+
 import { Box } from './create-tape/styles';
 
 const ListenTape = () => {
@@ -31,7 +32,9 @@ const ListenTape = () => {
             }
             detail="친구들의 목소리가 담긴 테이프를 갖고싶나요?"
             btnText="내 테이프 만들기"
-            onClickBtn={() => {}}
+            onClickBtn={() => {
+              console.log('click');
+            }}
           />
         )}
       </ModalPortal>
