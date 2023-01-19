@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuthToken } from 'utils/storage/authCookie';
+import { getAuthToken, removeAuthToken } from 'utils/storage/authCookie';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
@@ -11,9 +11,14 @@ instance.interceptors.request.use(
   (config) => {
     config.withCredentials = true;
 
+    removeAuthToken('accessToken');
     const accessToken = getAuthToken('accessToken');
-    if (config.headers && accessToken)
+    if (config.headers && accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
+
+      config.headers['env'] = `local`;
+    }
+
     return config;
   },
 
