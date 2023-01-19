@@ -2,7 +2,10 @@ import Button from 'components/button';
 import Input from 'components/input';
 import Tape from 'components/tape';
 import Title from 'components/title';
-import React, { ChangeEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ChangeEvent, useState } from 'react';
+import { useUserStore } from 'store';
+
 import { Box, Info, InputBox } from './styles';
 
 const MAX_LENGTH = {
@@ -12,6 +15,7 @@ const MAX_LENGTH = {
 const CreateTape = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
+  const { setUserData } = useUserStore();
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);
@@ -20,6 +24,8 @@ const CreateTape = () => {
   const handleChangeTitle = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setTitle(target.value);
   };
+
+  const router = useRouter();
 
   return (
     <Box>
@@ -52,11 +58,16 @@ const CreateTape = () => {
         <Info>
           친구들에게 어떤 얘기를 듣고싶나요?
           <br />
-          ex) 2023년 나의 새로운 도전을 응원해줘!
+          ex&#41; 2023년 나의 새로운 도전을 응원해줘!
         </Info>
       </InputBox>
 
-      <Button onClick={() => {}} variant="main">
+      <Button
+        onClick={() => {
+          setUserData(nickname, title), router.push('/decorate-tape');
+        }}
+        variant="main"
+      >
         작성 완료
       </Button>
     </Box>
