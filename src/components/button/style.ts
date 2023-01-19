@@ -16,8 +16,8 @@ const kakaoButton = css`
   padding: 15px 0;
 
   div {
-    padding-left: 36px;
-    gap: 24px;
+    padding-left: 24px;
+    gap: 72px;
   }
 `;
 
@@ -35,6 +35,7 @@ export const ButtonLayout = styled.div<ButtonProps>`
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 327px;
   font-size: ${theme.fontSize.md};
   border-radius: 50px;
   padding: 17.5px 0;
