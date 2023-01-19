@@ -1,3 +1,5 @@
+import { Color } from 'types';
+
 export interface Login {
   result: {
     memberInformation: User;
@@ -26,18 +28,19 @@ interface User {
   socialLoginType: SocialLogin;
 }
 
+// TODO: refreshToken 없어지면 제거.
 interface Token {
   accessToken: string;
   refreshToken: string;
 }
 
 interface Tape {
-  colorCode: string;
+  colorCode: Color;
   name: string;
   tapeLink: string;
-  fileName: string;
-  audioLink: string;
-  tracks: Track[];
+  fileName?: string;
+  audioLink?: string;
+  tracks?: Track[];
 }
 
 interface Track {
