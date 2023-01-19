@@ -6,10 +6,10 @@ const getUserTape = () => instance({ url: `/api/v1/tape` });
 
 const getGuestTape = (id: number) => instance({ url: `/api/v1/tape${id}` });
 
-const createUserTape = (colorCode: Color, title: string, name: string) => {
+const createUserTape = (title: string, name: string, colorCode: Color) => {
   return instance({
     method: 'post',
-    url: `/api/v1/member/follow`,
+    url: `/api/v1/tape`,
     data: {
       colorCode,
       title,
