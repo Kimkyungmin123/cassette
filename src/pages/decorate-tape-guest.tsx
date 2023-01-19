@@ -1,7 +1,7 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import Tape from 'components/tape';
-import { useStore } from 'store';
+import { useColorStore } from 'store';
 import { DecoContainer, DecoZone } from 'styles/decorate-tape';
 import { Color } from 'types';
 
@@ -10,7 +10,7 @@ export interface decorateTapeProps {
 }
 
 const decorateTapeGuest = () => {
-  const { tapeColor } = useStore();
+  const { tapeColor } = useColorStore();
 
   return (
     <DecoContainer color={tapeColor}>
