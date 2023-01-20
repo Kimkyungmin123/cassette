@@ -15,7 +15,6 @@ instance.interceptors.request.use(
     const accessToken = getAuthToken('accessToken');
     if (config.headers && accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
-
       config.headers['env'] = `local`;
     }
 
@@ -40,7 +39,7 @@ instance.interceptors.response.use(
     const code = error.code;
     const status = error.response?.status;
     // TODO: token만료시 refreshToken 요청
-    if (code === 'ECONNABORTED' || status === 408) {
+    if (code === 'EXPIRED_JWT_TOKEN' || status === 401) {
       alert('요청이 만료되었습니다.');
     }
 
