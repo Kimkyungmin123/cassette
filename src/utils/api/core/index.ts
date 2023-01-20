@@ -1,21 +1,26 @@
 import axios from 'axios';
 import { getAuthToken, removeAuthToken } from 'utils/storage/authCookie';
 
-export const instance = axios.create({
+const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
 });
 
 instance.defaults.timeout = 3000;
 
 instance.interceptors.request.use(
-  (config) => {
+  async (config) => {
     config.withCredentials = true;
+    try {
+      removeAuthToken('accessToken');
+      const accessToken = await getAuthToken('accessToken');
+      if (!accessToken) Promise.reject('accessToken 가져오기 싫패');
 
-    removeAuthToken('accessToken');
-    const accessToken = getAuthToken('accessToken');
-    if (config.headers && accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
-      config.headers['env'] = `local`;
+      if (config.headers && accessToken) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+        config.headers['env'] = `local`;
+      }
+    } catch {
+      console.error('Authorization or env 삽입 실패');
     }
 
     return config;
