@@ -13,7 +13,7 @@ instance.interceptors.request.use(
     try {
       removeAuthToken('accessToken');
       const accessToken = await getAuthToken('accessToken');
-      if (!accessToken) Promise.reject('accessToken 가져오기 싫패');
+      if (!accessToken) Promise.reject('accessToken 가져오기 실패');
 
       if (config.headers && accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
