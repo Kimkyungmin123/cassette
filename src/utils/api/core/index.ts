@@ -15,8 +15,9 @@ instance.interceptors.request.use(
       const accessToken = await getAuthToken('accessToken');
       if (!accessToken) Promise.reject('accessToken 가져오기 실패');
 
-      if (config.headers && accessToken) {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
+      if (config.headers) {
+        config.headers['Authorization'] =
+          accessToken && `Bearer ${accessToken}`;
         config.headers['env'] = `local`;
       }
     } catch {
