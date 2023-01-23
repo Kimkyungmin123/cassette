@@ -9,7 +9,7 @@ const Bridge = () => {
 
   useEffect(() => {
     if (code) {
-      mainInstance.KakaoSocialLogin(code).then((data) => {
+      mainInstance.KakaoSocialLogin(code as string).then((data) => {
         setAuthToken('accessToken', data.result.jwtInformation.accessToken),
           data.result.tapes.length === 0
             ? router.push('/create-tape')
