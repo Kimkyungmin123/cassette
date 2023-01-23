@@ -5,7 +5,7 @@ import instance from './core';
 const fetcher = (url: string) =>
   instance.get(url).then((response) => response.data);
 
-const KakaoSocialLogin = (code: string | string[]) => {
+const KakaoSocialLogin = (code: string) => {
   return instance<Login, Login>(`/callback`, {
     params: { code: `${code}` },
   });
@@ -20,11 +20,19 @@ const deleteUser = () => {
   });
 };
 
+const getNewToken = () => {
+  return instance({
+    method: 'post',
+    url: `/api/v1/auth/refresh`,
+  });
+};
+
 const mainInstance = {
   fetcher,
   KakaoSocialLogin,
   getUserInfo,
   deleteUser,
+  getNewToken,
 };
 
 export default mainInstance;
