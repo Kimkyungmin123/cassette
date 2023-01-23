@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuthToken, removeAuthToken } from 'utils/storage/authCookie';
+import { getAuthToken } from 'utils/storage/authCookie';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
@@ -11,7 +11,6 @@ instance.interceptors.request.use(
   async (config) => {
     config.withCredentials = true;
     try {
-      removeAuthToken('accessToken');
       const accessToken = await getAuthToken('accessToken');
       if (!accessToken) Promise.reject('accessToken 가져오기 실패');
 
