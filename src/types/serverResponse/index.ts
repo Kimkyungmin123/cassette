@@ -4,7 +4,7 @@ export interface Login {
   result: {
     memberInformation: User;
     jwtInformation: Token;
-    tapes: LoginTape[];
+    tapes: LoginTape[] | [];
   };
   message: string;
   timestamp: string;
@@ -22,6 +22,12 @@ export interface TapeInfo {
   timestamp: string;
 }
 
+export interface GetToken {
+  result: Token;
+  message: string;
+  timestamp: string;
+}
+
 interface User {
   name: string;
   email: string;
@@ -35,12 +41,11 @@ interface Token {
 
 export interface Tape {
   colorCode: Color;
+  title: string;
   name: string;
   tapeLink: string;
   fileName: string | null;
   audioLink: string | null;
-  tapeId: number;
-  title: string;
 }
 
 interface LoginTape extends Omit<Tape, 'fileName' | 'title'> {
@@ -59,8 +64,8 @@ interface Track {
   trackId: number;
   tapeId: number;
   colorCode: Color;
+  title: string;
   name: string;
-  senderName: string;
   fileName: string;
   audioLink: string;
 }
