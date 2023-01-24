@@ -13,6 +13,11 @@ interface UserStore {
   setUserData: (userNickname: string, tapename: string) => void;
 }
 
+interface TokenStore {
+  refreshToken: string;
+  setToken: (refreshToken: string) => void;
+}
+
 export const useColorStore = create<ColorStore>()(
   devtools((set) => ({
     tapeColor: 'cassette_orange',
@@ -29,6 +34,16 @@ export const useUserStore = create<UserStore>()(
 
     setUserData: (userNickname, tapename) => {
       set(() => ({ userNickname, tapename }));
+    },
+  })),
+);
+
+export const tokenStore = create<TokenStore>()(
+  devtools((set) => ({
+    refreshToken: '',
+
+    setToken: (refreshToken) => {
+      set(() => ({ refreshToken }));
     },
   })),
 );
