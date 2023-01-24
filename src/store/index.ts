@@ -2,16 +2,48 @@ import { Color } from 'types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-interface Store {
+interface ColorStore {
   tapeColor: Color;
   setTapeColor: (tapeColor: Color) => void;
 }
 
-export const useStore = create<Store>()(
+interface UserStore {
+  userNickname: string;
+  tapename: string;
+  setUserData: (userNickname: string, tapename: string) => void;
+}
+
+interface TokenStore {
+  refreshToken: string;
+  setToken: (refreshToken: string) => void;
+}
+
+export const useColorStore = create<ColorStore>()(
   devtools((set) => ({
     tapeColor: 'cassette_orange',
     setTapeColor: (value) => {
       set(() => ({ tapeColor: value }));
+    },
+  })),
+);
+
+export const useUserStore = create<UserStore>()(
+  devtools((set) => ({
+    userNickname: '',
+    tapename: '',
+
+    setUserData: (userNickname, tapename) => {
+      set(() => ({ userNickname, tapename }));
+    },
+  })),
+);
+
+export const tokenStore = create<TokenStore>()(
+  devtools((set) => ({
+    refreshToken: '',
+
+    setToken: (refreshToken) => {
+      set(() => ({ refreshToken }));
     },
   })),
 );

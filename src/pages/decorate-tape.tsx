@@ -1,16 +1,16 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import Tape from 'components/tape';
-import { useStore } from 'store';
+import Link from 'next/link';
+import { useColorStore } from 'store';
 import { DecoContainer, DecoZone } from 'styles/decorate-tape';
 import { Color } from 'types';
-
 export interface decorateTapeProps {
   color: Color;
 }
 
 const decorateTape = () => {
-  const { tapeColor } = useStore();
+  const { tapeColor } = useColorStore();
 
   return (
     <DecoContainer color={tapeColor}>
@@ -24,7 +24,9 @@ const decorateTape = () => {
             </p>
             <ColorPlate />
           </div>
-          <Button variant="main">꾸미기 완료</Button>
+          <Link href="create-tape-completed">
+            <Button variant="main">꾸미기 완료</Button>
+          </Link>
         </DecoZone>
       </DecoZone>
     </DecoContainer>

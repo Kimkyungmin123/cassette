@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useStore } from 'store';
+import { useColorStore } from 'store';
 import { Color } from 'types';
 
 import { CircleStyle, Item } from './style';
@@ -10,8 +10,7 @@ export interface CircleProps {
 
 const Paint = ({ color }: CircleProps) => {
   const [isColorValue, setIsColorValue] = useState<boolean>(false);
-
-  const { setTapeColor, tapeColor } = useStore();
+  const { setTapeColor, tapeColor } = useColorStore();
 
   useEffect(() => {
     setIsColorValue(color === tapeColor);

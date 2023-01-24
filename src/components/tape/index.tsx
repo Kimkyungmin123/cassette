@@ -1,4 +1,4 @@
-import { useStore } from 'store';
+import { useColorStore } from 'store';
 import theme from 'styles/theme';
 
 import { TypeStyle } from './style';
@@ -18,7 +18,7 @@ const Tape = ({
   width,
   height = '170px',
 }: TapeProps) => {
-  const { tapeColor } = useStore();
+  const { tapeColor } = useColorStore();
 
   return (
     <TypeStyle>
