@@ -10,57 +10,46 @@ export interface Login {
   timestamp: string;
 }
 
-export interface UserInfo {
-  result: User;
+export interface TapeResponse<T = Tape | User | Cassette[] | Token | Track> {
+  result: T;
   message: string;
   timestamp: string;
 }
 
-export interface TapeInfo {
-  result: Cassette[];
-  message: string;
-  timestamp: string;
-}
-
-export interface GetToken {
-  result: Token;
-  message: string;
-  timestamp: string;
-}
-
-interface User {
+export interface User {
   name: string;
   email: string;
   socialLoginType: SocialLogin;
 }
 
-interface Token {
+export interface Token {
   accessToken: string;
   refreshToken: string;
 }
 
 export interface Tape {
+  tapeId: number;
   colorCode: Color;
   title: string;
   name: string;
   tapeLink: string;
-  fileName: string | null;
-  audioLink: string | null;
+  fileName: null;
+  audioLink: null;
 }
 
 interface LoginTape extends Omit<Tape, 'fileName' | 'title'> {
+  tapeId: number;
   colorCode: Color;
   name: string;
   tapeLink: string;
-  audioLink: string | null;
-  tapeId: number;
+  audioLink: null;
 }
 
-interface Cassette extends Tape {
+export interface Cassette extends Tape {
   tracks: Track[];
 }
 
-interface Track {
+export interface Track {
   trackId: number;
   tapeId: number;
   colorCode: Color;
