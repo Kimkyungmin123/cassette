@@ -4,23 +4,17 @@ import Tape from 'components/tape';
 import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone } from 'styles/decorate-tape';
-import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 
-export interface DecorateTapeProps {
-  color: Color;
-}
-
-const DecorateTape = () => {
+const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename } = useUserStore();
-  const { setResponsUser } = useResponsUserStore();
+  const { tapeId } = useResponsUserStore();
 
   const submit = () => {
     subInstance
-      .createUserTape(tapeColor, tapename, userNickname)
+      .modifyUseTape(tapeId as number, tapeColor, tapename, userNickname)
       .then((data) => {
-        setResponsUser(data.result.tapeLink);
         setTapeColor(data.result.colorCode);
       });
   };
@@ -48,4 +42,4 @@ const DecorateTape = () => {
   );
 };
 
-export default DecorateTape;
+export default ModifyDecorateTape;

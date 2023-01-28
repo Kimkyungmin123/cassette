@@ -1,5 +1,6 @@
-import { useColorStore } from 'store';
+import { useColorStore, useGuestColorStore } from 'store';
 import theme from 'styles/theme';
+import { Color } from 'types';
 
 import { TypeStyle } from './style';
 
@@ -9,6 +10,8 @@ interface TapeProps {
   sec?: string;
   width?: string;
   height?: string;
+  color?: Color;
+  isOwner?: boolean;
 }
 
 const Tape = ({
@@ -17,8 +20,11 @@ const Tape = ({
   sec = '',
   width,
   height = '170px',
+  color,
+  isOwner = true,
 }: TapeProps) => {
   const { tapeColor } = useColorStore();
+  const guestColor = useGuestColorStore().tapeColor;
 
   return (
     <TypeStyle>
@@ -173,7 +179,13 @@ const Tape = ({
           />
           <path
             d="M17.4188 42.6719V111.319H241.413V42.6719H17.4188ZM76.3582 93.2064C67.6832 93.2064 60.6487 86.1719 60.6487 77.497C60.6487 68.8221 67.6832 61.7876 76.3582 61.7876C85.0331 61.7876 92.0676 68.8221 92.0676 77.497C92.0676 86.1719 85.0331 93.2064 76.3582 93.2064ZM161.612 94.4802H96.7669V60.5235H161.602V94.4802H161.612ZM182.407 93.2064C173.732 93.2064 166.697 86.1719 166.697 77.497C166.697 68.8221 173.732 61.7876 182.407 61.7876C191.081 61.7876 198.116 68.8221 198.116 77.497C198.116 86.1719 191.081 93.2064 182.407 93.2064Z"
-            fill={theme.colors[tapeColor]}
+            fill={
+              color
+                ? color && theme.colors[color]
+                : isOwner
+                ? theme.colors[tapeColor]
+                : theme.colors[guestColor]
+            }
           />
           <path
             opacity="0.7"

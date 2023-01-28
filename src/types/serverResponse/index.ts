@@ -28,7 +28,7 @@ export interface Token {
 }
 
 export interface Tape {
-  tapeId: number;
+  id: number;
   colorCode: Color;
   title: string;
   name: string;

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { decorateTapeProps } from 'pages/decorate-tape';
+import { DecorateTapeProps } from 'pages/decorate-tape';
 
 import theme from './theme';
 
-export const DecoContainer = styled.div<decorateTapeProps>`
+export const DecoContainer = styled.div<DecorateTapeProps>`
   width: 100%;
   display: flex;
   flex-direction: column;

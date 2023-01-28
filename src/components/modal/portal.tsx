@@ -1,5 +1,6 @@
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+
 import { ModalDimmed } from './styles';
 
 interface PortalProps {

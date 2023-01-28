@@ -1,5 +1,4 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { useColorStore } from 'store';
 import { ButtonType, Color } from 'types';
 
 import { ButtonLayout } from './style';
@@ -12,15 +11,14 @@ export interface ButtonProps {
   color?: Color;
 }
 
-const Button = ({ children, onClick, variant }: ButtonProps) => {
-  const { tapeColor } = useColorStore();
+const Button = ({ children, onClick, variant, color }: ButtonProps) => {
   return (
     <>
       <ButtonLayout
         role="button"
         onClick={onClick}
         variant={variant}
-        color={tapeColor}
+        color={color}
       >
         <div>{children}</div>
       </ButtonLayout>

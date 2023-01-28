@@ -32,13 +32,14 @@
     "framer-motion": "^7.6.19",
     "next": "13.0.6",
     "next-pwa": "^5.6.0",
-    "react": "18.2.0",
+    "react": "next",
     "react-audio-voice-recorder": "^1.0.4",
     "react-cookie": "^4.1.1",
-    "react-dom": "18.2.0",
+    "react-dom": "next",
     "react-query": "^3.39.2",
     "react-voice-recorder": "^2.1.2",
-    "zustand": "^4.1.5"
+    "zustand": "^4.1.5",
+    "zustand-persist": "^0.4.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
@@ -51,6 +52,7 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",
     "next-compose-plugins": "^2.2.1",
+    "react-query-devtools": "^2.6.3",
     "typescript": "4.4.4"
   },
   "packageManager": "yarn@3.3.1"

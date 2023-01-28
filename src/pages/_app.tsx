@@ -1,5 +1,6 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import Layout from 'components/layout';
+import ReactQueryWrapper from 'lib/reactQueryWrapper';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { global } from 'styles/globals';
@@ -14,13 +15,15 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <Global styles={global} />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <div id="modal" />
-      </ThemeProvider>
+      <ReactQueryWrapper>
+        <ThemeProvider theme={theme}>
+          <Global styles={global} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <div id="modal" />
+        </ThemeProvider>
+      </ReactQueryWrapper>
     </>
   );
 };

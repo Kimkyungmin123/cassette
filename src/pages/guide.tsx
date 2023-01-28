@@ -12,7 +12,7 @@ import Arrow from '../../public/assets/arrow.svg';
 import Close from '../../public/assets/close.svg';
 import Memo from '../../public/assets/memo.svg';
 
-const guide = () => {
+const Guide = () => {
   return (
     <GuideContainer>
       <div>
@@ -78,4 +78,4 @@ const guide = () => {
   );
 };
 
-export default guide;
+export default Guide;

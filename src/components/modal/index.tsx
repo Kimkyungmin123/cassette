@@ -1,9 +1,9 @@
 import Button from 'components/button';
-import React, { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
+
 import {
   ModalContainer,
   ModalDetail,
-  ModalDimmed,
   ModalTitle,
   ModalWrapper,
 } from './styles';

@@ -1384,7 +1384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.10.5, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.8.4":
   version: 7.20.7
   resolution: "@babel/runtime@npm:7.20.7"
   dependencies:
@@ -3164,14 +3164,16 @@ __metadata:
     next: 13.0.6
     next-compose-plugins: ^2.2.1
     next-pwa: ^5.6.0
-    react: 18.2.0
+    react: next
     react-audio-voice-recorder: ^1.0.4
     react-cookie: ^4.1.1
-    react-dom: 18.2.0
+    react-dom: next
     react-query: ^3.39.2
+    react-query-devtools: ^2.6.3
     react-voice-recorder: ^2.1.2
     typescript: 4.4.4
     zustand: ^4.1.5
+    zustand-persist: ^0.4.0
   languageName: unknown
   linkType: soft
 
@@ -5519,6 +5521,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"match-sorter@npm:^4.1.0":
+  version: 4.2.1
+  resolution: "match-sorter@npm:4.2.1"
+  dependencies:
+    "@babel/runtime": ^7.10.5
+    remove-accents: 0.4.2
+  checksum: 7f3cd8f84cdb4567b7a81f66a095e418044f318f41b6c8a1640730c99e370af9e5054f5a1ed2dfa1287a23101d75a105da63e4d95e8ac2f7061a8f8b32367c7d
+  languageName: node
+  linkType: hard
+
 "match-sorter@npm:^6.0.2":
   version: 6.3.1
   resolution: "match-sorter@npm:6.3.1"
@@ -6368,15 +6380,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0":
-  version: 18.2.0
-  resolution: "react-dom@npm:18.2.0"
+"react-dom@npm:next":
+  version: 18.3.0-next-ee8509801-20230117
+  resolution: "react-dom@npm:18.3.0-next-ee8509801-20230117"
   dependencies:
     loose-envify: ^1.1.0
-    scheduler: ^0.23.0
+    scheduler: 0.24.0-next-ee8509801-20230117
   peerDependencies:
-    react: ^18.2.0
-  checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+    react: 18.3.0-next-ee8509801-20230117
+  checksum: 8fbd931f13dba19dc49054a91f86cf0eaaff8d4975a6c23f5f7af907bdf164bf58c81df8d9f60ae0144545fd5b7116438faaebc6d2a920b0033aa8061474ad64
   languageName: node
   linkType: hard
 
@@ -6384,6 +6396,18 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-query-devtools@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "react-query-devtools@npm:2.6.3"
+  dependencies:
+    match-sorter: ^4.1.0
+  peerDependencies:
+    react: ^16.6.3 || ^17.0.0
+    react-query: ^2.0.0
+  checksum: 55cd257c32af83ac33ddff32a7234922fc53dd212c8a92dbee2a5c494c08763a94f60c8f455416ee4dde8ee7d908c7762b90f11d25d86e87efff9b729a8c2cfc
   languageName: node
   linkType: hard
 
@@ -6414,12 +6438,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0":
-  version: 18.2.0
-  resolution: "react@npm:18.2.0"
+"react@npm:next":
+  version: 18.3.0-next-ee8509801-20230117
+  resolution: "react@npm:18.3.0-next-ee8509801-20230117"
   dependencies:
     loose-envify: ^1.1.0
-  checksum: 88e38092da8839b830cda6feef2e8505dec8ace60579e46aa5490fc3dc9bba0bd50336507dc166f43e3afc1c42939c09fe33b25fae889d6f402721dcd78fca1b
+  checksum: 31eead70ccb7b03c132bd0ba9810f60c8a780e7e3b951bf0a4fcc881cc41de5735b51d62cadb6935d59a4bc39e3762db7d7b86267f88c29c33413152b17426a8
   languageName: node
   linkType: hard
 
@@ -6713,12 +6737,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.23.0":
-  version: 0.23.0
-  resolution: "scheduler@npm:0.23.0"
+"scheduler@npm:0.24.0-next-ee8509801-20230117":
+  version: 0.24.0-next-ee8509801-20230117
+  resolution: "scheduler@npm:0.24.0-next-ee8509801-20230117"
   dependencies:
     loose-envify: ^1.1.0
-  checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
+  checksum: f5e6946af80ed84f5b9fbffe2d76ea1b4ab46a2a746d4ee9357290006b8c81b2d7100372e02e989dee16ba0551c4a065e6c01bca4a58bd9706d30592e0e77bad
   languageName: node
   linkType: hard
 
@@ -7897,6 +7921,16 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zustand-persist@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "zustand-persist@npm:0.4.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    zustand: ">=3.6.3"
+  checksum: 4fe446da643dea6daefce95e0a193516f59546af5210d92e7cedd13de9dead06132ddae81911edee4a6e6dd9367b3e5108cab936c9600c18c67d5e61b895779f
   languageName: node
   linkType: hard
 

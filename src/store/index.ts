@@ -1,25 +1,14 @@
-import { Color } from 'types';
+import {
+  ColorStore,
+  ResponseUserStore,
+  TokenStore,
+  UserStore,
+} from 'types/store';
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
-
-interface ColorStore {
-  tapeColor: Color;
-  setTapeColor: (tapeColor: Color) => void;
-}
-
-interface UserStore {
-  userNickname: string;
-  tapename: string;
-  setUserData: (userNickname: string, tapename: string) => void;
-}
-
-interface TokenStore {
-  refreshToken: string;
-  setToken: (refreshToken: string) => void;
-}
+import { devtools, persist } from 'zustand/middleware';
 
 export const useColorStore = create<ColorStore>()(
-  devtools((set) => ({
+  persist((set) => ({
     tapeColor: 'cassette_orange',
     setTapeColor: (value) => {
       set(() => ({ tapeColor: value }));
@@ -28,12 +17,21 @@ export const useColorStore = create<ColorStore>()(
 );
 
 export const useUserStore = create<UserStore>()(
-  devtools((set) => ({
+  persist((set) => ({
     userNickname: '',
     tapename: '',
-
     setUserData: (userNickname, tapename) => {
       set(() => ({ userNickname, tapename }));
+    },
+  })),
+);
+
+export const useResponsUserStore = create<ResponseUserStore>()(
+  persist((set) => ({
+    userURL: '',
+    tapeId: 0,
+    setResponsUser: (userURL, tapeId) => {
+      set(() => ({ userURL, tapeId }));
     },
   })),
 );
@@ -44,6 +42,35 @@ export const tokenStore = create<TokenStore>()(
 
     setToken: (refreshToken) => {
       set(() => ({ refreshToken }));
+    },
+  })),
+);
+
+export const useGuestColorStore = create<ColorStore>()(
+  persist((set) => ({
+    tapeColor: 'cassette_orange',
+    setTapeColor: (value) => {
+      set(() => ({ tapeColor: value }));
+    },
+  })),
+);
+
+export const useGuestInfoStore = create<UserStore>()(
+  persist((set) => ({
+    userNickname: '',
+    tapename: '',
+    setUserData: (userNickname, tapename) => {
+      set(() => ({ userNickname, tapename }));
+    },
+  })),
+);
+
+export const useGuestResponsStore = create<ResponseUserStore>()(
+  persist((set) => ({
+    userURL: '',
+
+    setResponsUser: (userURL) => {
+      set(() => ({ userURL }));
     },
   })),
 );

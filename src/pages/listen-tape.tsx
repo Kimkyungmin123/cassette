@@ -6,7 +6,7 @@ import Title from 'components/title';
 import { useState } from 'react';
 import theme from 'styles/theme';
 
-import { Box } from './create-tape/styles';
+import { Box } from '../styles/create-tape';
 
 const ListenTape = () => {
   const [modalOpen, setModalOpen] = useState(false);
