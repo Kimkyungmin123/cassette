@@ -16,3 +16,14 @@ export const Info = styled.span`
   color: ${theme.colors.gray_600};
   margin-top: 8px;
 `;
+
+export const BottomZone = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+
+export const TosatZone = styled.div`
+  position: absolute;
+  bottom: 36px;
+`;
