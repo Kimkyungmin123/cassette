@@ -7,6 +7,10 @@ import { ButtonProps } from '.';
 const mainButton = css`
   background-color: ${theme.colors.primary};
   color: ${theme.colors.black_900};
+
+  div {
+    gap: 8px;
+  }
 `;
 
 const kakaoButton = css`

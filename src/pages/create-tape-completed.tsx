@@ -9,6 +9,7 @@ import theme from 'styles/theme';
 import subInstance from 'utils/api/sub';
 
 import Completed from '../../public/assets/completed.svg';
+import Copy from '../../public/assets/copy.svg';
 import { BottomZone, Box, TosatZone } from '../styles/create-tape';
 
 const CreateTapeCompleted = () => {
@@ -49,7 +50,7 @@ const CreateTapeCompleted = () => {
             setOnToast(true);
           }}
         >
-          친구들에게 목소리 남겨달라고 하기
+          <Copy />내 테이프 공유하기
         </Button>
         {isCopied && onToast ? (
           <TosatZone>
