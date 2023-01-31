@@ -1,9 +1,8 @@
+import Kakao from '@icon/kakao.svg';
 import Button from 'components/button';
 import Tape from 'components/tape';
 import Link from 'next/link';
 import { Container, Zone } from 'styles';
-
-import Kakao from '../../public/assets/kakao.svg';
 
 export default function Home() {
   const LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_REST_API}&redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/kakao/bridge`;
