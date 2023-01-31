@@ -19,4 +19,5 @@ export const setAuthToken = (name: string, value: string) => {
 
 export const getAuthToken = (name: string) => cookies.get(name);
 
-export const removeAuthToken = (name: string) => cookies.remove(name);
+export const removeAuthToken = (name: string) =>
+  cookies.remove(name, { path: '/' });
