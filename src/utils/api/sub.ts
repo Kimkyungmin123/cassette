@@ -64,6 +64,9 @@ const createTrack = (
   });
 };
 
+const downloadTrack = (id: number) =>
+  instance({ url: `/api/v1/track/download/${id}` });
+
 const subInstance = {
   getUserTape,
   getGuestTape,
@@ -73,6 +76,7 @@ const subInstance = {
   getUserTrack,
   getOwnerTape,
   createTrack,
+  downloadTrack,
 };
 
 export default subInstance;
