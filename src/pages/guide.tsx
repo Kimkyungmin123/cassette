@@ -1,4 +1,8 @@
+import Arrow from '@icon/arrow.svg';
+import Close from '@icon/close.svg';
+import Memo from '@icon/memo.svg';
 import Tape from 'components/tape';
+import { useRouter } from 'next/router';
 import {
   CloseZone,
   Content,
@@ -8,16 +12,14 @@ import {
   Title,
 } from 'styles/guide';
 
-import Arrow from '../../public/assets/arrow.svg';
-import Close from '../../public/assets/close.svg';
-import Memo from '../../public/assets/memo.svg';
-
 const Guide = () => {
+  const router = useRouter();
+
   return (
     <GuideContainer>
       <div>
         <CloseZone>
-          <Close />
+          <Close onClick={() => router.back()} />
         </CloseZone>
         <Title>
           <Memo />

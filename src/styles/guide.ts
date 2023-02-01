@@ -32,6 +32,10 @@ export const CloseZone = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 71px;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Title = styled.div`
