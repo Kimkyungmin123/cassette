@@ -29,7 +29,7 @@ const GuestEntry = () => {
         setOwnerName(data?.result?.name),
           setOwnerTapeTitle(data?.result?.title),
           setOwnerTapeColor(data?.result?.colorCode),
-          setDate(data.timestamp.slice(2, 10).replace('-', '.')),
+          setDate(data.timestamp.slice(2, 10).replaceAll('-', '.')),
           setResponsUser(id as string);
       });
     }
