@@ -31,7 +31,7 @@ export default function Home() {
             카카오 로그인
           </Button>
         </Link>
-        <Link href="/create-tape" css={{ maxWidth: '327px' }}>
+        <Link href={LOGIN_URL} css={{ maxWidth: '327px' }}>
           <Button variant="main">내 테이프 만들기</Button>
         </Link>
       </Zone>
