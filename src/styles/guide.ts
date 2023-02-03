@@ -32,6 +32,10 @@ export const CloseZone = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 71px;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Title = styled.div`
@@ -52,6 +56,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  text-align: start;
 
   div {
     display: flex;
@@ -85,5 +90,6 @@ export const GuideButton = styled(ButtonLayout)`
 
   div {
     gap: 8px;
+    color: ${theme.colors.primary};
   }
 `;

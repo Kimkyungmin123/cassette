@@ -22,6 +22,7 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-unreachable": "off",
-    "react-hooks/rules-of-hooks": "warn"
+    "react-hooks/rules-of-hooks": "warn",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
   }
 }

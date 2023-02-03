@@ -1,4 +1,5 @@
 import Button from 'components/button';
+import MenuLayout from 'components/menu';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import ToastUI from 'components/Toast';
@@ -35,6 +36,7 @@ const CreateTapeCompleted = () => {
 
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
   return (
+
     <div>
       <Box margin="0 0 24px 0">
         <Title name={userNickname} color={theme.colors.white} />
@@ -61,6 +63,7 @@ const CreateTapeCompleted = () => {
         ) : null}
       </BottomZone>
     </div>
+
   );
 };
 

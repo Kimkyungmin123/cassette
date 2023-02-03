@@ -15,8 +15,12 @@ const getUserInfo = () => instance({ url: `/api/v1/member` });
 
 const deleteUser = () => {
   return instance({
-    method: 'delete',
+    method: 'post',
     url: `/api/v1/member/withdrawal`,
+    data: {
+      withdrawalType: 'REMOVE_PERSONAL_INFORMATION',
+      withdrawalReason: '개인정보 노출이 무서워요 ㅠㅠㅠ',
+    },
   });
 };
 
