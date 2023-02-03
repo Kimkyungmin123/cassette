@@ -2,6 +2,7 @@ import Arrow from '@icon/arrow.svg';
 import Close from '@icon/close.svg';
 import Memo from '@icon/memo.svg';
 import Tape from 'components/tape';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   CloseZone,
@@ -23,6 +24,7 @@ const Guide = () => {
         </CloseZone>
         <Title>
           <Memo />
+
           <h1>Voice Tape 사용 가이드</h1>
         </Title>
         <ContentZone>
@@ -70,9 +72,15 @@ const Guide = () => {
             </p>
           </Content>
           <GuideButton variant="main">
-            <div>
-              Voice Tape 앱 다운로드하러 가기 <Arrow />
-            </div>
+            <Link
+              href="https://www.notion.so/Voice-Tape-041b53af5dce4da880e360d250c1bcab"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div>
+                Voice Tape 앱 다운로드하러 가기 <Arrow />
+              </div>
+            </Link>
           </GuideButton>
         </ContentZone>
       </div>

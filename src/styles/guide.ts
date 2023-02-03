@@ -56,6 +56,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  text-align: start;
 
   div {
     display: flex;
@@ -89,5 +90,6 @@ export const GuideButton = styled(ButtonLayout)`
 
   div {
     gap: 8px;
+    color: ${theme.colors.primary};
   }
 `;
