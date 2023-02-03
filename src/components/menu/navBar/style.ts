@@ -41,6 +41,7 @@ export const NavContainer = styled.div<ContainerProps>`
   flex-direction: column;
   color: ${theme.colors.white};
   padding: 100px 24px 0 24px;
+  z-index: 10;
 
   ${({ status }) => {
     switch (status) {
