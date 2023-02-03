@@ -1,5 +1,6 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
+import MenuLayout from 'components/menu';
 import Tape from 'components/tape';
 import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
@@ -20,25 +21,28 @@ const ModifyDecorateTape = () => {
   };
 
   return (
-    <DecoContainer color={tapeColor}>
-      <DecoZone css={{ gap: '24px' }}>
-        <h3>{userNickname}&apos;s Tape</h3>
-        <Tape title={tapename} date="21.01.01" sec="144" />
-        <DecoZone css={{ gap: '136px' }}>
-          <div>
-            <p>
-              테이프 <span>안쪽 색상</span>를 골라주세요!
-            </p>
-            <ColorPlate />
-          </div>
-          <Link href="create-tape-completed">
-            <Button variant="main" onClick={() => submit()}>
-              꾸미기 완료
-            </Button>
-          </Link>
+    <>
+      <MenuLayout name={userNickname} />
+      <DecoContainer color={tapeColor}>
+        <DecoZone css={{ gap: '24px' }}>
+          <h3>{userNickname}&apos;s Tape</h3>
+          <Tape title={tapename} date="21.01.01" sec="144" />
+          <DecoZone css={{ gap: '136px' }}>
+            <div>
+              <p>
+                테이프 <span>안쪽 색상</span>를 골라주세요!
+              </p>
+              <ColorPlate />
+            </div>
+            <Link href="create-tape-completed">
+              <Button variant="main" onClick={() => submit()}>
+                꾸미기 완료
+              </Button>
+            </Link>
+          </DecoZone>
         </DecoZone>
-      </DecoZone>
-    </DecoContainer>
+      </DecoContainer>
+    </>
   );
 };
 

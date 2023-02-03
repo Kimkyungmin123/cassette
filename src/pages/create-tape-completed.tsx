@@ -1,4 +1,5 @@
 import Button from 'components/button';
+import MenuLayout from 'components/menu';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import useCopy from 'hooks/useCopy';
@@ -30,22 +31,24 @@ const CreateTapeCompleted = () => {
   }, [setResponsUser, setUserData, setTapeColor]);
 
   return (
-    <div>
-      <Box margin="0 0 24px 0">
-        <Title name={userNickname} color={theme.colors.white} />
-      </Box>
-      <Box margin="0 0 44px 0">
-        <Tape title={tapename} date="21.01.01" sec="144" />
-      </Box>
-
-      <Button
-        variant="main"
-        onClick={() => handleCopyClipBoard(`${GUEST_URL}`)}
-      >
-        친구들에게 목소리 남겨달라고 하기
-      </Button>
-      {isCopied ? <span>복사완료</span> : null}
-    </div>
+    <>
+      <MenuLayout name={userNickname} />
+      <div>
+        <Box margin="0 0 24px 0">
+          <Title name={userNickname} color={theme.colors.white} />
+        </Box>
+        <Box margin="0 0 44px 0">
+          <Tape title={tapename} date="21.01.01" sec="144" />
+        </Box>
+        <Button
+          variant="main"
+          onClick={() => handleCopyClipBoard(`${GUEST_URL}`)}
+        >
+          친구들에게 목소리 남겨달라고 하기
+        </Button>
+        {isCopied ? <span>복사완료</span> : null}
+      </div>
+    </>
   );
 };
 
