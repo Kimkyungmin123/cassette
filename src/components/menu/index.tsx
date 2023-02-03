@@ -2,7 +2,7 @@ import User from '@icon/user.svg';
 import { useState } from 'react';
 
 import NavBar from './navBar';
-import { IconContainer, MenuContainer, MenuLayoutContainer } from './style';
+import { IconContainer, MenuContainer } from './style';
 
 interface MenuLayoutProps {
   name: string;
