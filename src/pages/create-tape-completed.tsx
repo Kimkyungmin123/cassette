@@ -1,3 +1,5 @@
+import Completed from '@icon/completed.svg';
+import Copy from '@icon/copy.svg';
 import Button from 'components/button';
 import MenuLayout from 'components/menu';
 import Tape from 'components/tape';
@@ -9,8 +11,6 @@ import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import theme from 'styles/theme';
 import subInstance from 'utils/api/sub';
 
-import Completed from '../../public/assets/completed.svg';
-import Copy from '../../public/assets/copy.svg';
 import { BottomZone, Box, TosatZone } from '../styles/create-tape';
 
 const CreateTapeCompleted = () => {
@@ -36,8 +36,8 @@ const CreateTapeCompleted = () => {
 
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
   return (
-
-    <div>
+    <>
+      <MenuLayout name={userNickname} />
       <Box margin="0 0 24px 0">
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
@@ -62,8 +62,7 @@ const CreateTapeCompleted = () => {
           </TosatZone>
         ) : null}
       </BottomZone>
-    </div>
-
+    </>
   );
 };
 

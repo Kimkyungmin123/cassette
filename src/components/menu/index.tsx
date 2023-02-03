@@ -13,12 +13,12 @@ const MenuLayout = ({ name }: MenuLayoutProps) => {
 
   return (
     <>
-      <IconContainer
-        onClick={() => {
-          setOpenMenu('open');
-        }}
-      >
-        <div>
+      <IconContainer>
+        <div
+          onClick={() => {
+            setOpenMenu('open');
+          }}
+        >
           <User />
         </div>
       </IconContainer>
