@@ -1,3 +1,4 @@
+import Roading from 'components/loading';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useColorStore, useResponsUserStore } from 'store';
@@ -25,7 +26,11 @@ const Bridge = () => {
     }
   }, [code, router, setResponsUser, setTapeColor]);
 
-  return <div>로딩중...입니다...</div>;
+  return (
+    <>
+      <Roading />
+    </>
+  );
 };
 
 export default Bridge;
