@@ -1,3 +1,6 @@
+import React from 'react';
+import theme from 'styles/theme';
+
 import { TitleName, TitleWrapper } from './styles';
 
 interface TitleProps {
