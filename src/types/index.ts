@@ -17,3 +17,15 @@ export interface UserClient {
   tapename: string;
   tapeColor: Color;
 }
+
+export type Withdrawal =
+  | 'REMOVE_PERSONAL_INFORMATION'
+  | 'REJOIN'
+  | 'INCONVENIENCE'
+  | 'SERVICE_NOT_USED'
+  | 'NOT_REMOVE_TAPE';
+
+export interface WithdrawalType {
+  type: Withdrawal;
+  content: string;
+}
