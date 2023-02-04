@@ -15,14 +15,14 @@ export const GuideContainer = styled.div`
   ol {
     margin: 0;
     color: ${theme.colors.white};
-    font-family: 'Pretendard-regular';
+    font-family: 'Pretendard-Regular';
     align-items: center;
     font-weight: 400;
   }
 
   div:first-of-type {
     h1 {
-      font-family: 'Ycomputer-regular';
+      font-family: 'Ycomputer-Regular';
       font-size: ${theme.fontSize.xl};
     }
   }
