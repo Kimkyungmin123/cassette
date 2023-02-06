@@ -8,7 +8,6 @@ import Withdrawal from '@icon/withdrawal.svg';
 import { ButtonLayout } from 'components/button/style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import mainInstance from 'utils/api/main';
 import { removeAuthToken } from 'utils/storage/authCookie';
 
 import {
@@ -72,19 +71,12 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
             <span> 서비스 다운로드 받는 법</span>
           </li>
         </Link>
-
-        <li css={{ cursor: 'pointer' }}>
-          <Withdrawal />
-          <span
-            onClick={() => {
-              mainInstance.deleteUser().then((data) => console.log(data));
-              window.localStorage.removeItem('persist');
-              route.push('/');
-            }}
-          >
-            탈퇴하기
-          </span>
-        </li>
+        <Link href="/withdrawal">
+          <li css={{ cursor: 'pointer' }}>
+            <Withdrawal />
+            <span>탈퇴하기</span>
+          </li>
+        </Link>
       </List>
       <Bottom>
         <Bar />
