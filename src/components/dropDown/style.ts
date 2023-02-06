@@ -6,10 +6,12 @@ import { ListProps, SelectProps } from '.';
 export const DropDownContainer = styled.div`
   width: 100%;
   position: relative;
+  width: 100%;
 `;
 
 export const SelectBox = styled.div<SelectProps>`
   display: flex;
+  width: 100%;
   justify-content: space-between;
   padding: 10px 16px;
   background-color: ${theme.colors.black_800};
@@ -28,6 +30,7 @@ export const SelectBox = styled.div<SelectProps>`
 `;
 
 export const WithdrawalList = styled.ul`
+  width: 100%;
   position: absolute;
   list-style: none;
   margin: 0;
@@ -46,6 +49,7 @@ export const WithdrawalList = styled.ul`
 `;
 
 export const ReasonBox = styled.div<ListProps>`
+  width: 100%;
   display: flex;
   padding: 10px 16px;
   border-top: solid 1px ${theme.colors.gray_700};
