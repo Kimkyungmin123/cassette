@@ -1,4 +1,4 @@
-import { Color } from 'types';
+import { Color, WithdrawalType } from 'types';
 
 export interface ColorStore {
   tapeColor: Color;
@@ -20,4 +20,11 @@ export interface ResponseUserStore {
 export interface TokenStore {
   refreshToken: string;
   setToken: (refreshToken: string) => void;
+}
+
+export interface DropdownStore {
+  dropContent: string;
+  dropType: WithdrawalType | null;
+
+  setDropData: (dropContent?: string, dropType?: WithdrawalType) => void;
 }

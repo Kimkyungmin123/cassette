@@ -1,5 +1,6 @@
 import {
   ColorStore,
+  DropdownStore,
   ResponseUserStore,
   TokenStore,
   UserStore,
@@ -91,4 +92,15 @@ export const useGuestResponsStore = create<ResponseUserStore>()(
     }),
     { name: 'persist' },
   ),
+);
+
+export const dropdownStore = create<DropdownStore>()(
+  devtools((set) => ({
+    dropContent: '',
+    dropType: null,
+
+    setDropData: (dropContent, dropType) => {
+      set(() => ({ dropContent, dropType }));
+    },
+  })),
 );
