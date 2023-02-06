@@ -21,6 +21,7 @@ const colors = {
   login_kakao: '#FEE500',
   disabled: '#9C9C89', // main_50%
   warning_red: '#B91919',
+  warning_red_disabled: '#6B1919',
   record_red: '#CD0E00',
 
   // cassette color
