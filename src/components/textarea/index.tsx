@@ -9,6 +9,8 @@ interface TextareaProps {
   maxLength: number;
 }
 
+export type TextType = Pick<TextareaProps, 'value'>;
+
 const Textarea = ({
   value,
   onChange,
@@ -21,6 +23,7 @@ const Textarea = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        maxLength={maxLength}
       />
       {maxLength && (
         <LimitText>
