@@ -5,9 +5,9 @@ import theme from './theme';
 
 export const GuideContainer = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 75px;
 
   h1,
   h2,
@@ -19,20 +19,12 @@ export const GuideContainer = styled.div`
     align-items: center;
     font-weight: 400;
   }
-
-  div:first-of-type {
-    h1 {
-      font-family: 'Ycomputer-Regular';
-      font-size: ${theme.fontSize.xl};
-    }
-  }
 `;
 
 export const CloseZone = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 71px;
-
+  position: absolute;
+  top: 71px;
+  right: 26px;
   svg {
     cursor: pointer;
   }
@@ -42,7 +34,14 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 0 32px 0;
+  width: 100%;
+  justify-content: center;
+  padding: 16px 20px 32px 0;
+
+  h1 {
+    font-family: 'Ycomputer-Regular';
+    font-size: ${theme.fontSize.xl};
+  }
 `;
 
 export const ContentZone = styled.div`
@@ -78,6 +77,10 @@ export const Content = styled.div`
 
   ol {
     padding-left: 20px;
+  }
+
+  svg {
+    height: 26px;
   }
 `;
 
