@@ -6,22 +6,21 @@ import { ListProps, SelectProps } from '.';
 export const DropDownContainer = styled.div`
   width: 100%;
   position: relative;
-  width: 100%;
 `;
 
 export const SelectBox = styled.div<SelectProps>`
   display: flex;
-  width: 100%;
   justify-content: space-between;
   padding: 10px 16px;
   background-color: ${theme.colors.black_800};
-  color: ${theme.colors.gray_600};
-  border-radius: ${({ IsOpen }) => (IsOpen ? '10px 10px 0 0 ' : '10px')};
+  color: ${({ selectContent }) =>
+    selectContent ? theme.colors.gray_100 : theme.colors.gray_600};
+  border-radius: ${({ isOpen }) => (isOpen ? '10px 10px 0 0 ' : '10px')};
   cursor: pointer;
 
   span {
     font-family: 'Pretendard-Regular';
-    font-size: ${theme.fontSize.ml};
+    font-size: ${theme.fontSize.md};
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0em;
@@ -30,7 +29,6 @@ export const SelectBox = styled.div<SelectProps>`
 `;
 
 export const WithdrawalList = styled.ul`
-  width: 100%;
   position: absolute;
   list-style: none;
   margin: 0;
@@ -40,7 +38,7 @@ export const WithdrawalList = styled.ul`
 
   span {
     font-family: 'Pretendard-Regular';
-    font-size: ${theme.fontSize.ml};
+    font-size: ${theme.fontSize.md};
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0em;
@@ -49,12 +47,11 @@ export const WithdrawalList = styled.ul`
 `;
 
 export const ReasonBox = styled.div<ListProps>`
-  width: 100%;
   display: flex;
   padding: 10px 16px;
   border-top: solid 1px ${theme.colors.gray_700};
   background-color: ${theme.colors.black_800};
-  border-radius: ${({ IsLastList }) => (IsLastList ? '0 0 10px 10px' : null)};
+  border-radius: ${({ isLastList }) => (isLastList ? '0 0 10px 10px' : null)};
 
   cursor: pointer;
 

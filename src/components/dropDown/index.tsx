@@ -19,11 +19,12 @@ interface DropDownProps {
 }
 
 export interface SelectProps {
-  IsOpen: boolean;
+  isOpen: boolean;
+  selectContent: string;
 }
 
 export interface ListProps {
-  IsLastList: boolean;
+  isLastList: boolean;
 }
 
 const Dropdown = ({
@@ -37,7 +38,11 @@ const Dropdown = ({
 
   return (
     <DropDownContainer>
-      <SelectBox IsOpen={selected} onClick={onSelected}>
+      <SelectBox
+        isOpen={selected}
+        onClick={onSelected}
+        selectContent={dropContent}
+      >
         <span>{dropContent ? dropContent : defaultText}</span> <Down />
       </SelectBox>
       {selected ? (
@@ -45,7 +50,7 @@ const Dropdown = ({
           {dropData.map((data, index) => (
             <li key={index}>
               <ReasonBox
-                IsLastList={WITHDRAWAL.length - 1 === index}
+                isLastList={WITHDRAWAL.length - 1 === index}
                 onClick={() => {
                   setDropData(data.content, data.type);
                   onClick();
