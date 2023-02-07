@@ -1,7 +1,7 @@
 'use client';
 
 import Button from 'components/button';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -44,7 +44,7 @@ const GuestEntry = () => {
               <h1>{ownerName}&apos;s Tape</h1>
               <h3>{ownerTapeTitle}</h3>
             </div>
-            <Tape
+            <TapeSVG
               title={ownerTapeTitle}
               date={date}
               sec="144"

@@ -1,6 +1,6 @@
 import Kakao from '@icon/kakao.svg';
 import Button from 'components/button';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { Container, Zone } from 'styles';
 
@@ -13,7 +13,7 @@ export default function Home() {
           <h1>2023 Vioce Tape</h1>
           <h3>테이프에 담은 내 마음</h3>
         </div>
-        <Tape
+        <TapeSVG
           title="2023 한정판 테이프"
           date="21.01.01"
           sec="144"

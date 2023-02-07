@@ -1,7 +1,7 @@
 import Arrow from '@icon/arrow.svg';
 import Close from '@icon/close.svg';
 import Memo from '@icon/memo.svg';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -30,7 +30,7 @@ const Guide = () => {
         <ContentZone>
           <Content>
             <div>
-              <Tape width="27px" height="25px" />
+              <TapeSVG width="27px" height="25px" title="" date="" />
               <h2>Voice Tape는 어떤 서비스예요?</h2>
             </div>
             <p>
@@ -42,7 +42,7 @@ const Guide = () => {
           </Content>
           <Content>
             <div>
-              <Tape width="27px" height="25px" />
+              <TapeSVG width="27px" height="25px" title="" date="" />
               <h2>Voice Tape는 어떻게 이용해요?</h2>
             </div>
             <ol>
@@ -63,7 +63,7 @@ const Guide = () => {
           </Content>
           <Content>
             <div>
-              <Tape width="27px" height="25px" />
+              <TapeSVG width="27px" height="25px" title="" date="" />
               <h2>Voice Tape를 매일 듣고 싶으신가요?</h2>
             </div>
             <p>

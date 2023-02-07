@@ -1,6 +1,6 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone } from 'styles/decorate-tape';
@@ -29,7 +29,7 @@ const DecorateTape = () => {
     <DecoContainer color={tapeColor}>
       <DecoZone css={{ gap: '24px' }}>
         <h3>{userNickname}&apos;s Tape</h3>
-        <Tape title={tapename} date="21.01.01" sec="144" />
+        <TapeSVG title={tapename} date="21.01.01" sec="144" />
         <DecoZone css={{ gap: '136px' }}>
           <div>
             <p>
