@@ -10,6 +10,7 @@ export interface TapeSvgProps {
   isOwner?: boolean;
   height?: string;
 }
+
 const TapeSvg = ({
   title,
   date,
@@ -29,6 +30,7 @@ const TapeSvg = ({
       viewBox="0 0 260 170"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      css={{ fontFamily: 'Ycomputer-Regular' }}
     >
       <g clipPath="url(#clip0_170_1587)">
         <path
