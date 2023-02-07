@@ -3,9 +3,10 @@ import theme from 'styles/theme';
 
 export const CheckboxContainer = styled.div`
   display: flex;
+  align-items: center;
   gap: 8px;
   font-family: 'Pretendard-Regular';
-  font-size: ${theme.fontSize.ml};
+  font-size: ${theme.fontSize.md};
   color: ${theme.colors.gray_50};
   font-weight: 600;
   line-height: 24px;
