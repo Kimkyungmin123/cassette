@@ -37,12 +37,20 @@ const Withdrawal = () => {
     setOpinion(target.value);
   };
 
-  const { dropContent, dropType } = dropdownStore();
+  const { dropContent, dropType, setDropData } = dropdownStore();
 
   return (
     <WithdrawalContainer>
       <CloseZone>
-        <Close onClick={() => router.back()} />
+        <Close
+          onClick={() => {
+            router.back();
+            setSelected(false);
+            setChecked(false);
+            setOpinion('');
+            setDropData('');
+          }}
+        />
       </CloseZone>
       <Title>
         <TapeSvg width="27px" height="25px" title="" date="" />
