@@ -56,6 +56,7 @@ const Input = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          maxLength={maxLength}
         />
         {maxLength && (
           <Length>
