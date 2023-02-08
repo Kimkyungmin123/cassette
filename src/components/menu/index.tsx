@@ -1,4 +1,5 @@
 import User from '@icon/user.svg';
+import Button from 'components/button';
 import { useState } from 'react';
 
 import NavBar from './navBar';
@@ -14,13 +15,14 @@ const MenuLayout = ({ name }: MenuLayoutProps) => {
   return (
     <>
       <IconContainer>
-        <div
+        <Button
+          variant="clear"
           onClick={() => {
             setOpenMenu('open');
           }}
         >
           <User />
-        </div>
+        </Button>
       </IconContainer>
 
       <MenuContainer>
