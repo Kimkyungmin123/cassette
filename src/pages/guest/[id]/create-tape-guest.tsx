@@ -38,6 +38,8 @@ const CreateTapeGuest = () => {
           title="테이프의 제목이 여기에 적혀요!"
           date="21.01.01"
           sec="144"
+          isOwner={false}
+          color="cassette_orange"
         />
       </Box>
       <InputBox>
