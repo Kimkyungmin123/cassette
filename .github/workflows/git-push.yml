@@ -23,8 +23,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'output'
-          destination-github-username: [Kimkyungmin123]
-          destination-repository-name: [cassette]
+          destination-github-username: Kimkyungmin123
+          destination-repository-name: cassette
           user-email: rud3302@naver.com
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
