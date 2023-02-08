@@ -25,9 +25,10 @@ export const CircleStyle = styled.input<CircleProps>`
     cursor: pointer;
   }
 
-  ${({ checked }) =>
-    checked &&
-    ` 
+  ${({ checked, isOwner }) =>
+    isOwner
+      ? checked &&
+        ` 
   &:checked {
     opacity: 1;
     cursor: default;
@@ -38,5 +39,18 @@ export const CircleStyle = styled.input<CircleProps>`
       padding: 10px      
     }
   }
+`
+      : checked &&
+        ` 
+&:checked {
+  opacity: 1;
+  cursor: default;
+
+  &::after {
+    content: url(../../../assets/check.svg);
+    display: flex;
+    padding: 10px      
+  }
+}
 `}
 `;
