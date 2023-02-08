@@ -21,6 +21,9 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          NEXT_PUBLIC_REST_API: ${{ secrets.NEXT_PUBLIC_REST_API }}
+          NEXT_PUBLIC_CLIENT_URL: ${{ secrets.NEXT_PUBLIC_CLIENT_URL }}
+          NEXT_PUBLIC_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}
         with:
           source-directory: 'output'
           destination-github-username: Kimkyungmin123
