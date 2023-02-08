@@ -57,7 +57,7 @@ export const tokenStore = create<TokenStore>()(
 );
 
 export const useGuestColorStore = create<ColorStore>()(
-  devtools(
+  persist(
     (set) => ({
       tapeColor: 'cassette_orange',
       setTapeColor: (value) => {
