@@ -32,6 +32,7 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
     <NavContainer status={status}>
       <ButtonLayout
         variant="clear"
+        as="button"
         onClick={isOpen}
         css={{
           padding: '0px',

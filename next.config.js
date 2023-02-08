@@ -5,6 +5,7 @@ const withPWA = require('next-pwa');
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  presets: ['next/babel'],
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
