@@ -2,6 +2,7 @@ import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useGuestColorStore, useGuestInfoStore } from 'store';
 import { DecoContainer, DecoZone } from 'styles/decorate-tape';
 
@@ -9,6 +10,11 @@ const DecorateTapeGuest = () => {
   const { userNickname, tapename } = useGuestInfoStore();
 
   const guestColor = useGuestColorStore().tapeColor;
+  const setGuestColor = useGuestColorStore().setTapeColor;
+
+  useEffect(() => {
+    setGuestColor('cassette_orange');
+  }, []);
 
   return (
     <DecoContainer color={guestColor}>
