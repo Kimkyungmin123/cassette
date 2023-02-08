@@ -33,7 +33,7 @@ export const CircleStyle = styled.input<CircleProps>`
     cursor: default;
 
     &::after {
-      content: url(assets/check.svg);;
+      content: url(assets/check.svg);
       display: flex;
       padding: 10px      
     }

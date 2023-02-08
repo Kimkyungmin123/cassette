@@ -1,3 +1,4 @@
+import { WithdrawalType } from 'types';
 import { Login } from 'types/serverResponse';
 
 import instance from './core';
@@ -13,13 +14,16 @@ const KakaoSocialLogin = (code: string) => {
 
 const getUserInfo = () => instance({ url: `/api/v1/member` });
 
-const deleteUser = () => {
+const deleteUser = (
+  withdrawalType: WithdrawalType,
+  withdrawalReason: string,
+) => {
   return instance({
     method: 'post',
     url: `/api/v1/member/withdrawal`,
     data: {
-      withdrawalType: 'REMOVE_PERSONAL_INFORMATION',
-      withdrawalReason: '개인정보 노출이 무서워요 ㅠㅠㅠ',
+      withdrawalType,
+      withdrawalReason,
     },
   });
 };

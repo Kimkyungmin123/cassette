@@ -1,6 +1,6 @@
 import Button from 'components/button';
 import Input from 'components/input';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import Link from 'next/link';
 import { ChangeEvent, useState } from 'react';
@@ -30,7 +30,7 @@ const CreateTape = () => {
         <Title name="닉네임" />
       </Box>
       <Box margin="0 0 44px 0">
-        <Tape
+        <TapeSVG
           title="테이프의 제목이 여기에 적혀요!"
           date="21.01.01"
           sec="144"

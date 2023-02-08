@@ -1,7 +1,9 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { ButtonType, Color } from 'types';
+import { Color } from 'types';
 
 import { ButtonLayout } from './style';
+
+export type ButtonType = 'main' | 'kakao' | 'guest' | 'clear';
 
 export interface ButtonProps {
   children: ReactNode;

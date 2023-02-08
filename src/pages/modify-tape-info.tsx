@@ -1,7 +1,7 @@
 import Button from 'components/button';
 import Input from 'components/input';
 import MenuLayout from 'components/menu';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
 import Link from 'next/link';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -54,7 +54,7 @@ const ModifyTapeInfo = () => {
           </TitleWrapper>
         </Box>
         <Box margin="0 0 44px 0">
-          <Tape title={userTapeName} date="21.01.01" sec="144" />
+          <TapeSVG title={userTapeName} date="21.01.01" sec="144" />
         </Box>
         <InputBox>
           <Input
