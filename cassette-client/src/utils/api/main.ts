@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { WithdrawalType } from 'types';
 import { Login } from 'types/serverResponse';
 
@@ -28,12 +29,14 @@ const deleteUser = (
   });
 };
 
-const getNewToken = () => {
-  return instance({
-    method: 'post',
-    url: `/api/v1/auth/refresh`,
-  });
-};
+const getNewToken = (refreshToken: string) =>
+  axios.post(
+    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/v1/auth/refresh`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    },
+  );
 
 const mainInstance = {
   fetcher,

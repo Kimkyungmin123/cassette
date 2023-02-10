@@ -9,7 +9,6 @@ export const DecoContainer = styled.div`
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
-  padding: 0 24px;
 
   h3,
   p {
@@ -60,4 +59,5 @@ export const DecoZone = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  gap: 94px; //136px
 `;
