@@ -1,6 +1,6 @@
 on:
   push:
-    branches: ['main', 'develop']
+    branches: ['main']
   pull_request:
     branches: ['develop']
 
@@ -20,7 +20,25 @@ jobs:
         run: sh ./build.sh
 
       - name: Push to repository
+        if: ${{ github.event_name }} == 'push'
         id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          NEXT_PUBLIC_REST_API: ${{ secrets.NEXT_PUBLIC_REST_API }}
+          NEXT_PUBLIC_CLIENT_URL: ${{ secrets.NEXT_PUBLIC_CLIENT_URL }}
+          NEXT_PUBLIC_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}
+        with:
+          source-directory: 'output'
+          destination-github-username: Kimkyungmin123
+          destination-repository-name: cassette
+          user-email: rud3302@naver.com
+          commit-message: push to main
+          target-branch: main
+
+      - name: pull_request to repository
+        if: ${{ github.event_name }} == 'pull_request'
+        id: pull_request_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
