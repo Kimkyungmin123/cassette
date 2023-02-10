@@ -9,19 +9,20 @@ const mainButton = css`
   color: ${theme.colors.black_900};
 
   div {
-    gap: 8px;
+    grid-gap: 8px;
   }
 `;
 
 const kakaoButton = css`
   background-color: ${theme.colors.login_kakao};
-  justify-content: flex-start;
+  justify-content: center;
   color: ${theme.colors.black_900};
-  padding: 15px 0;
+  padding: 17.5px 0;
+  position: relative;
 
-  div {
-    padding-left: 24px;
-    gap: 72px;
+  svg {
+    position: absolute;
+    left: 24.5px;
   }
 `;
 
@@ -44,6 +45,7 @@ export const ButtonLayout = styled.div<ButtonProps>`
   padding: 17.5px 0;
   font-weight: 700;
   line-height: 19px;
+  max-height: 54px;
   font-family: 'Pretendard-Regular';
   background-color: ${({ color, variant }) =>
     variant === 'guest' ? color && theme.colors[color] : null};
@@ -57,6 +59,12 @@ export const ButtonLayout = styled.div<ButtonProps>`
     justify-content: center;
     align-items: center;
     text-align: center;
+    word-break: keep-all;
+  }
+
+  span {
+    width: 100%;
+    display: inline;
   }
 
   ${({ variant }) => {

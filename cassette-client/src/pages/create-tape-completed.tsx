@@ -36,7 +36,7 @@ const CreateTapeCompleted = () => {
 
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
   return (
-    <>
+    <div css={{ padding: '0 24px' }}>
       <MenuLayout name={userNickname} />
       <Box margin="0 0 24px 0">
         <Title name={userNickname} color={theme.colors.white} />
@@ -62,7 +62,7 @@ const CreateTapeCompleted = () => {
           </TosatZone>
         ) : null}
       </BottomZone>
-    </>
+    </div>
   );
 };
 

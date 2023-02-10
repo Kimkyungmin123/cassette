@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
-import { DecorateTapeProps } from 'pages/decorate-tape';
 
 import theme from './theme';
 
-export const DecoContainer = styled.div<DecorateTapeProps>`
-  width: 100%;
+export const DecoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,19 +19,20 @@ export const DecoContainer = styled.div<DecorateTapeProps>`
   }
 
   h3 {
-    padding-top: 113px;
     text-align: center;
   }
 
   p {
+    text-align: start;
     font-family: 'Pretendard-Regular';
     font-weight: 700;
     font-size: ${theme.fontSize.lg};
     padding: 20px 0 16px 0;
+    width: 100%;
   }
 
-  span {
-    color: ${({ color }) => theme.colors[color]};
+  svg {
+    width: 100%;
   }
 `;
 
@@ -44,10 +43,21 @@ export const Text = styled.div`
   max-width: 245px;
 `;
 
-export const DecoZone = styled.div`
+export const Middie = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+`;
+
+export const DecoZone = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   width: 100%;
-  text-align: 'center';
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 94px; //136px
 `;

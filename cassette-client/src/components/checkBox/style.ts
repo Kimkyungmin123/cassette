@@ -4,7 +4,7 @@ import theme from 'styles/theme';
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+
   font-family: 'Pretendard-Regular';
   font-size: ${theme.fontSize.md};
   color: ${theme.colors.gray_50};
@@ -21,6 +21,7 @@ export const CheckboxWrapper = styled.input`
   height: 20px;
   border-radius: 2px;
   cursor: pointer;
+  margin-right: 8px;
 
   &:checked {
     content: url(assets/check.svg);

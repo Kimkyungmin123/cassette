@@ -4,12 +4,13 @@ import { ButtonLayout } from 'components/button/style';
 import theme from './theme';
 
 export const WithdrawalContainer = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 24px;
   padding: 0 24px;
+  grid-template-columns: 1fr;
 
   h1,
   h2 {
@@ -43,12 +44,16 @@ export const Title = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding-top: 36px;
+  padding-top: 121px;
 
   h1 {
     font-family: 'Ycomputer-Regular';
     font-size: ${theme.fontSize.xl};
     font-weight: 400;
+  }
+
+  svg {
+    padding-right: 8px;
   }
 `;
 
@@ -63,7 +68,7 @@ export const SubText = styled.div`
 
 export const WithdrawalContent = styled.div`
   width: 100%;
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 10px;
 
@@ -74,10 +79,10 @@ export const WithdrawalContent = styled.div`
 
 export const SubmitZone = styled.div`
   width: 100%;
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 12px;
-  padding-top: 135px;
+  padding-top: 70px; //135px;
 `;
 
 export const WithdrawalButton = styled(ButtonLayout)`

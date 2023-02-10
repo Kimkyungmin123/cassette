@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import theme from './theme';
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
+  padding: 0 24px;
 
   h1,
   h3,
@@ -24,7 +24,8 @@ export const Container = styled.div`
 
   h1 {
     font-size: ${theme.fontSize.title};
-    padding: 163px 0 10px 0;
+    // figma상 163px인데 모바일로 보면 너무 길어서 임시 수정
+    padding: 110px 0 10px 0;
   }
 
   h3 {
@@ -35,10 +36,13 @@ export const Container = styled.div`
     line-height: 24px;
     font-size: ${theme.fontSize.lg};
   }
+  svg {
+    width: 100%;
+  }
 `;
 
 export const Zone = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   width: 100%;

@@ -10,16 +10,13 @@ export const MenuContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  position: absolute;
   display: flex;
   justify-content: flex-end;
-  top: 71px;
-  right: 26px;
-  width: 100%;
+  padding-top: 71px;
+
   div {
     cursor: pointer;
     padding: 10px;
     max-width: 30px;
-    margin: 0;
   }
 `;

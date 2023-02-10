@@ -33,19 +33,17 @@ export const CloseZone = styled.div`
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: 100%;
-  justify-content: center;
-  padding: 16px 20px 32px 0;
+  padding: 121px 20px 32px 0;
 
   h1 {
     font-family: 'Ycomputer-Regular';
     font-size: ${theme.fontSize.xl};
+    padding-left: 6px;
   }
 `;
 
 export const ContentZone = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 24px;
   max-width: 326px;
@@ -54,13 +52,11 @@ export const ContentZone = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
   text-align: start;
 
   div {
     display: flex;
     align-items: center;
-    gap: 8px;
   }
 
   h2 {
@@ -81,6 +77,7 @@ export const Content = styled.div`
 
   svg {
     height: 26px;
+    padding-right: 8px;
   }
 `;
 
@@ -92,7 +89,8 @@ export const GuideButton = styled(ButtonLayout)`
   padding: 10px 0;
 
   div {
-    gap: 8px;
+    display: flex;
+    align-items: center;
     color: ${theme.colors.primary};
   }
 `;
