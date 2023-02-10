@@ -46,8 +46,8 @@ const ModifyTapeInfo = () => {
 
   return (
     <>
-      <MenuLayout name={userNickname} />
-      <Box>
+      <Box css={{ padding: '0 24px' }}>
+        <MenuLayout name={userNickname} />
         <Box margin="0 0 24px 0">
           <TitleWrapper>
             <TitleName color={'white'}>{userName}</TitleName>&apos;s Tape

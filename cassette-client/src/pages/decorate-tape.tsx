@@ -3,13 +3,10 @@ import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
-import { DecoContainer, DecoZone } from 'styles/decorate-tape';
-import { Color } from 'types';
+import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import subInstance from 'utils/api/sub';
 
-export interface DecorateTapeProps {
-  color: Color;
-}
+import theme from '../styles/theme';
 
 const DecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
@@ -26,20 +23,24 @@ const DecorateTape = () => {
   };
 
   return (
-    <DecoContainer color={tapeColor}>
-      <DecoZone css={{ gap: '24px' }}>
+    <DecoContainer color={tapeColor} css={{ padding: '0 24px' }}>
+      <DecoZone css={{ gap: '24px', paddingTop: '113px' }}>
         <h3>{userNickname}&apos;s Tape</h3>
         <TapeSVG title={tapename} date="21.01.01" sec="144" />
-        <DecoZone css={{ gap: '136px' }}>
-          <div>
-            <p>
-              테이프 <span>안쪽 색상</span>를 골라주세요!
-            </p>
-            <ColorPlate />
-          </div>
+        <DecoZone>
+          <Middie>
+            <div>
+              <p>
+                테이프{' '}
+                <span css={{ color: theme.colors[tapeColor] }}>안쪽 색상</span>
+                를 골라주세요!
+              </p>
+              <ColorPlate />
+            </div>
+          </Middie>
           <Link href="create-tape-completed">
             <Button variant="main" onClick={() => submit()}>
-              꾸미기 완료
+              <span>꾸미기 완료</span>
             </Button>
           </Link>
         </DecoZone>

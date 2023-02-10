@@ -55,7 +55,7 @@ const GuestEntry = () => {
             </p>
           </Zone>
           <Zone css={{ paddingTop: '176px' }}>
-            <Link href={GUEST_CREATE_URL} css={{ maxWidth: '327px' }}>
+            <Link href={GUEST_CREATE_URL}>
               <Button variant="guest" color={ownerTapeColor}>
                 목소리 남겨주기
               </Button>

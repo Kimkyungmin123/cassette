@@ -98,7 +98,7 @@ export const LoginStatus = styled.div`
 
 export const List = styled.ul`
   list-style: none;
-  padding: 32px 0 358px 0;
+  padding: 32px 0 200px 0;
   margin: 0;
 
   li {
