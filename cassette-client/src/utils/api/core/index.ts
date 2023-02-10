@@ -20,7 +20,7 @@ instance.interceptors.request.use(
       if (config.headers) {
         config.headers['Authorization'] =
           accessToken && `Bearer ${accessToken}`;
-        config.headers['env'] = `local`;
+        config.headers['env'] = `prod`;
       }
     } catch {
       console.error('Authorization or env 삽입 실패');
