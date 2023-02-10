@@ -27,9 +27,16 @@ const Bridge = () => {
   }, [code, router, setResponsUser, setTapeColor]);
 
   return (
-    <>
+    <div
+      css={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'cneter',
+      }}
+    >
       <Roading />
-    </>
+    </div>
   );
 };
 
