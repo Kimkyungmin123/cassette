@@ -28,7 +28,7 @@ const ModifyDecorateTape = () => {
         <DecoZone css={{ gap: '24px' }}>
           <h3 css={{ paddingTop: '0' }}> {userNickname}&apos;s Tape</h3>
           <Tape title={tapename} date="21.01.01" sec="144" />
-          <DecoZone>
+          <DecoZone css={{ gap: '136px' }}>
             <Middie>
               <div>
                 <p>

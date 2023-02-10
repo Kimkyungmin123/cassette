@@ -18,11 +18,11 @@ const DecorateTapeGuest = () => {
   }, []);
 
   return (
-    <DecoContainer color={guestColor} css={{ padding: '0 24px' }}>
+    <DecoContainer color={guestColor}>
       <DecoZone css={{ gap: '24px', paddingTop: '113px' }}>
         <h3>{userNickname}&apos;s Tape</h3>
         <TapeSVG title={tapename} date="21.01.01" sec="144" isOwner={false} />
-        <DecoZone>
+        <DecoZone css={{ gap: '136px' }}>
           <Middie>
             <div>
               <p>
