@@ -85,7 +85,6 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
           css={{ cursor: 'pointer' }}
           onClick={() => {
             removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
             route.push('/');
           }}
         >

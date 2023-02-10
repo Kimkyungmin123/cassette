@@ -1,0 +1,40 @@
+name: git push into another repo to deploy to vercel main
+on:
+  push:
+    branches: ['develop']
+  pull_request:
+    branches: ['develop']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install mustache
+        run: apk add ruby && gem install mustache
+
+      - name: Create output
+        run: sh ./build.sh
+
+      - name: Push to repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          NEXT_PUBLIC_REST_API: ${{ secrets.NEXT_PUBLIC_REST_API }}
+          NEXT_PUBLIC_CLIENT_URL: ${{ secrets.NEXT_PUBLIC_CLIENT_URL }}
+          NEXT_PUBLIC_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}
+        with:
+          source-directory: 'output'
+          destination-github-username: Kimkyungmin123
+          destination-repository-name: cassette
+          user-email: rud3302@naver.com
+          commit-message: push to develop
+          target-branch: develop
+
+      - name: Test exported variable
+        run: echo $DESTINATION_CLONED_DIRECTORY
