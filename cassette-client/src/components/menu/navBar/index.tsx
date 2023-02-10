@@ -1,6 +1,6 @@
 import Close from '@icon/close.svg';
 import Document from '@icon/document.svg';
-import DownLoad from '@icon/downLoad.svg';
+import DownLoad from '@icon/download.svg';
 import KakaoLogin from '@icon/kakaoLogin.svg';
 import Logout from '@icon/logout.svg';
 import Setting from '@icon/setting.svg';
