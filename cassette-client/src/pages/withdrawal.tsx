@@ -96,9 +96,7 @@ const Withdrawal = () => {
           disabled={!checked || !dropContent}
           as="button"
           onClick={() => {
-            mainInstance
-              .deleteUser(dropType as WithdrawalType, dropContent)
-              .then((data) => console.log(data));
+            mainInstance.deleteUser(dropType as WithdrawalType, opinion);
             window.localStorage.removeItem('persist');
             router.push('/');
           }}
