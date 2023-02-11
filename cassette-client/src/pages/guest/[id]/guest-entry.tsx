@@ -49,7 +49,7 @@ const GuestEntry = () => {
               title={ownerTapeTitle}
               date={date}
               sec="144"
-              // color={theme.colors[ownerTapeColor]}
+              color={ownerTapeColor}
             />
             <p>
               평소 전하지 못했던 마음을 <br /> 목소리로 담아보세요 ♡
