@@ -9,16 +9,26 @@ import useCopy from 'hooks/useCopy';
 import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import theme from 'styles/theme';
+import { Track } from 'types/serverResponse';
 import subInstance from 'utils/api/sub';
 
-import { BottomZone, Box, TosatZone } from '../styles/create-tape';
+import {
+  BottomZone,
+  Box,
+  PopupText,
+  ToastZone,
+  TrackBox,
+  TrackContainer,
+  TrackName,
+} from '../styles/create-tape';
 
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL } = useResponsUserStore();
   const { userNickname, tapename, setUserData } = useUserStore();
-  const { setTapeColor } = useColorStore();
+  const { tapeColor, setTapeColor } = useColorStore();
   const [isCopied, onCopy] = useCopy();
   const [onToast, setOnToast] = useState<boolean>(true);
+  const [tracks, setTracks] = useState<Track[]>([]);
 
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
@@ -28,9 +38,14 @@ const CreateTapeCompleted = () => {
 
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
-      setUserData(data?.result[0]['name'], data?.result[0]['title']);
-      setResponsUser(data?.result[0]['tapeLink']);
-      setTapeColor(data?.result[0]['colorCode']);
+      const tapeData = data?.result[0];
+
+      if (tapeData) {
+        setUserData(tapeData['name'], tapeData['title']);
+        setResponsUser(tapeData['tapeLink']);
+        setTapeColor(tapeData['colorCode']);
+        setTracks(tapeData.tracks);
+      }
     });
   }, [setResponsUser, setUserData, setTapeColor]);
 
@@ -42,8 +57,42 @@ const CreateTapeCompleted = () => {
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
       <Box margin="0 0 44px 0">
-        <Tape title={tapename} date="21.01.01" sec="144" hasAudio />
+        <TrackBox isShown={tracks.length > 3}>
+          <Tape title={tapename} date="21.01.01" sec="144" />
+        </TrackBox>
       </Box>
+      <TrackContainer>
+        {tracks?.map((track) => (
+          <TrackBox
+            key={track.trackId}
+            isShown={tracks.length > 3}
+            onClick={() => {
+              /* */
+            }}
+          >
+            <Tape
+              title={track.fileName}
+              color={track.colorCode}
+              audioLink={tracks.length > 3 ? track.audioLink : ''}
+              date="21.01.01"
+              sec="144"
+              width="88"
+              height="80"
+            />
+            <TrackName>{track.name}</TrackName>
+          </TrackBox>
+        ))}
+      </TrackContainer>
+
+      {tracks.length < 4 && (
+        <PopupText>
+          <Tape width={'25'} height={'20'} />
+          <Box margin={'0 0 0 4px'}>
+            X 3 테이프가 최소 3개가 모여야 들을 수 있어요! <br />
+            친구들에게 더 공유해볼까요?
+          </Box>
+        </PopupText>
+      )}
       <BottomZone>
         <Button
           variant="main"
@@ -55,11 +104,11 @@ const CreateTapeCompleted = () => {
           <Copy />내 테이프 공유하기
         </Button>
         {isCopied && onToast ? (
-          <TosatZone>
+          <ToastZone>
             <ToastUI onClose={setOnToast}>
               <Completed />내 테이프 링크를 복사했어요!
             </ToastUI>
-          </TosatZone>
+          </ToastZone>
         ) : null}
       </BottomZone>
     </div>

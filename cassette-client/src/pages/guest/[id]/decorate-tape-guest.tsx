@@ -3,7 +3,11 @@ import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { useGuestColorStore, useGuestInfoStore } from 'store';
+import {
+  useGuestColorStore,
+  useGuestInfoStore,
+  useGuestResponsStore,
+} from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
 
@@ -12,6 +16,9 @@ const DecorateTapeGuest = () => {
 
   const guestColor = useGuestColorStore().tapeColor;
   const setGuestColor = useGuestColorStore().setTapeColor;
+  const { userURL } = useGuestResponsStore();
+
+  const GUEST_MAKE_TRACK_URL = `/guest/${userURL}/make-track`;
 
   useEffect(() => {
     setGuestColor('cassette_orange');
@@ -33,7 +40,7 @@ const DecorateTapeGuest = () => {
               <ColorPlate isOwner={false} />
             </div>
           </Middie>
-          <Link href="create-tape-completed">
+          <Link href={GUEST_MAKE_TRACK_URL}>
             <Button variant="main">꾸미기 완료</Button>
           </Link>
         </DecoZone>

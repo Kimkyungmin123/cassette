@@ -4,21 +4,37 @@ import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import { useState } from 'react';
+import { Box } from 'styles/create-tape';
 import theme from 'styles/theme';
+import subInstance from 'utils/api/sub';
 
-import { Box } from '../styles/create-tape';
-
-const ListenTape = () => {
+const makeTrack = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [blob, setBlob] = useState<Blob>();
 
   const sendTape = () => {
-    setModalOpen(true);
+    const formData = new FormData();
+    console.log(blob);
+    if (blob) {
+      //const file = new File([blob], 'fileName', { type: 'audio/webm' });
+      formData.append('audio', blob, 'audio.wav');
+      console.log('blob', blob);
+      console.log(formData);
+
+      subInstance
+        .createTrack('cassette_blue', 'jjjjjjjjj', '', '', formData)
+        .then(() => {
+          // setModalOpen(true);
+        });
+    }
+
+    console.log({ blob });
   };
 
   const closeModal = () => setModalOpen(false);
 
   return (
-    <div>
+    <div css={{ padding: '163px 24px 0 24px  ' }}>
       <ModalPortal closeModal={closeModal}>
         {modalOpen && (
           <Modal
@@ -42,14 +58,26 @@ const ListenTape = () => {
         <Title name="게스트" color={theme.colors.white} />
       </Box>
       <Box margin="0 0 44px 0">
-        <Tape title="2023 한정판 테이프" date="21.01.01" sec="144" />
+        <Tape
+          title="2023 한정판 테이프"
+          date="21.01.01"
+          sec="144"
+          hasAudio
+          setAudio={setBlob}
+        />
       </Box>
 
-      <Button onClick={sendTape} variant="main">
+      <Button
+        onClick={
+          () => setModalOpen(true)
+          //sendTape
+        }
+        variant="main"
+      >
         테이프 전송하기
       </Button>
     </div>
   );
 };
 
-export default ListenTape;
+export default makeTrack;

@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
-import { useEffect, useRef, useState } from 'react';
+import useAudio from 'hooks/useAudio';
+import { Dispatch, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
 
 import {
@@ -14,9 +15,23 @@ import TapeSvg, { TapeSvgProps } from './tape';
 
 interface TapeProps extends TapeSvgProps {
   hasAudio?: boolean;
+  audioLink?: string;
+  setAudio?: Dispatch<any>;
 }
 
-const Tape = ({ hasAudio, title, date, sec, width }: TapeProps) => {
+const Tape = ({
+  hasAudio,
+  title,
+  date,
+  sec,
+  width,
+  color,
+  height,
+  audioLink,
+  setAudio,
+}: TapeProps) => {
+  const { playing, toggle } = useAudio(audioLink ?? '');
+
   const recordRef = useRef<null | HTMLDivElement>(null);
   const [isRecorded, setIsRecorded] = useState(false);
   const {
@@ -37,11 +52,14 @@ const Tape = ({ hasAudio, title, date, sec, width }: TapeProps) => {
     if (!recordRef.current) return;
     if (recordRef.current.querySelector('audio')) return;
 
+    setAudio?.(blob);
+
     recordRef.current?.appendChild(audio);
   };
 
   const handleClearRecording = () => {
     const audio = recordRef.current?.querySelector('audio');
+
     if (!audio) {
       stopRecording();
       return;
@@ -58,7 +76,18 @@ const Tape = ({ hasAudio, title, date, sec, width }: TapeProps) => {
 
   return (
     <TypeStyle>
-      <TapeSvg title={title} date={date} sec={sec} width={width} />
+      <TapeSvg
+        title={title}
+        date={date}
+        sec={sec}
+        width={width}
+        height={height}
+        color={color}
+      />
+
+      {audioLink && (
+        <button onClick={() => toggle?.()}>{playing ? '정지' : '시작'}</button>
+      )}
 
       {hasAudio && (
         <AudioContainer>

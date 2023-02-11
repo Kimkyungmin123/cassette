@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useGuestResponsStore } from 'store';
 import { Container, Zone } from 'styles';
+import theme from 'styles/theme';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 
@@ -48,7 +49,7 @@ const GuestEntry = () => {
               title={ownerTapeTitle}
               date={date}
               sec="144"
-              color={ownerTapeColor}
+              // color={theme.colors[ownerTapeColor]}
             />
             <p>
               평소 전하지 못했던 마음을 <br /> 목소리로 담아보세요 ♡
