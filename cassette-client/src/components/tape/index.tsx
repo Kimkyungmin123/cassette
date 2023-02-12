@@ -83,6 +83,7 @@ const Tape = ({
         width={width}
         height={height}
         color={color}
+        isOwner={false}
       />
 
       {audioLink && (

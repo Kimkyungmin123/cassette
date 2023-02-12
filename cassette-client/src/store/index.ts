@@ -25,8 +25,12 @@ export const useUserStore = create<UserStore>()(
     (set) => ({
       userNickname: '',
       tapename: '',
+      date: '',
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
+      },
+      setDate: (date) => {
+        set(() => ({ date }));
       },
     }),
     { name: 'persist' },
@@ -73,8 +77,12 @@ export const useGuestInfoStore = create<UserStore>()(
     (set) => ({
       userNickname: '',
       tapename: '',
+      date: '',
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
+      },
+      setDate: (date) => {
+        set(() => ({ date }));
       },
     }),
     { name: 'persist' },

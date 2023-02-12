@@ -8,7 +8,9 @@ export interface ColorStore {
 export interface UserStore {
   userNickname: string;
   tapename: string;
+  date: string;
   setUserData: (userNickname: string, tapename: string) => void;
+  setDate: (date: string) => void;
 }
 
 export interface ResponseUserStore {

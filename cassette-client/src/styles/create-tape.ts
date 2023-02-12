@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { ButtonProps } from 'components/button';
+import { ButtonLayout } from 'components/button/style';
 import theme from 'styles/theme';
 
 export const Box = styled.div<{ margin?: string }>`
@@ -51,4 +53,9 @@ export const PopupText = styled.div`
   font-size: ${theme.fontSize.xs};
   text-align: left;
   margin-bottom: 10px;
+`;
+
+export const CreateTapeInfoButton = styled(ButtonLayout)<ButtonProps>`
+  background-color: ${({ disabled }) =>
+    disabled ? theme.colors.disabled : theme.colors.primary};
 `;

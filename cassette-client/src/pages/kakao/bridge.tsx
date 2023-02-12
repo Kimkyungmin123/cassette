@@ -1,7 +1,7 @@
 import Roading from 'components/loading';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useColorStore, useResponsUserStore } from 'store';
+import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import mainInstance from 'utils/api/main';
 import { setAuthToken } from 'utils/storage/authCookie';
 
@@ -10,11 +10,13 @@ const Bridge = () => {
   const { code } = router.query;
   const { setResponsUser } = useResponsUserStore();
   const { setTapeColor } = useColorStore();
+  const { setDate } = useUserStore();
 
   useEffect(() => {
     if (code) {
       mainInstance.KakaoSocialLogin(code as string).then((data) => {
         setAuthToken('accessToken', data.result.jwtInformation.accessToken),
+          setDate(data.timestamp.slice(2, 10).replaceAll('-', '.')),
           data.result.tapes.length === 0
             ? (router.push('/create-tape'), setTapeColor('cassette_orange'))
             : (router.push('/create-tape-completed'),
@@ -24,7 +26,7 @@ const Bridge = () => {
               ));
       });
     }
-  }, [code, router, setResponsUser, setTapeColor]);
+  }, [code, router, setResponsUser, setTapeColor, setDate]);
 
   return (
     <div
@@ -33,6 +35,7 @@ const Bridge = () => {
         height: '100%',
         display: 'flex',
         justifyContent: 'cneter',
+        alignItems: 'center',
       }}
     >
       <Roading />

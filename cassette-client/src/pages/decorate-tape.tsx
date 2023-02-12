@@ -10,7 +10,7 @@ import theme from '../styles/theme';
 
 const DecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
-  const { userNickname, tapename } = useUserStore();
+  const { userNickname, tapename, date } = useUserStore();
   const { setResponsUser } = useResponsUserStore();
 
   const submit = () => {
@@ -26,7 +26,7 @@ const DecorateTape = () => {
     <DecoContainer color={tapeColor} css={{ padding: '0 24px' }}>
       <DecoZone css={{ gap: '24px', paddingTop: '113px' }}>
         <h3>{userNickname}&apos;s Tape</h3>
-        <TapeSVG title={tapename} date="21.01.01" sec="144" />
+        <TapeSVG title={tapename} date={date} sec="144" />
         <DecoZone>
           <Middie>
             <div>

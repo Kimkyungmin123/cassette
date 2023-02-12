@@ -3,7 +3,7 @@ import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useGuestInfoStore, useGuestResponsStore } from 'store';
 import { Box, Info, InputBox } from 'styles/create-tape';
 
@@ -15,8 +15,9 @@ const MAX_LENGTH = {
 const CreateTapeGuest = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
-  const { setUserData } = useGuestInfoStore();
+  const { setUserData, setDate } = useGuestInfoStore();
   const { userURL } = useGuestResponsStore();
+  const [trackDate, setTrackDate] = useState('');
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);
@@ -28,6 +29,14 @@ const CreateTapeGuest = () => {
 
   const GUEST_DECORATE_TAPE_URL = `/guest/${userURL}/decorate-tape-guest`;
 
+  useEffect(() => {
+    const createTrackDate = new Date();
+    setTrackDate(
+      createTrackDate.toLocaleDateString().slice(2).split(' ').join(''),
+    );
+    setDate(createTrackDate.toLocaleDateString().slice(2).split(' ').join(''));
+  }, [setDate]);
+
   return (
     <Box css={{ padding: '113px 24px 0 24px ' }}>
       <Box margin="0 0 24px 0">
@@ -36,7 +45,7 @@ const CreateTapeGuest = () => {
       <Box margin="0 0 44px 0">
         <TapeSVG
           title="테이프의 제목이 여기에 적혀요!"
-          date="21.01.01"
+          date={trackDate}
           sec="144"
           isOwner={false}
           color="cassette_orange"

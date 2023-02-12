@@ -7,7 +7,20 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return <Children>{children}</Children>;
+  return (
+    <Children>
+      <div
+        css={{
+          width: '100%',
+          maxWidth: '580px',
+          minWidth: '375px',
+          height: '100%',
+        }}
+      >
+        {children}
+      </div>
+    </Children>
+  );
 };
 
 export default Layout;

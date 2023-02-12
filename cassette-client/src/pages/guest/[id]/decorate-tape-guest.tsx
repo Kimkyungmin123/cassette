@@ -12,7 +12,7 @@ import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
 
 const DecorateTapeGuest = () => {
-  const { userNickname, tapename } = useGuestInfoStore();
+  const { userNickname, tapename, date } = useGuestInfoStore();
 
   const guestColor = useGuestColorStore().tapeColor;
   const setGuestColor = useGuestColorStore().setTapeColor;
@@ -28,7 +28,7 @@ const DecorateTapeGuest = () => {
     <DecoContainer color={guestColor} css={{ padding: '0 24px' }}>
       <DecoZone css={{ gap: '24px', paddingTop: '113px' }}>
         <h3>{userNickname}&apos;s Tape</h3>
-        <TapeSVG title={tapename} date="21.01.01" sec="144" isOwner={false} />
+        <TapeSVG title={tapename} date={date} sec="144" isOwner={false} />
         <DecoZone>
           <Middie>
             <div>

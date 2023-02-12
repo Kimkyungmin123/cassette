@@ -5,7 +5,7 @@ import Title from 'components/title';
 import Link from 'next/link';
 import { ChangeEvent, useState } from 'react';
 import { useUserStore } from 'store';
-import { Box, Info, InputBox } from 'styles/create-tape';
+import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
 
 const MAX_LENGTH = {
   NICKNAME: 5,
@@ -14,7 +14,7 @@ const MAX_LENGTH = {
 const CreateTape = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
-  const { setUserData } = useUserStore();
+  const { setUserData, date } = useUserStore();
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);
@@ -30,11 +30,7 @@ const CreateTape = () => {
         <Title name="닉네임" />
       </Box>
       <Box margin="0 0 44px 0">
-        <TapeSVG
-          title="테이프의 제목이 여기에 적혀요!"
-          date="21.01.01"
-          sec="144"
-        />
+        <TapeSVG title="테이프의 제목이 여기에 적혀요!" date={date} sec="144" />
       </Box>
       <InputBox>
         <Input
@@ -62,15 +58,16 @@ const CreateTape = () => {
           ex&#41; 2023년 나의 새로운 도전을 응원해줘!
         </Info>
       </InputBox>
-      <Link href="/decorate-tape">
-        <Button
+      <Link href={nickname && title ? '/decorate-tape' : '#'}>
+        <CreateTapeInfoButton
           onClick={() => {
-            setUserData(nickname, title);
+            nickname && title && setUserData(nickname, title);
           }}
           variant="main"
+          disabled={!nickname || !title}
         >
           작성 완료
-        </Button>
+        </CreateTapeInfoButton>
       </Link>
     </Box>
   );

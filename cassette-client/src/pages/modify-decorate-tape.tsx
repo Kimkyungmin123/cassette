@@ -1,7 +1,7 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import MenuLayout from 'components/menu';
-import Tape from 'components/tape';
+import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
@@ -10,7 +10,7 @@ import subInstance from 'utils/api/sub';
 
 const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
-  const { userNickname, tapename } = useUserStore();
+  const { userNickname, tapename, date } = useUserStore();
   const { tapeId } = useResponsUserStore();
 
   const submit = () => {
@@ -27,7 +27,7 @@ const ModifyDecorateTape = () => {
       <DecoContainer color={tapeColor}>
         <DecoZone css={{ gap: '24px' }}>
           <h3 css={{ paddingTop: '0' }}> {userNickname}&apos;s Tape</h3>
-          <Tape title={tapename} date="21.01.01" sec="144" />
+          <TapeSVG title={tapename} date={date} sec="144" />
           <DecoZone>
             <Middie>
               <div>

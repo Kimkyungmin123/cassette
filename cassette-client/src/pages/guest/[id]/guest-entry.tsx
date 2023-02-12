@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useGuestResponsStore } from 'store';
 import { Container, Zone } from 'styles';
-import theme from 'styles/theme';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 

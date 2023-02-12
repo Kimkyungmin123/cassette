@@ -4,13 +4,15 @@ import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import { useState } from 'react';
+import {  useGuestInfoStore } from 'store';
 import { Box } from 'styles/create-tape';
 import theme from 'styles/theme';
 import subInstance from 'utils/api/sub';
 
-const makeTrack = () => {
+const MakeTrack = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [blob, setBlob] = useState<Blob>();
+  const { date, userNickname, tapename } = useGuestInfoStore();
 
   const sendTape = () => {
     const formData = new FormData();
@@ -55,12 +57,12 @@ const makeTrack = () => {
         )}
       </ModalPortal>
       <Box margin="0 0 24px 0">
-        <Title name="게스트" color={theme.colors.white} />
+        <Title name={userNickname} color={theme.colors.white} />
       </Box>
       <Box margin="0 0 44px 0">
         <Tape
-          title="2023 한정판 테이프"
-          date="21.01.01"
+          title={tapename}
+          date={date}
           sec="144"
           hasAudio
           setAudio={setBlob}
@@ -80,4 +82,4 @@ const makeTrack = () => {
   );
 };
 
-export default makeTrack;
+export default MakeTrack;
