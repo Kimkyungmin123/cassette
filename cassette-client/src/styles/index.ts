@@ -24,8 +24,7 @@ export const Container = styled.div`
 
   h1 {
     font-size: ${theme.fontSize.title};
-    // figma상 163px인데 모바일로 보면 너무 길어서 임시 수정
-    padding: 110px 0 10px 0;
+    padding: 113px 0 10px 0;
   }
 
   h3 {

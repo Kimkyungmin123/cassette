@@ -9,7 +9,7 @@ export const DecoContainer = styled.div`
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
-
+  padding: '0 24px';
   h3,
   p {
     margin: 0;
@@ -34,13 +34,6 @@ export const DecoContainer = styled.div`
   svg {
     width: 100%;
   }
-`;
-
-export const Text = styled.div`
-  display: flex;
-  width: 100%;
-  padding-left: 24px;
-  max-width: 245px;
 `;
 
 export const Middie = styled.div`

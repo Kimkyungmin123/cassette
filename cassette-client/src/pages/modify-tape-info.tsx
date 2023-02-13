@@ -52,7 +52,7 @@ const ModifyTapeInfo = () => {
 
   return (
     <>
-      <Box css={{ padding: '0 24px' }}>
+      <Box css={{ padding: '93px 24px 0 24px' }}>
         <MenuLayout name={userNickname} />
         <Box margin="0 0 24px 0">
           <TitleWrapper>

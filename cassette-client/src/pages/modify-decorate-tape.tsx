@@ -22,11 +22,11 @@ const ModifyDecorateTape = () => {
   };
 
   return (
-    <div css={{ padding: '0 24px' }}>
+    <>
       <MenuLayout name={userNickname} />
       <DecoContainer color={tapeColor}>
         <DecoZone css={{ gap: '24px' }}>
-          <h3 css={{ paddingTop: '0' }}> {userNickname}&apos;s Tape</h3>
+          <h3 css={{ paddingTop: '93px' }}> {userNickname}&apos;s Tape</h3>
           <TapeSVG title={tapename} date={date} sec="144" />
           <DecoZone>
             <Middie>
@@ -49,7 +49,7 @@ const ModifyDecorateTape = () => {
           </DecoZone>
         </DecoZone>
       </DecoContainer>
-    </div>
+    </>
   );
 };
 
