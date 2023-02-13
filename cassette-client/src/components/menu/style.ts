@@ -1,18 +1,14 @@
 import styled from '@emotion/styled';
 
-export const MenuLayoutContainer = styled.div`
-  position: relative;
-`;
-
 export const MenuContainer = styled.div`
   width: 100%;
   position: relative;
 `;
 
 export const IconContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 71px;
+  position: absolute;
+  top: 61px;
+  right: 16px;
 
   div {
     cursor: pointer;
