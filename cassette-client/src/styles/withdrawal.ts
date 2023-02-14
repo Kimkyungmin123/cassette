@@ -82,7 +82,7 @@ export const SubmitZone = styled.div`
   display: grid;
   flex-direction: column;
   gap: 12px;
-  padding-top: 70px; //135px;
+  padding-top: 30px; //135px; 70px;
 `;
 
 export const WithdrawalButton = styled(ButtonLayout)`
