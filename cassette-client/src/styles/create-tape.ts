@@ -17,6 +17,7 @@ export const Info = styled.span`
   font-size: ${theme.fontSize.sm};
   color: ${theme.colors.gray_600};
   margin-top: 8px;
+  //padding-bottom: 32px;
 `;
 
 export const BottomZone = styled.div`
