@@ -17,6 +17,7 @@ const Portal = ({ children, closeModal, id = 'modal' }: PortalProps) => {
   };
 
   useEffect(() => {
+    if (typeof window !== 'object') return;
     const targetEl = document.getElementById(id);
     if (targetEl) {
       setEl(targetEl);
