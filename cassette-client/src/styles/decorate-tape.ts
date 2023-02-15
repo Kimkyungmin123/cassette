@@ -4,12 +4,14 @@ import theme from './theme';
 
 export const DecoContainer = styled.div`
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
-  padding: '0 24px';
+  padding: 0 24px;
+
   h3,
   p {
     margin: 0;
@@ -52,5 +54,5 @@ export const DecoZone = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 94px; //136px
+  grid-gap: 136px;
 `;

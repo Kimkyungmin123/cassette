@@ -7,7 +7,7 @@ export const MenuContainer = styled.div`
 
 export const IconContainer = styled.div`
   position: absolute;
-  top: 61px;
+  top: 18px;
   right: 16px;
 
   div {

@@ -23,7 +23,7 @@ export const GuideContainer = styled.div`
 
 export const CloseZone = styled.div`
   position: absolute;
-  top: 71px;
+  top: 40px;
   right: 26px;
   svg {
     cursor: pointer;
@@ -33,7 +33,7 @@ export const CloseZone = styled.div`
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  padding: 121px 20px 32px 0;
+  padding: 100px 20px 32px 0;
 
   h1 {
     font-family: 'Ycomputer-Regular';
