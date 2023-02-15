@@ -39,7 +39,8 @@ const colors = {
 
 const fontSize = {
   title: '28px',
-  xl: '24px',
+  xxl: '24px',
+  xl: '22px',
   lg: '20px',
   md: '16px',
   smd: '15px',

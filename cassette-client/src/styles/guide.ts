@@ -37,7 +37,7 @@ export const Title = styled.div`
 
   h1 {
     font-family: 'Ycomputer-Regular';
-    font-size: ${theme.fontSize.xl};
+    font-size: ${theme.fontSize.xxl};
     padding-left: 6px;
   }
 `;

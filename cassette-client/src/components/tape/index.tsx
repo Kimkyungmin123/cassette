@@ -43,7 +43,6 @@ const Tape = ({
   } = useAudioRecorder();
 
   const addAudioElement = (blob: any) => {
-    if (typeof window !== 'object') return;
     if (!blob) return;
     const url = URL.createObjectURL(blob);
     const audio = document.createElement('audio');
