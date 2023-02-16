@@ -6,19 +6,21 @@ import Tape from 'components/tape';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import ToastUI from 'components/Toast';
+import { trackArray_TEN, trackArray_TWO } from 'constants/trackDummyData';
 import useCopy from 'hooks/useCopy';
 import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import {
+  AudioZone,
   BottomZone,
   Box,
   CompletedTapeContainer,
   GuestTrack,
+  PlayTime,
   PopupText,
   ToastZone,
   TrackBox,
   TrackCollection,
-  TrackContainer,
   TrackName,
 } from 'styles/create-tape-completed';
 import theme from 'styles/theme';
@@ -42,7 +44,6 @@ const CreateTapeCompleted = () => {
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
       const tapeData = data?.result[0];
-
       if (tapeData) {
         setUserData(tapeData['name'], tapeData['title']);
         setResponsUser(tapeData['tapeLink']);
@@ -52,92 +53,47 @@ const CreateTapeCompleted = () => {
     });
   }, [setResponsUser, setUserData, setTapeColor]);
 
+  console.log(trackArray_TEN);
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
+
   return (
     <CompletedTapeContainer>
       <MenuLayout name={userNickname} />
-      <Box margin="0 0 24px 0">
+      <Box>
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
-      <Box margin="0 0 44px 0">
-        <TrackBox isShown={tracks.length > 3}>
-          <TapeSVG title={tapename} date={date} sec="144" />
-        </TrackBox>
-      </Box>
-      <TrackContainer>
-        {tracks?.map((track) => (
-          <TrackBox
-            key={track.trackId}
-            isShown={tracks.length > 3}
+      <PlayTime>
+        <span>00:00/02:24</span>
+      </PlayTime>
+      <TrackBox isShown={trackArray_TEN.length > 3}>
+        <TapeSVG title={tapename} date={date} sec="144" />
+      </TrackBox>
+
+      <AudioZone></AudioZone>
+
+      <TrackCollection>
+        {trackArray_TEN.map((data) => (
+          <GuestTrack
+            key={data.result.trackId}
+            isShown={trackArray_TEN.length > 3}
             onClick={() => {
-              /* */
+              console.log('click');
             }}
           >
             <Tape
-              title={track.fileName}
-              color={track.colorCode}
-              audioLink={tracks.length > 3 ? track.audioLink : ''}
-              date="21.01.01"
-              sec="144"
               width="88"
-              height="80"
+              height="58"
+              title={data.result.title}
+              color={data.result.colorCode}
+              date={data.timestamp.slice(2, 10).replaceAll('-', '.')}
+              audioLink={trackArray_TWO.length > 3 ? data.result.audioLink : ''}
             />
-            <TrackName>{track.name}</TrackName>
-          </TrackBox>
+            <TrackName>{data.result.name}</TrackName>
+          </GuestTrack>
         ))}
-      </TrackContainer>
-      <TrackCollection>
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>{' '}
-        <GuestTrack>
-          <TapeSVG width="88" height="58" />
-          <span>경민</span>
-        </GuestTrack>
       </TrackCollection>
 
-      {tracks.length < 4 && (
+      {trackArray_TEN.length < 4 && (
         <PopupText>
           <Tape width={'25'} height={'20'} />
           <Box margin={'0 0 0 4px'}>

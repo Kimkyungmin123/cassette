@@ -6,13 +6,13 @@ export interface Login {
     jwtInformation: Token;
     tapes: LoginTape[] | [];
   };
-  message: string;
+  message: number;
   timestamp: string;
 }
 
 export interface TapeResponse<T = Tape | User | Cassette[] | Token | Track> {
   result: T;
-  message: string;
+  message: number;
   timestamp: string;
 }
 

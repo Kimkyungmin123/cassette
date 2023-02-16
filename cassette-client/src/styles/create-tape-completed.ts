@@ -14,16 +14,34 @@ export const Box = styled.div<{ margin?: string }>`
   margin: ${({ margin }) => margin && margin};
 `;
 
-export const TrackContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  position: relative;
+export const PlayTime = styled.div`
+  margin: 8px 0 11px 0;
+  span {
+    color: ${theme.colors.gray_500};
+    font-family: 'Ycomputer-Regular';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+`;
+
+export const AudioZone = styled.div`
+  width: 100%;
+  height: 56px;
+  background-color: blue;
+  margin: 32px 0;
 `;
 
 export const TrackName = styled.div`
   font-family: 'Ycomputer-Regular';
   font-size: ${theme.fontSize.xs};
   color: ${theme.colors.white};
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
 `;
 
 export const TrackBox = styled.div<{ isShown: boolean }>`
@@ -43,6 +61,8 @@ export const TrackCollection = styled.div`
   align-items: center;
   overflow-y: scroll;
   -ms-overflow-style: none;
+  margin-bottom: 40px;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -50,28 +70,30 @@ export const TrackCollection = styled.div`
   scrollbar-width: none;
 `;
 
-export const GuestTrack = styled.div`
+export const GuestTrack = styled.div<{ isShown: boolean }>`
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  font-family: 'Ycomputer-Regular';
-  font-size: ${theme.fontSize.xs};
-  color: ${theme.colors.white};
-  font-weight: 400;
-  line-height: 14px;
-  letter-spacing: 0em;
-  text-align: center;
+  opacity: ${({ isShown }) => (isShown ? 1 : 0.5)};
+  ${({ isShown }) => (isShown ? 1 : 0.5)};
 `;
 
 export const PopupText = styled.div`
+  position: absolute;
+  top: 612px;
   display: flex;
   justify-content: center;
   color: ${theme.colors.white};
   font-size: ${theme.fontSize.xs};
   text-align: left;
-  margin-bottom: 10px;
+
+  font-family: 'Pretendard-Regular';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
 `;
 
 export const BottomZone = styled.div`
