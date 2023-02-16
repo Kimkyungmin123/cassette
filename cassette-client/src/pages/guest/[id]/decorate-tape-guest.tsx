@@ -1,6 +1,7 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
+import Title from 'components/title';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import {
@@ -26,8 +27,8 @@ const DecorateTapeGuest = () => {
 
   return (
     <DecoContainer color={guestColor}>
-      <DecoZone css={{ gap: '24px', paddingTop: '93px' }}>
-        <h3>{userNickname}&apos;s Tape</h3>
+      <DecoZone css={{ gap: '24px', marginTop: '93px' }}>
+        <Title name={userNickname} color={theme.colors.white} />
         <TapeSVG title={tapename} date={date} sec="144" isOwner={false} />
         <DecoZone>
           <Middie>

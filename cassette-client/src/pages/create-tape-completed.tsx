@@ -9,19 +9,21 @@ import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
 import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
-import theme from 'styles/theme';
-import { Track } from 'types/serverResponse';
-import subInstance from 'utils/api/sub';
-
 import {
   BottomZone,
   Box,
+  CompletedTapeContainer,
+  GuestTrack,
   PopupText,
   ToastZone,
   TrackBox,
+  TrackCollection,
   TrackContainer,
   TrackName,
-} from '../styles/create-tape';
+} from 'styles/create-tape-completed';
+import theme from 'styles/theme';
+import { Track } from 'types/serverResponse';
+import subInstance from 'utils/api/sub';
 
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL } = useResponsUserStore();
@@ -52,7 +54,7 @@ const CreateTapeCompleted = () => {
 
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
   return (
-    <div css={{ padding: '93px 24px 0 24px' }}>
+    <CompletedTapeContainer>
       <MenuLayout name={userNickname} />
       <Box margin="0 0 24px 0">
         <Title name={userNickname} color={theme.colors.white} />
@@ -84,6 +86,56 @@ const CreateTapeCompleted = () => {
           </TrackBox>
         ))}
       </TrackContainer>
+      <TrackCollection>
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>{' '}
+        <GuestTrack>
+          <TapeSVG width="88" height="58" />
+          <span>경민</span>
+        </GuestTrack>
+      </TrackCollection>
 
       {tracks.length < 4 && (
         <PopupText>
@@ -112,7 +164,7 @@ const CreateTapeCompleted = () => {
           </ToastZone>
         ) : null}
       </BottomZone>
-    </div>
+    </CompletedTapeContainer>
   );
 };
 

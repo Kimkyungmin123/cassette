@@ -1,4 +1,3 @@
-import Button from 'components/button';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
@@ -25,7 +24,7 @@ const CreateTape = () => {
   };
 
   return (
-    <Box css={{ padding: '113px 24px 0 24px ' }}>
+    <Box css={{ padding: '93px 24px 0 24px ' }}>
       <Box margin="0 0 24px 0">
         <Title name="닉네임" />
       </Box>

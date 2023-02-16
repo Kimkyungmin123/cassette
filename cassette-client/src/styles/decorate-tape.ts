@@ -4,25 +4,12 @@ import theme from './theme';
 
 export const DecoContainer = styled.div`
   display: flex;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
   padding: 0 24px;
-
-  h3,
-  p {
-    margin: 0;
-    color: ${theme.colors.white};
-    display: inline-block;
-    font-weight: 400;
-  }
-
-  h3 {
-    text-align: center;
-  }
 
   p {
     text-align: start;
@@ -31,6 +18,10 @@ export const DecoContainer = styled.div`
     font-size: ${theme.fontSize.lg};
     padding: 20px 0 16px 0;
     width: 100%;
+    margin: 0;
+    color: ${theme.colors.white};
+    display: inline-block;
+    font-weight: 400;
   }
 
   svg {

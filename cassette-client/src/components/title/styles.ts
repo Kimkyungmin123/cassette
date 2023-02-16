@@ -6,10 +6,11 @@ export const TitleWrapper = styled.h1`
   color: ${theme.colors.white};
   font-size: ${theme.fontSize.lg};
   text-align: center;
+  font-weight: 400;
 `;
 
 export const TitleName = styled.span`
   font-family: 'Ycomputer-Regular';
-  color: ${({ color }) => color || theme.colors.mint}
+  color: ${({ color }) => color || theme.colors.mint};
   font-size: ${theme.fontSize.lg};
 `;
