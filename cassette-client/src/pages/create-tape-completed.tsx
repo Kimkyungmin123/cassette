@@ -53,7 +53,6 @@ const CreateTapeCompleted = () => {
     });
   }, [setResponsUser, setUserData, setTapeColor]);
 
-  console.log(trackArray_TEN);
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
 
   return (
