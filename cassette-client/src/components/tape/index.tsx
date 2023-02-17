@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import AudioPlayer from 'components/audio';
 import useAudio from 'hooks/useAudio';
 import { Dispatch, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
@@ -6,7 +7,6 @@ import { useAudioRecorder } from 'react-audio-voice-recorder';
 import {
   AudioContainer,
   ClearButton,
-  RecordContainer,
   RecordingContainer,
   Time,
   TypeStyle,
@@ -34,6 +34,7 @@ const Tape = ({
 
   const recordRef = useRef<null | HTMLDivElement>(null);
   const [isRecorded, setIsRecorded] = useState(false);
+  const [url, setUrl] = useState<string>('');
   const {
     startRecording,
     stopRecording,
@@ -42,19 +43,17 @@ const Tape = ({
     recordingTime,
   } = useAudioRecorder();
 
-  const addAudioElement = (blob: any) => {
+  const addAudioFile = (blob: Blob) => {
     if (!blob) return;
     const url = URL.createObjectURL(blob);
-    const audio = document.createElement('audio');
-    audio.src = url;
-    audio.controls = true;
+    setUrl(url);
 
     if (!recordRef.current) return;
     if (recordRef.current.querySelector('audio')) return;
 
     setAudio?.(blob);
 
-    recordRef.current?.appendChild(audio);
+    console.log('recordRef', recordRef);
   };
 
   const handleClearRecording = () => {
@@ -69,10 +68,24 @@ const Tape = ({
   };
 
   useEffect(() => {
+    if (!recordRef.current) return;
+    if (recordRef.current.querySelector('audio')) return;
+  }, [recordRef]);
+
+  useEffect(() => {
     if (!recordingBlob) return;
-    addAudioElement(recordingBlob);
+    addAudioFile(recordingBlob);
     setIsRecorded(true);
   }, [recordingBlob]);
+
+  useEffect(() => {
+    if (recordingTime > 12) {
+      stopRecording();
+      setIsRecorded(false);
+    }
+
+    console.log(recordingTime);
+  }, [recordingTime, setIsRecorded]);
 
   return (
     <TypeStyle>
@@ -94,7 +107,7 @@ const Tape = ({
         <AudioContainer>
           {isRecording ? (
             <>
-              <ClearButton onClick={stopRecording}>
+              <ClearButton onClick={stopRecording} disabled={recordingTime < 3}>
                 <Icon
                   icon="material-symbols:stop-circle-rounded"
                   color="white"
@@ -117,11 +130,13 @@ const Tape = ({
             </ClearButton>
           )}
           <Time>
-            {recordingTime < 10 ? `0${recordingTime}` : recordingTime}:00
+            {recordingTime < 10
+              ? `00:0${recordingTime}`
+              : `00:${recordingTime}`}
           </Time>
 
           <RecordingContainer>
-            <RecordContainer ref={recordRef} />
+            {<AudioPlayer ref={recordRef} audioLink={url} />}
           </RecordingContainer>
         </AudioContainer>
       )}

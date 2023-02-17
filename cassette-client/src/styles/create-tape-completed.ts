@@ -14,7 +14,7 @@ export const Box = styled.div<{ margin?: string }>`
   margin: ${({ margin }) => margin && margin};
 `;
 
-export const PlayTime = styled.div`
+export const TapeCount = styled.div`
   margin: 8px 0 11px 0;
   span {
     color: ${theme.colors.gray_500};
@@ -25,13 +25,6 @@ export const PlayTime = styled.div`
     letter-spacing: 0em;
     text-align: center;
   }
-`;
-
-export const AudioZone = styled.div`
-  width: 100%;
-  height: 56px;
-  background-color: blue;
-  margin: 32px 0;
 `;
 
 export const TrackName = styled.div`

@@ -1,6 +1,6 @@
-import Arrow from '@icon/arrow.svg';
 import Close from '@icon/close.svg';
 import Memo from '@icon/memo.svg';
+import Right from '@icon/right.svg';
 import TapeSVG from 'components/tape';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import {
   GuideContainer,
   Title,
 } from 'styles/guide';
+import theme from 'styles/theme';
 
 const Guide = () => {
   const router = useRouter();
@@ -77,7 +78,8 @@ const Guide = () => {
             rel="noreferrer noopener"
           >
             <div>
-              Voice Tape 앱 다운로드하러 가기 <Arrow />
+              Voice Tape 앱 다운로드하러 가기
+              <Right current={theme.colors.primary} />
             </div>
           </Link>
         </GuideButton>
