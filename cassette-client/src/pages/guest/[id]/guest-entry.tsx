@@ -1,6 +1,7 @@
 'use client';
 
 import Button from 'components/button';
+import Tape from 'components/tape';
 import TapeSVG from 'components/tape/tape';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -29,7 +30,7 @@ const GuestEntry = () => {
         setOwnerName(data?.result?.name),
           setOwnerTapeTitle(data?.result?.title),
           setOwnerTapeColor(data?.result?.colorCode),
-          setDate(data.timestamp.slice(2, 10).replaceAll('-', '.')),
+          setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.')),
           setResponsUser(id as string);
       });
     }
@@ -44,6 +45,7 @@ const GuestEntry = () => {
               <h1>{ownerName}&apos;s Tape</h1>
               <h3>{ownerTapeTitle}</h3>
             </div>
+
             <TapeSVG
               title={ownerTapeTitle}
               date={date}

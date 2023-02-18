@@ -89,6 +89,14 @@ const Tape = ({
     setIsRecorded(true);
   }, [recordingBlob]);
 
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return (
+      minutes + ':' + (remainingSeconds < 10 ? '0' : '') + remainingSeconds
+    );
+  };
+
   return (
     <TypeStyle>
       <TapeSvg
@@ -146,12 +154,7 @@ const Tape = ({
               <span>재녹음</span>
             </ClearButton>
           )}
-          <Time>
-            {recordingTime < 10
-              ? `00:0${recordingTime}`
-              : `00:${recordingTime}`}
-          </Time>
-
+          `
           <RecordingContainer>
             {<AudioPlayer ref={recordRef} audioLink={url} />}
           </RecordingContainer>

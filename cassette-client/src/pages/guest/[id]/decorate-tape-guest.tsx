@@ -3,23 +3,20 @@ import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import {
-  useGuestColorStore,
-  useGuestInfoStore,
-  useGuestResponsStore,
-} from 'store';
+import { useGuestColorStore, useGuestInfoStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
 
 const DecorateTapeGuest = () => {
+  const { query } = useRouter();
   const { userNickname, tapename, date } = useGuestInfoStore();
 
   const guestColor = useGuestColorStore().tapeColor;
   const setGuestColor = useGuestColorStore().setTapeColor;
-  const { userURL } = useGuestResponsStore();
 
-  const GUEST_MAKE_TRACK_URL = `/guest/${userURL}/make-track`;
+  const GUEST_MAKE_TRACK_URL = `/guest/${query.id}/make-track`;
 
   useEffect(() => {
     setGuestColor('cassette_orange');

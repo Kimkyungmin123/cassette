@@ -25,29 +25,34 @@ const MakeTrack = () => {
   const { recordFile } = useRecord();
 
   const sendTape = () => {
-    const formData = new FormData();
-    console.log(blob);
-    //const file = new File([blob], 'fileName', { type: 'audio/webm' });
-    console.log('blob', blob);
-    console.log('formData', formData);
+    const fileName = 'temporary file name';
+    if (blob) {
+      const formData = new FormData();
+      formData.append('audio', blob, fileName);
 
-    subInstance
-      .createTrack(
-        `${tapeColor}`,
-        `${tapename}`,
-        `${userNickname}`,
-        `${userURL}`,
-        formData,
-      )
-      .then((data) => {
-        console.log(data);
-        // setModalOpen(true);
-      });
+      subInstance
+        .createTrack(
+          `${tapeColor}`,
+          `${tapename}`,
+          `${userNickname}`,
+          `${userURL}`,
+          formData,
+        )
+        .then((data) => {
+          console.log(data);
+          // setModalOpen(true);
+        });
 
-    console.log({ blob });
+      console.log({ blob });
+    }
   };
 
   const closeModal = () => setModalOpen(false);
+
+  const handleSendTape = () => {
+    sendTape();
+    // setModalOpen(true);
+  };
 
   return (
     <MakeTapeContainer>
@@ -90,13 +95,7 @@ const MakeTrack = () => {
         </p>
       </WarningZone>
 
-      <Button
-        onClick={() => {
-          setModalOpen(true);
-          sendTape();
-        }}
-        variant="main"
-      >
+      <Button onClick={handleSendTape} variant="main">
         테이프 전송하기
       </Button>
     </MakeTapeContainer>

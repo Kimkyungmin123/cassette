@@ -89,7 +89,6 @@ export const useGuestInfoStore = create<UserStore>()(
     { name: 'persist' },
   ),
 );
-
 export const useGuestResponsStore = create<ResponseUserStore>()(
   persist(
     (set) => ({
