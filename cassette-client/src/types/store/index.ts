@@ -24,6 +24,11 @@ export interface TokenStore {
   setToken: (refreshToken: string) => void;
 }
 
+export interface RecordStore {
+  recordFile: string;
+  setRecordFile: (recordFile: string) => void;
+}
+
 export interface DropdownStore {
   dropContent: string;
   dropType: WithdrawalType | null;

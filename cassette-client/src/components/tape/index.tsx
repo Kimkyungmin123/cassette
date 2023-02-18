@@ -3,10 +3,12 @@ import AudioPlayer from 'components/audio';
 import useAudio from 'hooks/useAudio';
 import { Dispatch, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
+import { useRecord } from 'store';
 
 import {
   AudioContainer,
   ClearButton,
+  RecordButtonZone,
   RecordingContainer,
   Time,
   TypeStyle,
@@ -31,6 +33,7 @@ const Tape = ({
   setAudio,
 }: TapeProps) => {
   const { playing, toggle } = useAudio(audioLink ?? '');
+  const { setRecordFile } = useRecord();
 
   const recordRef = useRef<null | HTMLDivElement>(null);
   const [isRecorded, setIsRecorded] = useState(false);
@@ -45,13 +48,20 @@ const Tape = ({
 
   const addAudioFile = (blob: Blob) => {
     if (!blob) return;
+    console.log('blob!!', blob);
     const url = URL.createObjectURL(blob);
+    const formData = new FormData();
+    formData.append('audio', blob, 'audio.wav');
+
+    console.log('formData', formData);
     setUrl(url);
+    setRecordFile(url);
 
     if (!recordRef.current) return;
     if (recordRef.current.querySelector('audio')) return;
 
     setAudio?.(blob);
+    console.log('blob', blob);
 
     console.log('recordRef', recordRef);
   };
@@ -75,17 +85,9 @@ const Tape = ({
   useEffect(() => {
     if (!recordingBlob) return;
     addAudioFile(recordingBlob);
+    console.log('recordingBlob', recordingBlob);
     setIsRecorded(true);
   }, [recordingBlob]);
-
-  useEffect(() => {
-    if (recordingTime > 12) {
-      stopRecording();
-      setIsRecorded(false);
-    }
-
-    console.log(recordingTime);
-  }, [recordingTime, setIsRecorded]);
 
   return (
     <TypeStyle>
@@ -105,28 +107,43 @@ const Tape = ({
 
       {hasAudio && (
         <AudioContainer>
-          {isRecording ? (
-            <>
-              <ClearButton onClick={stopRecording} disabled={recordingTime < 3}>
+          <RecordButtonZone>
+            {isRecording ? (
+              <ClearButton
+                variant="clear"
+                onClick={stopRecording}
+                disabled={recordingTime < 3}
+                as="button"
+              >
                 <Icon
                   icon="material-symbols:stop-circle-rounded"
                   color="white"
                   width="32px"
                 />
               </ClearButton>
-            </>
-          ) : (
-            <ClearButton onClick={startRecording} disabled={isRecorded}>
-              <Icon
-                icon="uim:record-audio"
-                color={isRecorded ? '#840000' : '#CD0E00'}
-                width="32px"
-              />
-            </ClearButton>
-          )}
+            ) : (
+              <ClearButton
+                variant="clear"
+                onClick={startRecording}
+                disabled={isRecorded}
+                as="button"
+              >
+                <Icon
+                  icon="uim:record-audio"
+                  color={isRecorded ? '#840000' : '#CD0E00'}
+                  width="32px"
+                />
+              </ClearButton>
+            )}
+          </RecordButtonZone>
           {isRecorded && (
-            <ClearButton onClick={handleClearRecording} disabled={isRecording}>
-              재녹음하기
+            <ClearButton
+              variant="clear"
+              onClick={handleClearRecording}
+              disabled={isRecording}
+              as="button"
+            >
+              <span>재녹음</span>
             </ClearButton>
           )}
           <Time>
