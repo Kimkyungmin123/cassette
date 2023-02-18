@@ -1,6 +1,6 @@
 import PauseIcon from '@icon/pause.svg';
 import Play from '@icon/play.svg';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { forwardRef, RefObject, useEffect, useRef, useState } from 'react';
 
 import {
   Audio,
@@ -115,4 +115,4 @@ const AudioPlayer = ({ audioLink, ref }: AudioPlayerProps) => {
   );
 };
 
-export default AudioPlayer;
+export default forwardRef(AudioPlayer);
