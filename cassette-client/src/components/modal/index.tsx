@@ -14,17 +14,24 @@ interface ModalProps {
   title: ReactNode;
   detail?: string;
   btnText: string;
-  onClickBtn: () => void;
+  onClickBtn?: () => void;
+  link: string;
 }
-const Modal = ({ icon, title, detail, btnText, onClickBtn }: ModalProps) => {
-  const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
+const Modal = ({
+  icon,
+  title,
+  detail,
+  btnText,
+  onClickBtn,
+  link,
+}: ModalProps) => {
   return (
     <ModalContainer>
       <ModalWrapper>
         <ModalTitle>{icon}</ModalTitle>
         <ModalTitle>{title}</ModalTitle>
         <ModalDetail>{detail}</ModalDetail>
-        <Link href={MAKE_TAPE_URL}>
+        <Link href={link}>
           <Button onClick={onClickBtn} variant="main">
             {btnText}
           </Button>

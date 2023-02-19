@@ -4,7 +4,6 @@ import theme from 'styles/theme';
 
 export const AudioCOntainer = styled.div`
   width: 100%;
-  margin: 32px 0;
 `;
 
 export const Audio = styled.audio``;
@@ -70,6 +69,8 @@ export const ProgressBar = styled.input`
 export const PlayZone = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 20px;
 
   span {
     font-family: 'Ycomputer-Regular';
@@ -80,10 +81,10 @@ export const PlayZone = styled.div`
   }
 `;
 
-export const ButtonZone = styled.div`
+export const ButtonZone = styled.div<{ isGuest?: boolean }>`
   display: flex;
-  width: 100%;
-  margin-top: 16px;
+  width: ${({ isGuest }) => (isGuest ? '24px' : '100%')};
+  margin: ${({ isGuest }) => (isGuest ? '0 1px 0 3px' : '16px 0 0 0')};
   flex-direction: column;
   justify-content: center;
   align-items: center;

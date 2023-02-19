@@ -34,6 +34,7 @@ const CreateTapeCompleted = () => {
   const [isCopied, onCopy] = useCopy();
   const [onToast, setOnToast] = useState<boolean>(true);
   const [tracks, setTracks] = useState<Track[]>([]);
+  const { tapeId } = useResponsUserStore();
 
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
@@ -55,8 +56,11 @@ const CreateTapeCompleted = () => {
     });
   }, [setResponsUser, setUserData, setTapeColor]);
 
-  const { tapeId } = useResponsUserStore();
-
+  useEffect(() => {
+    subInstance
+      .getUserTrack(tapeId as number)
+      .then((data) => console.log(data));
+  }, []);
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
 
   return (

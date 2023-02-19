@@ -1,7 +1,6 @@
 import {
   ColorStore,
   DropdownStore,
-  RecordStore,
   ResponseUserStore,
   TokenStore,
   UserStore,
@@ -96,19 +95,6 @@ export const useGuestResponsStore = create<ResponseUserStore>()(
 
       setResponsUser: (userURL) => {
         set(() => ({ userURL }));
-      },
-    }),
-    { name: 'persist' },
-  ),
-);
-
-export const useRecord = create<RecordStore>()(
-  persist(
-    (set) => ({
-      recordFile: '',
-
-      setRecordFile: (recordFile) => {
-        set(() => ({ recordFile }));
       },
     }),
     { name: 'persist' },

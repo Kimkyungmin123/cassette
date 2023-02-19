@@ -1,11 +1,11 @@
 import { Icon } from '@iconify/react';
 import AudioPlayer from 'components/audio';
 import useAudio from 'hooks/useAudio';
-import { Dispatch, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
-import { useRecord } from 'store';
 
 import {
+  AlertBox,
   AudioContainer,
   ClearButton,
   RecordButtonZone,
@@ -18,7 +18,12 @@ import TapeSvg, { TapeSvgProps } from './tape';
 interface TapeProps extends TapeSvgProps {
   hasAudio?: boolean;
   audioLink?: string;
-  setAudio?: Dispatch<any>;
+  setAudio?: Dispatch<SetStateAction<Blob>>;
+  isOwner?: boolean;
+  firstEntry?: boolean;
+  setFirstEntry?: Dispatch<SetStateAction<boolean>>;
+
+  setIsRedording?: Dispatch<SetStateAction<boolean>>;
 }
 
 const Tape = ({
@@ -31,13 +36,17 @@ const Tape = ({
   height,
   audioLink,
   setAudio,
+  isOwner = true,
+  firstEntry,
+  setFirstEntry,
+  setIsRedording,
 }: TapeProps) => {
   const { playing, toggle } = useAudio(audioLink ?? '');
-  const { setRecordFile } = useRecord();
 
   const recordRef = useRef<null | HTMLDivElement>(null);
   const [isRecorded, setIsRecorded] = useState(false);
   const [url, setUrl] = useState<string>('');
+
   const {
     startRecording,
     stopRecording,
@@ -48,39 +57,17 @@ const Tape = ({
 
   const addAudioFile = (blob: Blob) => {
     if (!blob) return;
-    console.log('blob!!', blob);
     const url = URL.createObjectURL(blob);
     const formData = new FormData();
     formData.append('audio', blob, 'audio.wav');
-
-    console.log('formData', formData);
     setUrl(url);
-    setRecordFile(url);
-
-    if (!recordRef.current) return;
-    if (recordRef.current.querySelector('audio')) return;
-
     setAudio?.(blob);
-    console.log('blob', blob);
-
-    console.log('recordRef', recordRef);
   };
 
   const handleClearRecording = () => {
-    const audio = recordRef.current?.querySelector('audio');
-
-    if (!audio) {
-      stopRecording();
-      return;
-    }
-    recordRef.current?.removeChild(audio);
+    setUrl('');
     setIsRecorded(false);
   };
-
-  useEffect(() => {
-    if (!recordRef.current) return;
-    if (recordRef.current.querySelector('audio')) return;
-  }, [recordRef]);
 
   useEffect(() => {
     if (!recordingBlob) return;
@@ -116,52 +103,87 @@ const Tape = ({
       {hasAudio && (
         <AudioContainer>
           <RecordButtonZone>
+            {firstEntry ? (
+              <>
+                <Time css={{ marginBottom: '61px' }}>00:00</Time>
+                <ClearButton
+                  variant="clear"
+                  onClick={() => {
+                    handleClearRecording();
+                    startRecording();
+                    setFirstEntry?.(false);
+                    setIsRedording?.(true);
+                  }}
+                  disabled={isRecording}
+                  as="button"
+                >
+                  <Icon
+                    icon="uim:record-audio"
+                    color={'#CD0E00'}
+                    width="35px"
+                  />
+                </ClearButton>
+              </>
+            ) : null}
+
             {isRecording ? (
-              <ClearButton
-                variant="clear"
-                onClick={stopRecording}
-                disabled={recordingTime < 3}
-                as="button"
-              >
-                <Icon
-                  icon="material-symbols:stop-circle-rounded"
-                  color="white"
-                  width="32px"
-                />
-              </ClearButton>
-            ) : (
-              <ClearButton
-                variant="clear"
-                onClick={startRecording}
-                disabled={isRecorded}
-                as="button"
-              >
-                <Icon
-                  icon="uim:record-audio"
-                  color={isRecorded ? '#840000' : '#CD0E00'}
-                  width="32px"
-                />
-              </ClearButton>
-            )}
+              <>
+                <Time>
+                  {recordingTime < 10
+                    ? `00:0${recordingTime}`
+                    : `00:${recordingTime}`}
+                </Time>
+                <AlertBox isRecording={true}>
+                  <div>최대 녹음 가능 시간은 12초에요!</div>
+                </AlertBox>
+                <ClearButton
+                  variant="clear"
+                  onClick={() => {
+                    stopRecording();
+                    setIsRedording?.(false);
+                  }}
+                  disabled={recordingTime < 3}
+                  as="button"
+                >
+                  <Icon
+                    icon="material-symbols:stop-circle-rounded"
+                    color="white"
+                    width="35px"
+                  />
+                </ClearButton>
+              </>
+            ) : null}
           </RecordButtonZone>
-          {isRecorded && (
-            <ClearButton
-              variant="clear"
-              onClick={handleClearRecording}
-              disabled={isRecording}
-              as="button"
-            >
-              <span>재녹음</span>
-            </ClearButton>
-          )}
-          <Time>
-            {recordingTime < 10
-              ? `00:0${recordingTime}`
-              : `00:${recordingTime}`}
-          </Time>
-          <RecordingContainer>
-            {<AudioPlayer ref={recordRef} audioLink={url} />}
-          </RecordingContainer>
+
+          {isRecorded ? (
+            <>
+              <RecordingContainer>
+                <AudioPlayer
+                  ref={recordRef}
+                  audioLink={url}
+                  isOwner={isOwner}
+                />
+              </RecordingContainer>
+              <RecordButtonZone css={{ paddingBottom: '39px' }}>
+                <ClearButton
+                  variant="clear"
+                  onClick={() => {
+                    handleClearRecording();
+                    startRecording();
+                    setIsRedording?.(true);
+                  }}
+                  disabled={isRecording}
+                  as="button"
+                >
+                  <Icon
+                    icon="uim:record-audio"
+                    color={'#CD0E00'}
+                    width="35px"
+                  />
+                </ClearButton>
+              </RecordButtonZone>
+            </>
+          ) : null}
         </AudioContainer>
       )}
     </TypeStyle>

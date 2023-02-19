@@ -14,9 +14,10 @@ import {
 interface AudioPlayerProps {
   audioLink: string;
   ref?: RefObject<HTMLDivElement>;
+  isOwner?: boolean;
 }
 
-const AudioPlayer = ({ audioLink, ref }: AudioPlayerProps) => {
+const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -88,29 +89,65 @@ const AudioPlayer = ({ audioLink, ref }: AudioPlayerProps) => {
   return (
     <AudioCOntainer ref={ref}>
       <Audio ref={audioPlayer} src={audioLink} preload="metadata" />
-      <PlayZone>
-        <span>{calculateTime(currentTime)}</span>
+      {isOwner ? (
+        <>
+          <PlayZone>
+            <span>{calculateTime(currentTime)}</span>
+            <ProgressBar
+              type="range"
+              defaultValue="0"
+              ref={progressBar}
+              onChange={changeRange}
+            />
 
-        <ProgressBar
-          type="range"
-          defaultValue="0"
-          ref={progressBar}
-          onChange={changeRange}
-        />
-
-        <span>
-          {duration ? !isNaN(duration) && calculateTime(duration) : '00:00'}
-        </span>
-      </PlayZone>
-      <ButtonZone>
-        <PlaynPauseButton variant="clear" onClick={togglePlayPause} as="button">
-          {isPlaying && (currentTime === 0 || currentTime !== duration) ? (
-            <PauseIcon />
-          ) : (
-            <Play />
-          )}
-        </PlaynPauseButton>
-      </ButtonZone>
+            <span>
+              {duration ? !isNaN(duration) && calculateTime(duration) : '00:00'}
+            </span>
+          </PlayZone>
+          <ButtonZone>
+            <PlaynPauseButton
+              variant="clear"
+              onClick={togglePlayPause}
+              as="button"
+            >
+              {isPlaying && (currentTime === 0 || currentTime !== duration) ? (
+                <PauseIcon />
+              ) : (
+                <Play />
+              )}
+            </PlaynPauseButton>
+          </ButtonZone>
+        </>
+      ) : (
+        <>
+          <PlayZone>
+            <span>{calculateTime(currentTime)}</span>
+            <ButtonZone isGuest={true}>
+              <PlaynPauseButton
+                variant="clear"
+                onClick={togglePlayPause}
+                as="button"
+              >
+                {isPlaying &&
+                (currentTime === 0 || currentTime !== duration) ? (
+                  <PauseIcon width="20" height="20" />
+                ) : (
+                  <Play width="20" height="20" />
+                )}
+              </PlaynPauseButton>
+            </ButtonZone>
+            <ProgressBar
+              type="range"
+              defaultValue="0"
+              ref={progressBar}
+              onChange={changeRange}
+            />
+            <span>
+              {duration ? !isNaN(duration) && calculateTime(duration) : '00:00'}
+            </span>
+          </PlayZone>
+        </>
+      )}
     </AudioCOntainer>
   );
 };

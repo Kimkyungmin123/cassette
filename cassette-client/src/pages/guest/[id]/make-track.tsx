@@ -1,28 +1,36 @@
+import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
 import Button from 'components/button';
 import Modal from 'components/modal';
 import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction, useState } from 'react';
 import {
   useGuestColorStore,
   useGuestInfoStore,
   useGuestResponsStore,
-  useRecord,
 } from 'store';
 import { Box } from 'styles/create-tape';
-import { MakeTapeContainer, WarningZone } from 'styles/make-track';
+import {
+  BackButtonZone,
+  MakeTapeContainer,
+  SubmitTapeButton,
+  WarningZone,
+} from 'styles/make-track';
 import theme from 'styles/theme';
 import subInstance from 'utils/api/sub';
 
 const MakeTrack = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [blob, setBlob] = useState<Blob>();
+  const [firstEntry, setFirstEntry] = useState<boolean>(true);
+  const [isRedording, setIsRedording] = useState<boolean>(false);
   const { date, userNickname, tapename } = useGuestInfoStore();
   const { tapeColor } = useGuestColorStore();
   const { userURL } = useGuestResponsStore();
-  const { recordFile } = useRecord();
+  const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
 
   const sendTape = () => {
     const fileName = 'temporary file name';
@@ -31,31 +39,23 @@ const MakeTrack = () => {
       formData.append('audio', blob, fileName);
 
       subInstance
-        .createTrack(
-          `${tapeColor}`,
-          `${tapename}`,
-          `${userNickname}`,
-          `${userURL}`,
-          formData,
-        )
+        .createTrack(tapeColor, tapename, userNickname, userURL, formData)
         .then((data) => {
           console.log(data);
-          // setModalOpen(true);
+          setModalOpen(true);
         });
-
-      console.log({ blob });
     }
   };
 
   const closeModal = () => setModalOpen(false);
-
-  const handleSendTape = () => {
-    sendTape();
-    // setModalOpen(true);
-  };
-
+  const route = useRouter();
   return (
     <MakeTapeContainer>
+      <BackButtonZone>
+        <Button variant="clear" onClick={() => route.back()}>
+          <Left />
+        </Button>
+      </BackButtonZone>
       <ModalPortal closeModal={closeModal}>
         {modalOpen && (
           <Modal
@@ -69,9 +69,8 @@ const MakeTrack = () => {
             }
             detail="친구들의 목소리가 담긴 테이프를 갖고싶나요?"
             btnText="내 테이프 만들기"
-            onClickBtn={() => {
-              console.log('click');
-            }}
+            link={MAKE_TAPE_URL}
+            onClickBtn={closeModal}
           />
         )}
       </ModalPortal>
@@ -84,20 +83,32 @@ const MakeTrack = () => {
           date={date}
           sec="144"
           hasAudio
-          setAudio={setBlob}
+          setAudio={setBlob as Dispatch<SetStateAction<Blob>>}
+          isOwner={false}
+          firstEntry={firstEntry}
+          setFirstEntry={setFirstEntry}
+          setIsRedording={setIsRedording}
         />
       </Box>
-      <WarningZone>
-        <Siren />
-        <p>
-          테이프 전송하기를 누르면 주인장에게 녹음테이프가
-          <br /> 바로 전송됩니다. 충분히 확인 후 전송해주세요.
-        </p>
+      <WarningZone firstEntry={firstEntry}>
+        {!firstEntry ? (
+          <>
+            <Siren />
+            <p>
+              테이프 전송하기를 누르면 주인장에게 녹음테이프가
+              <br /> 바로 전송됩니다. 충분히 확인 후 전송해주세요.
+            </p>
+          </>
+        ) : null}
       </WarningZone>
 
-      <Button onClick={handleSendTape} variant="main">
+      <SubmitTapeButton
+        onClick={sendTape}
+        variant="main"
+        disabled={firstEntry || isRedording}
+      >
         테이프 전송하기
-      </Button>
+      </SubmitTapeButton>
     </MakeTapeContainer>
   );
 };
