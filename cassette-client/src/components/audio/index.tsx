@@ -91,7 +91,7 @@ const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
       <Audio ref={audioPlayer} src={audioLink} preload="metadata" />
       {isOwner ? (
         <>
-          <PlayZone>
+          <PlayZone css={{ marginTop: '21px' }}>
             <span>{calculateTime(currentTime)}</span>
             <ProgressBar
               type="range"
@@ -111,9 +111,9 @@ const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
               as="button"
             >
               {isPlaying && (currentTime === 0 || currentTime !== duration) ? (
-                <PauseIcon />
+                <PauseIcon width="24" height="24" />
               ) : (
-                <Play />
+                <Play width="24" height="24" />
               )}
             </PlaynPauseButton>
           </ButtonZone>

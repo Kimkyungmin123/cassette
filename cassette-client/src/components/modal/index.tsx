@@ -36,12 +36,7 @@ const Modal = ({
             {btnText}
           </Button>
         </Link>
-        <Button
-          onClick={() => {
-            /* close modal */
-          }}
-          variant="clear"
-        >
+        <Button onClick={onClickBtn} variant="clear">
           닫기
         </Button>
       </ModalWrapper>

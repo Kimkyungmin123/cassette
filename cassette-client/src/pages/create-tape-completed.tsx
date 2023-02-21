@@ -7,7 +7,6 @@ import Tape from 'components/tape';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import ToastUI from 'components/Toast';
-import { trackArray_TEN, trackArray_TWO } from 'constants/trackDummyData';
 import useCopy from 'hooks/useCopy';
 import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
@@ -24,25 +23,24 @@ import {
   TrackName,
 } from 'styles/create-tape-completed';
 import theme from 'styles/theme';
-import { Track } from 'types/serverResponse';
+import { TapeResponse, Track } from 'types/serverResponse';
 import subInstance from 'utils/api/sub';
 
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL } = useResponsUserStore();
   const { userNickname, tapename, setUserData, date } = useUserStore();
-  const { setTapeColor } = useColorStore();
+  const { setTapeColor, tapeColor } = useColorStore();
   const [isCopied, onCopy] = useCopy();
   const [onToast, setOnToast] = useState<boolean>(true);
   const [tracks, setTracks] = useState<Track[]>([]);
-  const { tapeId } = useResponsUserStore();
+  const [currentTapeId, setCurrentTapeId] = useState<number | null>(null);
+  const [currentTrack, setCurrentTrack] = useState<TapeResponse<Track>>();
 
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
   };
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
-  const andio_File =
-    'https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3';
 
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
@@ -56,12 +54,14 @@ const CreateTapeCompleted = () => {
     });
   }, [setResponsUser, setUserData, setTapeColor]);
 
-  useEffect(() => {
-    subInstance
-      .getUserTrack(tapeId as number)
-      .then((data) => console.log(data));
-  }, []);
   // TODO: server, client tape fill 매치되지 않는 에러 해결하기
+
+  useEffect(() => {
+    if (currentTapeId)
+      subInstance
+        .getUserTrack(currentTapeId)
+        .then((data) => setCurrentTrack(data));
+  }, [currentTapeId]);
 
   return (
     <CompletedTapeContainer>
@@ -70,41 +70,53 @@ const CreateTapeCompleted = () => {
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
       <TapeCount>
-        {trackArray_TEN.length === 0 || trackArray_TEN.length === 1 ? (
-          <span>{trackArray_TEN.length} tape</span>
+        {tracks.length === 0 || tracks.length === 1 ? (
+          <span>{tracks.length} tape</span>
         ) : (
-          <span>{trackArray_TEN.length} tapes</span>
+          <span>{tracks.length} tapes</span>
         )}
         <span> / 12 tapes</span>
       </TapeCount>
-      <TrackBox isShown={trackArray_TEN.length > 3}>
-        <TapeSVG title={tapename} date={date} sec="144" />
+      <TrackBox isShown={tracks.length > 2}>
+        <TapeSVG
+          title={currentTapeId ? currentTrack?.result.title : tapename}
+          date={
+            currentTapeId
+              ? currentTrack?.timestamp.slice(2, 10).replaceAll('-', '.')
+              : date
+          }
+          color={currentTapeId ? currentTrack?.result.colorCode : tapeColor}
+          sec="144"
+        />
       </TrackBox>
 
-      <AudioPlayer audioLink={andio_File} />
+      <AudioPlayer
+        audioLink={
+          currentTapeId ? (currentTrack?.result.audioLink as string) : ''
+        }
+      />
       <TrackCollection>
-        {trackArray_TEN.map((data) => (
+        {tracks.map((data) => (
           <GuestTrack
-            key={data.result.trackId}
-            isShown={trackArray_TEN.length > 3}
+            key={data.trackId}
+            isShown={tracks.length > 2}
             onClick={() => {
-              console.log('click');
+              setCurrentTapeId(data.trackId);
             }}
           >
             <Tape
               width="88"
               height="58"
-              title={data.result.title}
-              color={data.result.colorCode}
-              date={data.timestamp.slice(2, 10).replaceAll('-', '.')}
-              audioLink={trackArray_TWO.length > 3 ? data.result.audioLink : ''}
+              title={data.title}
+              color={data.colorCode}
+              audioLink={tracks.length > 2 ? data.audioLink : ''}
             />
-            <TrackName>{data.result.name}</TrackName>
+            <TrackName>{data.name}</TrackName>
           </GuestTrack>
         ))}
       </TrackCollection>
 
-      {trackArray_TEN.length < 4 && (
+      {tracks.length < 3 && (
         <PopupText>
           <Tape width={'25'} height={'20'} />
           <Box margin={'0 0 0 4px'}>

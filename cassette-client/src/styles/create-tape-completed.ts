@@ -55,7 +55,7 @@ export const TrackCollection = styled.div`
   overflow-y: scroll;
   -ms-overflow-style: none;
   margin-bottom: 40px;
-
+  margin-top: 28px;
   &::-webkit-scrollbar {
     display: none;
   }

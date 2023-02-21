@@ -87,7 +87,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           rel="apple-touch-startup-image"
         />
       </Head>
-      <ReactQueryWrapper>
+      {/* <ReactQueryWrapper> */}
         <Suspense>
           <ThemeProvider theme={theme}>
             <Global styles={global} />
@@ -97,7 +97,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <div id="modal" />
           </ThemeProvider>
         </Suspense>
-      </ReactQueryWrapper>
+      {/* </ReactQueryWrapper> */}
     </>
   );
 };
