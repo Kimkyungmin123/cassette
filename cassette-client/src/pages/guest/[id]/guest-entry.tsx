@@ -1,9 +1,9 @@
 'use client';
-
+import Cry from '@icon/cry.svg';
 import Button from 'components/button';
-import Tape from 'components/tape';
+import Modal from 'components/modal';
+import ModalPortal from 'components/modal/portal';
 import TapeSVG from 'components/tape/tape';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useGuestResponsStore } from 'store';
@@ -14,15 +14,18 @@ import subInstance from 'utils/api/sub';
 const GuestEntry = () => {
   const router = useRouter();
   const { id } = router.query;
-
+  const [modalOpen, setModalOpen] = useState(false);
   const [ownerName, setOwnerName] = useState<string>('');
   const [ownerTapeTitle, setOwnerTapeTitle] = useState<string>('');
   const [ownerTapeColor, setOwnerTapeColor] =
     useState<Color>('cassette_orange');
+  const [hasFullTape, setHasfullTape] = useState<boolean>(false);
   const { setResponsUser } = useGuestResponsStore();
   const [date, setDate] = useState<string>('');
 
   const GUEST_CREATE_URL = `/guest/${id}/create-tape-guest`;
+  const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
+  const route = useRouter();
 
   useEffect(() => {
     if (id) {
@@ -30,16 +33,29 @@ const GuestEntry = () => {
         setOwnerName(data?.result?.name),
           setOwnerTapeTitle(data?.result?.title),
           setOwnerTapeColor(data?.result?.colorCode),
-          setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.')),
-          setResponsUser(id as string);
+          setHasfullTape(data?.result?.hasAudioLink),
+          setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.'));
       });
     }
   }, [id, ownerName, ownerTapeTitle, setResponsUser]);
 
+  const closeModal = () => setModalOpen(false);
   return (
     <>
       {id ? (
         <Container>
+          <ModalPortal closeModal={closeModal}>
+            {modalOpen && (
+              <Modal
+                icon={<Cry />}
+                title={<>테이프를 남길 자리가 없어요!</>}
+                detail="친구들의 목소리가 담긴 테이프를 갖고싶나요?"
+                btnText="내 테이프 만들기"
+                link={MAKE_TAPE_URL}
+                onClickBtn={closeModal}
+              />
+            )}
+          </ModalPortal>
           <Zone css={{ gap: '32px' }}>
             <div>
               <h1>{ownerName}&apos;s Tape</h1>
@@ -57,11 +73,17 @@ const GuestEntry = () => {
             </p>
           </Zone>
           <Zone css={{ paddingTop: '176px' }}>
-            <Link href={GUEST_CREATE_URL}>
-              <Button variant="guest" color={ownerTapeColor}>
-                목소리 남겨주기
-              </Button>
-            </Link>
+            <Button
+              variant="guest"
+              color={ownerTapeColor}
+              onClick={
+                hasFullTape
+                  ? () => setModalOpen(true)
+                  : () => route.push(GUEST_CREATE_URL)
+              }
+            >
+              목소리 남겨주기
+            </Button>
           </Zone>
         </Container>
       ) : //TODO: 탈퇴한 유저 링크 들어갔을 때 처리

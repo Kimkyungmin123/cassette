@@ -33,8 +33,10 @@ const MakeTrack = () => {
   const { date, userNickname, tapename } = useGuestInfoStore();
   const { tapeColor } = useGuestColorStore();
   const { userURL } = useGuestResponsStore();
+  const router = useRouter();
+  const { id } = router.query;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
-
+  const GUEST_ENTRY_URL = `/guest/${id}/guest-entry`;
   const sendTape = () => {
     if (blob) {
       const audiofile = new File([blob], 'audiofile.wav', {
@@ -44,7 +46,6 @@ const MakeTrack = () => {
       subInstance
         .createTrack(tapeColor, tapename, userNickname, userURL, audiofile)
         .then((data) => {
-          console.log(data);
           setModalOpen(true);
         })
         .catch(() => {
@@ -82,6 +83,7 @@ const MakeTrack = () => {
             btnText="내 테이프 만들기"
             link={MAKE_TAPE_URL}
             onClickBtn={closeModal}
+            entryLink={GUEST_ENTRY_URL}
           />
         )}
       </ModalPortal>

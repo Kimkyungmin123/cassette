@@ -1,5 +1,6 @@
 import Button from 'components/button';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import {
@@ -16,6 +17,7 @@ interface ModalProps {
   btnText: string;
   onClickBtn?: () => void;
   link: string;
+  entryLink?: string;
 }
 const Modal = ({
   icon,
@@ -24,7 +26,9 @@ const Modal = ({
   btnText,
   onClickBtn,
   link,
+  entryLink,
 }: ModalProps) => {
+  const route = useRouter();
   return (
     <ModalContainer>
       <ModalWrapper>
@@ -36,7 +40,11 @@ const Modal = ({
             {btnText}
           </Button>
         </Link>
-        <Button onClick={onClickBtn} variant="clear">
+
+        <Button
+          onClick={entryLink ? () => route.push(entryLink) : onClickBtn}
+          variant="clear"
+        >
           닫기
         </Button>
       </ModalWrapper>

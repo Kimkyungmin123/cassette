@@ -44,6 +44,7 @@ const CreateTapeCompleted = () => {
 
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
+      console.log(data);
       const tapeData = data?.result[0];
       if (tapeData) {
         setUserData(tapeData['name'], tapeData['title']);
