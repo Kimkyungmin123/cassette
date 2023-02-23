@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 import {
   ModalContainer,
+  ModalContent,
   ModalDetail,
   ModalTitle,
   ModalWrapper,
@@ -32,21 +33,23 @@ const Modal = ({
   return (
     <ModalContainer>
       <ModalWrapper>
-        <ModalTitle>{icon}</ModalTitle>
-        <ModalTitle>{title}</ModalTitle>
-        <ModalDetail>{detail}</ModalDetail>
-        <Link href={link}>
-          <Button onClick={onClickBtn} variant="main">
-            {btnText}
-          </Button>
-        </Link>
+        <ModalContent>
+          <ModalTitle>{icon}</ModalTitle>
+          <ModalTitle>{title}</ModalTitle>
+          <ModalDetail>{detail}</ModalDetail>
+          <Link href={link}>
+            <Button onClick={onClickBtn} variant="main">
+              {btnText}
+            </Button>
+          </Link>
 
-        <Button
-          onClick={entryLink ? () => route.push(entryLink) : onClickBtn}
-          variant="clear"
-        >
-          닫기
-        </Button>
+          <Button
+            onClick={entryLink ? () => route.push(entryLink) : onClickBtn}
+            variant="clear"
+          >
+            닫기
+          </Button>
+        </ModalContent>
       </ModalWrapper>
     </ModalContainer>
   );

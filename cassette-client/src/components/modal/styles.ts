@@ -7,6 +7,9 @@ export const ModalWrapper = styled.div`
   padding: 20px;
   border-radius: 30px 30px 0 0;
   font-family: 'Pretendard-Regular';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const ModalContainer = styled.div`
@@ -14,6 +17,11 @@ export const ModalContainer = styled.div`
   width: 100%;
   bottom: 0;
   z-index: 99999;
+`;
+
+export const ModalContent = styled.div`
+  width: 100%;
+  max-width: 580px;
 `;
 
 export const ModalDimmed = styled.div`
@@ -31,7 +39,6 @@ export const ModalTitle = styled.h1`
   color: ${theme.colors.white};
   text-align: center;
   margin-bottom: 16px;
-
   font-size: ${theme.fontSize.xxl};
   font-weight: 600;
   line-height: 32px;
@@ -42,7 +49,6 @@ export const ModalDetail = styled.div`
   color: ${theme.colors.gray_600};
   text-align: center;
   margin-bottom: 32px;
-
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
