@@ -92,6 +92,7 @@ const CreateTapeCompleted = () => {
       </TrackBox>
 
       <AudioPlayer
+        disabled={tracks.length < 3}
         audioLink={
           currentTapeId ? (currentTrack?.result.audioLink as string) : ''
         }

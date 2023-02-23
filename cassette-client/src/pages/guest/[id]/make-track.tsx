@@ -45,7 +45,7 @@ const MakeTrack = () => {
 
       subInstance
         .createTrack(tapeColor, tapename, userNickname, userURL, audiofile)
-        .then((data) => {
+        .then(() => {
           setModalOpen(true);
         })
         .catch(() => {

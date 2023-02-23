@@ -15,9 +15,15 @@ interface AudioPlayerProps {
   audioLink: string;
   ref?: RefObject<HTMLDivElement>;
   isOwner?: boolean;
+  disabled?: boolean;
 }
 
-const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
+const AudioPlayer = ({
+  audioLink,
+  ref,
+  isOwner = true,
+  disabled,
+}: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -87,7 +93,7 @@ const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
   };
 
   return (
-    <AudioCOntainer ref={ref}>
+    <AudioCOntainer ref={ref} disabled={disabled as boolean}>
       <Audio ref={audioPlayer} src={audioLink} preload="metadata" />
       {isOwner ? (
         <>
@@ -109,6 +115,7 @@ const AudioPlayer = ({ audioLink, ref, isOwner = true }: AudioPlayerProps) => {
               variant="clear"
               onClick={togglePlayPause}
               as="button"
+              disabled={disabled}
             >
               {isPlaying && (currentTime === 0 || currentTime !== duration) ? (
                 <PauseIcon width="24" height="24" />

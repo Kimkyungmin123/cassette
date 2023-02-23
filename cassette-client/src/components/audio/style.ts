@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import { ButtonLayout } from 'components/button/style';
 import theme from 'styles/theme';
 
-export const AudioCOntainer = styled.div`
+export const AudioCOntainer = styled.div<{ disabled: boolean }>`
   width: 100%;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
 export const Audio = styled.audio``;
