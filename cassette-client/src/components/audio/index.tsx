@@ -33,16 +33,19 @@ const AudioPlayer = ({
   const animationRef = useRef<number>();
 
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer?.current?.duration || 0);
+    const audio = audioPlayer.current;
 
-    setDuration(seconds);
+    const handleDurationChange = () => {
+      setDuration(Math.floor(audio?.duration as number));
+      progressBar?.current?.setAttribute('max', `${audio?.duration}`);
+    };
 
-    if (seconds !== Infinity)
-      progressBar.current?.setAttribute('max', `${seconds}`);
-  }, [
-    audioPlayer?.current?.onloadedmetadata,
-    audioPlayer?.current?.readyState,
-  ]);
+    audio?.addEventListener('durationchange', handleDurationChange);
+
+    return () => {
+      audio?.removeEventListener('durationchange', handleDurationChange);
+    };
+  }, [audioPlayer]);
 
   const calculateTime = (secs: number) => {
     const minutes = Math.floor(secs / 60);
@@ -85,9 +88,10 @@ const AudioPlayer = ({
 
   const changePlayerCurrentTime = () => {
     const duration = audioPlayer?.current?.duration || 0;
+    const currentTime = audioPlayer?.current?.currentTime || 0;
     progressBar?.current?.style.setProperty(
       '--movewidth',
-      `${(parseFloat(progressBar?.current?.value) / duration) * 100}%`,
+      `${(currentTime / duration) * 100}%`,
     );
     setCurrentTime(parseFloat(progressBar?.current?.value ?? '0'));
   };

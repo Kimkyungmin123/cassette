@@ -50,12 +50,12 @@ export const ProgressBar = styled.input`
 
   ::-webkit-slider-thumb {
     -webkit-appearance: none;
+    cursor: pointer;
     height: 10px;
     width: 10px;
     border-radius: 50%;
     border: none;
-    background-color: ${theme.colors.gray_300};
-    cursor: pointer;
+    //background-color: ${theme.colors.gray_300};
     position: relative;
     margin-top: -4px;
     z-index: 3;

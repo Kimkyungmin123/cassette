@@ -9,11 +9,7 @@ import Tape from 'components/tape';
 import Title from 'components/title';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
-import {
-  useGuestColorStore,
-  useGuestInfoStore,
-  useGuestResponsStore,
-} from 'store';
+import { useGuestColorStore, useGuestInfoStore } from 'store';
 import { Box } from 'styles/create-tape';
 import {
   BackButtonZone,
@@ -32,7 +28,6 @@ const MakeTrack = () => {
   const [fullTape, setFullTape] = useState<boolean>(false);
   const { date, userNickname, tapename } = useGuestInfoStore();
   const { tapeColor } = useGuestColorStore();
-  const { userURL } = useGuestResponsStore();
   const router = useRouter();
   const { id } = router.query;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
@@ -44,7 +39,7 @@ const MakeTrack = () => {
       });
 
       subInstance
-        .createTrack(tapeColor, tapename, userNickname, userURL, audiofile)
+        .createTrack(tapeColor, tapename, userNickname, id as string, audiofile)
         .then(() => {
           setModalOpen(true);
         })
