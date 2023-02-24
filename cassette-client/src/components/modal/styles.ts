@@ -18,6 +18,7 @@ export const ModalContainer = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0;
+  max-height: 340px;
   z-index: 99999;
 `;
 
