@@ -21,6 +21,7 @@ import theme from 'styles/theme';
 import subInstance from 'utils/api/sub';
 
 const MakeTrack = () => {
+  const route = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [blob, setBlob] = useState<Blob>();
   const [firstEntry, setFirstEntry] = useState<boolean>(true);
@@ -32,6 +33,9 @@ const MakeTrack = () => {
   const { id } = router.query;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
   const GUEST_ENTRY_URL = `/guest/${id}/guest-entry`;
+
+  const closeModal = () => setModalOpen(false);
+
   const sendTape = () => {
     if (blob) {
       const audiofile = new File([blob], 'audiofile.wav', {
@@ -39,7 +43,7 @@ const MakeTrack = () => {
       });
 
       subInstance
-        .createTrack(tapeColor, tapename, userNickname, id as string, audiofile)
+        .createTrack(tapeColor, tapename, userNickname, `${id}`, audiofile)
         .then(() => {
           setModalOpen(true);
         })
@@ -50,8 +54,6 @@ const MakeTrack = () => {
     }
   };
 
-  const closeModal = () => setModalOpen(false);
-  const route = useRouter();
   return (
     <MakeTapeContainer>
       <BackButtonZone>

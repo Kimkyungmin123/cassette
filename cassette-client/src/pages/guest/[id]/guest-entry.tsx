@@ -29,26 +29,31 @@ const GuestEntry = () => {
 
   useEffect(() => {
     if (id) {
-      subInstance.getOwnerTape(id as string).then((data) => {
-        setOwnerName(data?.result?.name),
-          setOwnerTapeTitle(data?.result?.title),
-          setOwnerTapeColor(data?.result?.colorCode),
-          setHasfullTape(data?.result?.hasAudioLink),
-          setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.'));
-      });
+      subInstance
+        .getOwnerTape(id as string)
+        .then((data) => {
+          setOwnerName(data?.result?.name),
+            setOwnerTapeTitle(data?.result?.title),
+            setOwnerTapeColor(data?.result?.colorCode),
+            setHasfullTape(data?.result?.hasAudioLink),
+            setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.'));
+        })
+        .catch((e) => {
+          route.push('/404');
+        });
     }
   }, [id, ownerName, ownerTapeTitle, setResponsUser]);
 
   const closeModal = () => setModalOpen(false);
   return (
     <>
-      {id ? (
+      {id && ownerName ? (
         <Container>
           <ModalPortal closeModal={closeModal}>
             {modalOpen && (
               <Modal
                 icon={<Cry />}
-                title={<>테이프를 남길 자리가 없어요!</>}
+                title="테이프를 남길 자리가 없어요!"
                 detail="친구들의 목소리가 담긴 테이프를 갖고싶나요?"
                 btnText="내 테이프 만들기"
                 link={MAKE_TAPE_URL}
