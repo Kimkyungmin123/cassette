@@ -22,7 +22,6 @@ interface TapeProps extends TapeSvgProps {
   isOwner?: boolean;
   firstEntry?: boolean;
   setFirstEntry?: Dispatch<SetStateAction<boolean>>;
-
   setIsRedording?: Dispatch<SetStateAction<boolean>>;
 }
 

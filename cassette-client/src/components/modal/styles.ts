@@ -6,7 +6,6 @@ export const ModalWrapper = styled.div`
   color: ${theme.colors.white};
   padding: 20px;
   border-radius: 30px 30px 0 0;
-  height: 100vh;
   max-height: 340px;
   font-family: 'Pretendard-Regular';
   display: flex;
