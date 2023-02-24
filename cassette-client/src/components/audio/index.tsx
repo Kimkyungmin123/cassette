@@ -111,7 +111,11 @@ const AudioPlayer = ({
             />
 
             <span>
-              {duration ? !isNaN(duration) && calculateTime(duration) : '00:00'}
+              {duration
+                ? isFinite(duration) &&
+                  !isNaN(duration) &&
+                  calculateTime(duration)
+                : '00:00'}
             </span>
           </PlayZone>
           <ButtonZone>
@@ -154,7 +158,11 @@ const AudioPlayer = ({
               onChange={changeRange}
             />
             <span>
-              {duration ? !isNaN(duration) && calculateTime(duration) : '00:00'}
+              {duration
+                ? isFinite(duration) &&
+                  !isNaN(duration) &&
+                  calculateTime(duration)
+                : '00:00'}
             </span>
           </PlayZone>
         </>
