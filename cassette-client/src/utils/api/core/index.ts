@@ -15,10 +15,6 @@ instance.interceptors.request.use(
     try {
       const token = await getAuthToken('accessToken');
 
-      if (!token) {
-        throw new Error('AccessToken 가져오기 실패');
-      }
-
       if (config.headers) {
         config.headers['Authorization'] = token && `Bearer ${token}`;
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;

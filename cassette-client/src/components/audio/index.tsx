@@ -1,6 +1,6 @@
 import PauseIcon from '@icon/pause.svg';
 import Play from '@icon/play.svg';
-import { forwardRef, RefObject, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 
 import {
   Audio,
