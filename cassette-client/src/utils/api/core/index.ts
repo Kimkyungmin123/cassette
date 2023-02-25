@@ -13,17 +13,16 @@ instance.interceptors.request.use(
   async (config) => {
     config.withCredentials = true;
     try {
-      const token = await getAuthToken('accessToken');
+      const accessToken = await getAuthToken('accessToken');
 
-      if (!token) {
-        throw new Error('AccessToken 가져오기 실패');
-      }
+      if (!accessToken) Promise.reject('accessToken 가져오기 실패');
 
       if (config.headers) {
-        config.headers['Authorization'] = token && `Bearer ${token}`;
+        config.headers['Authorization'] =
+          accessToken && `Bearer ${accessToken}`;
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
       }
-    } catch (e: any) {
+    } catch {
       console.error('Authorization or env 삽입 실패');
     }
 
@@ -40,7 +39,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const refreshTokenString = response.headers.refreshtoken;
-
     if (refreshTokenString) {
       const token = refreshTokenString.substring(
         refreshTokenString.indexOf('=') + 1,
@@ -53,17 +51,22 @@ instance.interceptors.response.use(
     return res;
   },
   (error) => {
+    console.log(error);
+
     const code = error.code;
     const status = error.response?.status;
 
-    const refreshToken = getAuthToken('refreshToken');
-    if ((status === 401 || code === 'EMPTY_TOKEN') && refreshToken) {
-      mainInstance.getNewToken(refreshToken).then(({ data }) => {
-        if (data.result.accessToken) {
-          setAuthToken('accessToken', data.data.result.accessToken);
-        }
-      });
+    //TODO: 만료시간 계산해서 만료 되기 전에 refresh 토큰 저장
+    if (code === 'EXPIRED_JWT_TOKEN' || status === 401) {
+      const refreshToken = getAuthToken('refreshToken');
+      if (refreshToken)
+        mainInstance.getNewToken(refreshToken).then((data) => {
+          if (data.data.result.accessToken)
+            setAuthToken('accessToken', data.data.result.accessToken);
+        });
     }
+
+    return Promise.reject(error);
   },
 );
 
