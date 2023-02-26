@@ -14,16 +14,36 @@ export const Box = styled.div<{ margin?: string }>`
   margin: ${({ margin }) => margin && margin};
 `;
 
-export const TapeCount = styled.div`
+export const CurrentName = styled.div`
   margin: 8px 0 11px 0;
   span {
     color: ${theme.colors.gray_500};
     font-family: 'Ycomputer-Regular';
-    font-size: 14px;
+    font-size: ${theme.fontSize.sm};
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0em;
     text-align: center;
+  }
+
+  div {
+    height: 21px;
+  }
+`;
+
+export const TapeCount = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 324px;
+  margin-top: 24px;
+  span {
+    color: ${theme.colors.gray_500};
+    font-family: 'Ycomputer-Regular';
+    font-size: ${theme.fontSize.xs};
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
   }
 `;
 
@@ -55,7 +75,7 @@ export const TrackCollection = styled.div`
   overflow-y: scroll;
   -ms-overflow-style: none;
   margin-bottom: 40px;
-  margin-top: 28px;
+  margin-top: 12px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -81,7 +101,6 @@ export const PopupText = styled.div`
   color: ${theme.colors.white};
   font-size: ${theme.fontSize.xs};
   text-align: left;
-
   font-family: 'Pretendard-Regular';
   font-size: 14px;
   font-weight: 500;

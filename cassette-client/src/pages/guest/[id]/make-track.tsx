@@ -40,20 +40,20 @@ const MakeTrack = () => {
   const sendTape = () => {
     if (blob) {
       audioInstance.getWaveBlob(blob, false).then((res) => {
-        console.log(blob);
-        console.log(res);
         const audiofile = new File([res], 'audiofile.wav', {
           type: 'audio/wav',
         });
-        subInstance
-          .createTrack(tapeColor, tapename, userNickname, `${id}`, audiofile)
-          .then(() => {
-            setModalOpen(true);
-          })
-          .catch(() => {
-            setFullTape(true);
-            setModalOpen(true);
-          });
+        if (!firstEntry && !isRedording) {
+          subInstance
+            .createTrack(tapeColor, tapename, userNickname, `${id}`, audiofile)
+            .then(() => {
+              setModalOpen(true);
+            })
+            .catch(() => {
+              setFullTape(true);
+              setModalOpen(true);
+            });
+        }
       });
     }
   };

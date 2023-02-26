@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react';
 import { useColorStore, useGuestColorStore } from 'store';
 import theme from 'styles/theme';
 import { Color } from 'types';
+
 export interface TapeSvgProps {
   title?: string;
   date?: string;

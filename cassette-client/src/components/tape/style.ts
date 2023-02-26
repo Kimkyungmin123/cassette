@@ -1,6 +1,16 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ButtonLayout } from 'components/button/style';
 import theme from 'styles/theme';
+
+export const rotateAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const TypeStyle = styled.div`
   font-family: 'Ycomputer-Regular';
@@ -42,6 +52,24 @@ export const AudioContainer = styled.div`
   width: 100%;
 `;
 
+export const EmptyTapeZone = styled.div`
+  width: 88px;
+  height: 54px;
+  border-radius: 3px;
+  background-color: ${theme.colors.black_900};
+`;
+
+export const TapeName = styled.div<{ isEmpty?: boolean }>`
+  margin-top: 6px;
+  font-family: 'Ycomputer-Regular';
+  font-size: ${theme.fontSize.xs};
+  color: ${theme.colors.gray_700};
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+`;
+
 export const AlertBox = styled.div<{ isRecording: boolean }>`
   margin: 15px 0 14px 0;
 
@@ -73,4 +101,9 @@ export const AlertBox = styled.div<{ isRecording: boolean }>`
     }`
         : `height:36px`}
   }
+`;
+
+export const RotatingPath = styled.path`
+  transform-origin: center center;
+  animation: ${rotateAnimation} 2s linear infinite;
 `;

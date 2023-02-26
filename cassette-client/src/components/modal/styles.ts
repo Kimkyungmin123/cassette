@@ -4,7 +4,7 @@ import theme from 'styles/theme';
 export const ModalWrapper = styled.div`
   background: ${theme.colors.black_900};
   color: ${theme.colors.white};
-  padding: 20px;
+  padding: 20px 20px 8px 20px;
   border-radius: 30px 30px 0 0;
   max-height: 340px;
   font-family: 'Pretendard-Regular';
