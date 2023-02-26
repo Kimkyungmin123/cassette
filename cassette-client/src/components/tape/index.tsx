@@ -73,7 +73,9 @@ const Tape = ({
   }, [recordingBlob]);
 
   useEffect(() => {
-    if (recordingTime > 12) {
+    //TODO: 최대 시간 수정
+    if (Math.ceil(recordingTime) > 10.9) {
+      console.log(recordingTime, Math.ceil(recordingTime));
       stopRecording();
       setIsRedording?.(false);
     }
@@ -90,10 +92,10 @@ const Tape = ({
         color={color}
         isOwner={false}
       />
-
-      {audioLink && (
+      {/* TODO: 추후에 연결할 것 */}
+      {/* {audioLink && (
         <button onClick={() => toggle?.()}>{playing ? '정지' : '시작'}</button>
-      )}
+      )} */}
 
       {hasAudio && (
         <AudioContainer>

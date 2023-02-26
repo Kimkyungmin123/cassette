@@ -42,7 +42,6 @@ export const Time = styled.div`
 export const RecordButtonZone = styled.div`
   display: flex;
   width: 100%;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -57,6 +56,7 @@ export const EmptyTapeZone = styled.div`
   height: 54px;
   border-radius: 3px;
   background-color: ${theme.colors.black_900};
+  opacity: 0.7;
 `;
 
 export const TapeName = styled.div<{ isEmpty?: boolean }>`

@@ -67,17 +67,14 @@ const CreateTapeCompleted = () => {
     onCopy(text);
   };
 
-  useEffect(() => {
-    setTracks([...tracks]);
-  }, [tracks]);
-
-  const onClickTape = (id: number) => {
+  const onClickTape = (id: number, isFull: boolean) => {
     if (tracks.length < 3) return;
 
     if (id === (tapeId as number) * 1000 && tracks.length !== 12) return;
 
     setCurrentTapeId(id);
-    tracks.length === 12 ? setIsFullTape(true) : setIsFullTape(false);
+    isFull ? setIsFullTape(true) : setIsFullTape(false);
+    //setTracks([...tracks]);
   };
 
   return (
@@ -113,7 +110,7 @@ const CreateTapeCompleted = () => {
       </TrackBox>
 
       <AudioPlayer
-        disabled={tracks.length < 3}
+        disabled={!currentTapeId || tracks.length < 3}
         audioLink={
           !isFullTape && currentTapeId
             ? (currentTrack?.result.audioLink as string)
@@ -129,49 +126,37 @@ const CreateTapeCompleted = () => {
         <span>/12 </span>
       </TapeCount>
       <TrackCollection>
-        {tracks.length === 0 ? (
-          <EmptyTape isShown={false} emptyNum={0} MaxNum={11}></EmptyTape>
-        ) : (
-          tracks
-            .filter((data) => data.trackId !== currentTapeId)
-            .map((data, index) => (
-              <>
-                <GuestTrack
-                  key={data.trackId}
-                  isShown={tracks.length > 2}
-                  onClick={() => onClickTape(data.trackId)}
-                >
-                  <>
-                    <Tape
-                      width="88"
-                      height="58"
-                      title={data.title}
-                      color={data.colorCode}
-                      audioLink={tracks.length > 2 ? data.audioLink : ''}
-                    />
-                    <TrackName>{data.name}</TrackName>
-                  </>
-                </GuestTrack>
-
-                {index === tracks.length - 1 ? (
-                  <EmptyTape
-                    isShown={tracks.length > 2}
-                    emptyNum={tracks.length}
-                    MaxNum={11}
-                  ></EmptyTape>
-                ) : null}
-              </>
-            ))
-        )}
+        {tracks
+          .filter((data) => data.trackId !== currentTapeId)
+          .map((data) => (
+            <>
+              <GuestTrack
+                key={data.trackId}
+                isShown={tracks.length > 2}
+                onClick={() => onClickTape(data.trackId, false)}
+              >
+                <>
+                  <Tape
+                    width="88"
+                    height="58"
+                    title={data.title}
+                    color={data.colorCode}
+                    audioLink={tracks.length > 2 ? data.audioLink : ''}
+                  />
+                  <TrackName>{data.name}</TrackName>
+                </>
+              </GuestTrack>
+            </>
+          ))}
         <EmptyTape
           isShown={tracks.length > 2}
-          emptyNum={11}
-          MaxNum={11}
+          emptyNum={tracks.length}
+          MaxNum={12}
         ></EmptyTape>
         {currentTapeId !== (tapeId as number) * 1000 ? (
           <GuestTrack
             key={(tapeId as number) * 1000}
-            onClick={() => onClickTape((tapeId as number) * 1000)}
+            onClick={() => onClickTape((tapeId as number) * 1000, true)}
             isShown={tracks.length === 12}
           >
             <Tape
