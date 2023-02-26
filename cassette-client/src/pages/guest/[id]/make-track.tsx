@@ -43,7 +43,7 @@ const MakeTrack = () => {
         const audiofile = new File([res], 'audiofile.wav', {
           type: 'audio/wav',
         });
-        if (!firstEntry && !isRedording) {
+        if (!isRedording) {
           subInstance
             .createTrack(tapeColor, tapename, userNickname, `${id}`, audiofile)
             .then(() => {
