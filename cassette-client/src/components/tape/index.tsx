@@ -73,7 +73,6 @@ const Tape = ({
   }, [recordingBlob]);
 
   useEffect(() => {
-    //TODO: 최대 시간 수정
     if (Math.ceil(recordingTime) === 12) {
       console.log(recordingTime, Math.ceil(recordingTime));
       stopRecording();

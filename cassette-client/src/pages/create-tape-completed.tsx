@@ -39,12 +39,12 @@ const CreateTapeCompleted = () => {
   const [currentTrack, setCurrentTrack] = useState<TapeResponse<Track>>();
   const [fullTapeLink, setFullTapeLink] = useState<string | null>('');
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
 
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
-      console.log(data);
       const tapeData = data?.result[0];
       if (tapeData) {
         setUserData(tapeData['name'], tapeData['title']);
@@ -57,24 +57,72 @@ const CreateTapeCompleted = () => {
   }, [setResponsUser, setUserData, setTapeColor]);
 
   useEffect(() => {
-    if (currentTapeId)
+    if (currentTapeId && currentTapeId !== (tapeId as number) * 1000)
       subInstance
         .getUserTrack(currentTapeId)
         .then((data) => setCurrentTrack(data));
   }, [currentTapeId]);
 
+  useEffect(() => {
+    if (currentIndex === -1) return;
+    const index = tracks.findIndex((data) => data.trackId === currentIndex);
+    setCurrentIndex(index);
+  }, [setCurrentIndex]);
+
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
   };
 
-  const onClickTape = (id: number, isFull: boolean) => {
+  const MoveForward = () => {
+    if (currentIndex <= 0 || tracks.length - 1 < currentIndex) return;
+    if (fullTapeLink && isFullTape) {
+      setCurrentIndex(11);
+      setCurrentTapeId(tracks[11].trackId);
+      setIsFullTape(false);
+    } else {
+      const forwardId = tracks[currentIndex - 1].trackId;
+      const forwardIndex = tracks.findIndex(
+        (data) => data.trackId === forwardId,
+      );
+
+      setCurrentTapeId(forwardId);
+      setCurrentIndex(forwardIndex);
+    }
+  };
+
+  const MoveBackward = () => {
+    if (currentIndex < 0 || tracks.length - 1 < currentIndex) return;
+    if (fullTapeLink && currentIndex === 11) {
+      setCurrentTapeId((tapeId as number) * 1000);
+      setIsFullTape(true);
+    } else {
+      if (tracks.length - 1 === currentIndex) return;
+      const backwardId = tracks[currentIndex + 1].trackId;
+      const backwardIndex = tracks.findIndex(
+        (data) => data.trackId === backwardId,
+      );
+
+      setCurrentTapeId(backwardId);
+      setCurrentIndex(backwardIndex);
+      setIsFullTape(false);
+    }
+  };
+
+  const onClickTape = (id: number, isFull: boolean, index: number) => {
     if (tracks.length < 3) return;
 
     if (id === (tapeId as number) * 1000 && tracks.length !== 12) return;
 
     setCurrentTapeId(id);
-    isFull ? setIsFullTape(true) : setIsFullTape(false);
-    //setTracks([...tracks]);
+    isFull
+      ? setIsFullTape(true)
+      : (setIsFullTape(false), setCurrentIndex(index));
+  };
+
+  const downloadAudioFile = () => {
+    isFullTape
+      ? tapeId && subInstance.downloadTape(tapeId)
+      : currentTapeId && subInstance.downloadTrack(currentTapeId);
   };
 
   return (
@@ -116,6 +164,9 @@ const CreateTapeCompleted = () => {
             ? (currentTrack?.result.audioLink as string)
             : (fullTapeLink as string)
         }
+        onhandleDownload={downloadAudioFile}
+        onhandleBackward={MoveBackward}
+        onhandleForward={MoveForward}
       />
       <TapeCount>
         {tracks.length === 0 || tracks.length === 1 ? (
@@ -128,12 +179,12 @@ const CreateTapeCompleted = () => {
       <TrackCollection>
         {tracks
           .filter((data) => data.trackId !== currentTapeId)
-          .map((data) => (
+          .map((data, index) => (
             <>
               <GuestTrack
                 key={data.trackId}
                 isShown={tracks.length > 2}
-                onClick={() => onClickTape(data.trackId, false)}
+                onClick={() => onClickTape(data.trackId, false, index)}
               >
                 <>
                   <Tape
@@ -156,7 +207,7 @@ const CreateTapeCompleted = () => {
         {currentTapeId !== (tapeId as number) * 1000 ? (
           <GuestTrack
             key={(tapeId as number) * 1000}
-            onClick={() => onClickTape((tapeId as number) * 1000, true)}
+            onClick={() => onClickTape((tapeId as number) * 1000, true, 12)}
             isShown={tracks.length === 12}
           >
             <Tape
