@@ -42,6 +42,12 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
       };
     }, [audioPlayer]);
 
+    useEffect(() => {
+      currentTime === 0 || Math.ceil(duration) === currentTime
+        ? setIsPlaying(false)
+        : setIsPlaying(true);
+    }, [currentTime, duration]);
+
     const calculateTime = (secs: number) => {
       const minutes = Math.floor(secs / 60);
       const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -104,7 +110,6 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 ref={progressBar}
                 onChange={changeRange}
               />
-
               <span>
                 {duration
                   ? isFinite(duration) &&
@@ -120,8 +125,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 as="button"
                 disabled={disabled}
               >
-                {isPlaying &&
-                (currentTime === 0 || currentTime !== duration) ? (
+                {isPlaying ? (
                   <PauseIcon width="24" height="24" />
                 ) : (
                   <Play width="24" height="24" />
@@ -139,8 +143,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                   onClick={togglePlayPause}
                   as="button"
                 >
-                  {isPlaying &&
-                  (currentTime === 0 || currentTime !== duration) ? (
+                  {isPlaying ? (
                     <PauseIcon width="20" height="20" />
                   ) : (
                     <Play width="20" height="20" />
