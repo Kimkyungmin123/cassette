@@ -42,6 +42,7 @@ const CreateTapeCompleted = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
+  const MAX_NUMBER = 99999999;
 
   useEffect(() => {
     subInstance.getUserTape().then((data) => {
@@ -57,7 +58,7 @@ const CreateTapeCompleted = () => {
   }, [setResponsUser, setUserData, setTapeColor]);
 
   useEffect(() => {
-    if (currentTapeId && currentTapeId !== (tapeId as number) * 1000)
+    if (currentTapeId && currentTapeId !== (tapeId as number) * MAX_NUMBER)
       subInstance
         .getUserTrack(currentTapeId)
         .then((data) => setCurrentTrack(data));
@@ -93,7 +94,7 @@ const CreateTapeCompleted = () => {
   const MoveBackward = () => {
     if (currentIndex < 0 || tracks.length - 1 < currentIndex) return;
     if (fullTapeLink && currentIndex === 11) {
-      setCurrentTapeId((tapeId as number) * 1000);
+      setCurrentTapeId((tapeId as number) * MAX_NUMBER);
       setIsFullTape(true);
     } else {
       if (tracks.length - 1 === currentIndex) return;
@@ -111,7 +112,7 @@ const CreateTapeCompleted = () => {
   const onClickTape = (id: number, isFull: boolean, index: number) => {
     if (tracks.length < 3) return;
 
-    if (id === (tapeId as number) * 1000 && tracks.length !== 12) return;
+    if (id === (tapeId as number) * MAX_NUMBER && tracks.length !== 12) return;
 
     setCurrentTapeId(id);
     isFull
@@ -204,10 +205,12 @@ const CreateTapeCompleted = () => {
           emptyNum={tracks.length}
           MaxNum={12}
         ></EmptyTape>
-        {currentTapeId !== (tapeId as number) * 1000 ? (
+        {currentTapeId !== (tapeId as number) * MAX_NUMBER ? (
           <GuestTrack
-            key={(tapeId as number) * 1000}
-            onClick={() => onClickTape((tapeId as number) * 1000, true, 12)}
+            key={(tapeId as number) * MAX_NUMBER}
+            onClick={() =>
+              onClickTape((tapeId as number) * MAX_NUMBER, true, 12)
+            }
             isShown={tracks.length === 12}
           >
             <Tape
