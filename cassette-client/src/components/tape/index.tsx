@@ -74,7 +74,7 @@ const Tape = ({
 
   useEffect(() => {
     //TODO: 최대 시간 수정
-    if (Math.ceil(recordingTime) > 10.9) {
+    if (Math.ceil(recordingTime) === 12) {
       console.log(recordingTime, Math.ceil(recordingTime));
       stopRecording();
       setIsRedording?.(false);
@@ -112,6 +112,7 @@ const Tape = ({
                     setIsRedording?.(true);
                   }}
                   as="button"
+                  aria-label="녹음하기"
                 >
                   <Icon
                     icon="uim:record-audio"
@@ -140,6 +141,7 @@ const Tape = ({
                   }}
                   disabled={recordingTime < 3}
                   as="button"
+                  aria-label="녹음 중지하기"
                 >
                   <Icon
                     icon="material-symbols:stop-circle-rounded"
@@ -170,6 +172,7 @@ const Tape = ({
                   }}
                   disabled={isRecording}
                   as="button"
+                  aria-label="재녹음하기"
                 >
                   <Icon
                     icon="uim:record-audio"

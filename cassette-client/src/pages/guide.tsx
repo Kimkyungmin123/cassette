@@ -78,8 +78,8 @@ const Guide = () => {
             rel="noreferrer noopener"
           >
             <div>
-              Voice Tape 앱 다운로드하러 가기
-              <Right current={theme.colors.primary} />
+              Voice Tape 앱 다운받기
+              <Right fill={theme.colors.primary} />
             </div>
           </Link>
         </GuideButton>

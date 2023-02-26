@@ -4,7 +4,7 @@ import theme from 'styles/theme';
 
 export const AudioCOntainer = styled.div<{ disabled: boolean }>`
   width: 100%;
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;
 
 export const Audio = styled.audio``;
@@ -73,16 +73,30 @@ export const PlayZone = styled.div`
   }
 `;
 
+export const TrackControlZone = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 128px;
+  justify-content: space-between;
+`;
+
 export const ButtonZone = styled.div<{ isGuest?: boolean }>`
   display: flex;
+  position: relative;
+
   width: ${({ isGuest }) => (isGuest ? '24px' : '100%')};
   margin: ${({ isGuest }) => (isGuest ? '0 1px 0 3px' : '16px 0 0 0')};
-  flex-direction: column;
+  justify-content: space-between;
   justify-content: center;
   align-items: center;
 `;
 
-export const PlaynPauseButton = styled(ButtonLayout)`
+export const AudioButton = styled(ButtonLayout)`
   width: 30px;
   height: 30px;
+`;
+
+export const DownloadButton = styled(AudioButton)`
+  position: absolute;
+  right: 5px;
 `;

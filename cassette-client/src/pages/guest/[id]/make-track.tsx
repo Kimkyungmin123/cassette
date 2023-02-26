@@ -62,7 +62,7 @@ const MakeTrack = () => {
     <MakeTapeContainer>
       <BackButtonZone>
         <Button variant="clear" onClick={() => route.back()}>
-          <Left />
+          <Left fill={theme.colors.gray_700} />
         </Button>
       </BackButtonZone>
       <ModalPortal closeModal={closeModal}>

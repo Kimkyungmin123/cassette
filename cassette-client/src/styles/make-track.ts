@@ -6,7 +6,7 @@ import theme from './theme';
 
 export const BackButtonZone = styled.div`
   position: absolute;
-  top: 70px;
+  top: 52px;
   left: 24px;
 `;
 

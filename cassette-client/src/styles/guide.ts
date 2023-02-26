@@ -86,11 +86,15 @@ export const GuideButton = styled(ButtonLayout)`
   color: ${theme.colors.primary};
   font-size: ${theme.fontSize.smd};
   border-radius: 10px;
-  padding: 10px 0;
-
+  padding: 10px 7px;
   div {
+    width: 100%;
     display: flex;
     align-items: center;
     color: ${theme.colors.primary};
+  }
+
+  svg {
+    padding: 0 0 0 12px;
   }
 `;

@@ -95,6 +95,7 @@ const Withdrawal = () => {
           variant="main"
           disabled={!checked || !dropContent}
           as="button"
+          aria-label="탈퇴하기"
           onClick={() => {
             mainInstance.deleteUser(dropType as WithdrawalType, opinion);
             window.localStorage.removeItem('persist');
