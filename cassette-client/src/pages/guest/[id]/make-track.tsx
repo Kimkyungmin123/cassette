@@ -65,7 +65,7 @@ const MakeTrack = () => {
           <Left fill={theme.colors.gray_700} />
         </Button>
       </BackButtonZone>
-      <ModalPortal closeModal={closeModal}>
+      <ModalPortal closeModal={closeModal} isCreatedTrack={true}>
         {modalOpen && (
           <Modal
             icon={fullTape ? <Cry /> : <CheckeRectangle />}
