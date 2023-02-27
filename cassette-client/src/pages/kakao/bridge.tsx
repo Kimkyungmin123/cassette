@@ -15,6 +15,7 @@ const Bridge = () => {
   useEffect(() => {
     if (code) {
       mainInstance.KakaoSocialLogin(code as string).then((data) => {
+        if (!data) router.push('/');
         setAuthToken('accessToken', data.result.jwtInformation.accessToken),
           setDate(data.timestamp.slice(2, 10).replaceAll('-', '.')),
           data.result.tapes.length === 0
