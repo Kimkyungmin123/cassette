@@ -18,6 +18,7 @@ import {
 } from 'styles/withdrawal';
 import { WithdrawalType } from 'types';
 import mainInstance from 'utils/api/main';
+import { removeAuthToken } from 'utils/storage/authCookie';
 
 const Withdrawal = () => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -99,6 +100,8 @@ const Withdrawal = () => {
           onClick={() => {
             mainInstance.deleteUser(dropType as WithdrawalType, opinion);
             window.localStorage.removeItem('persist');
+            removeAuthToken('accessToken');
+            removeAuthToken('refreshToken');
             router.push('/');
           }}
         >
