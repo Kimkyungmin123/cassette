@@ -40,6 +40,7 @@ const CreateTapeCompleted = () => {
   const [fullTapeLink, setFullTapeLink] = useState<string | null>('');
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentFile, setCurrentFile] = useState<string>('');
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
   const MAX_NUMBER = 99999999;
@@ -73,6 +74,13 @@ const CreateTapeCompleted = () => {
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
   };
+
+  useEffect(() => {
+    if (currentTapeId)
+      !isFullTape && currentTapeId
+        ? setCurrentFile(currentTrack?.result.audioLink as string)
+        : setCurrentFile(fullTapeLink as string);
+  }, [currentTapeId, currentTrack?.result.audioLink, fullTapeLink, isFullTape]);
 
   const MoveForward = () => {
     if (currentIndex <= 0 || tracks.length - 1 < currentIndex) return;
@@ -120,10 +128,29 @@ const CreateTapeCompleted = () => {
       : (setIsFullTape(false), setCurrentIndex(index));
   };
 
-  const downloadAudioFile = () => {
-    isFullTape
-      ? tapeId && subInstance.downloadTape(tapeId)
-      : currentTapeId && subInstance.downloadTrack(currentTapeId);
+  // 서버에서 파일데이터 받는 로직 임시 주석
+  // const downloadAudioFile = () => {
+  //   // isFullTape
+  //   //   ? tapeId &&
+  //   //     subInstance.downloadTape(tapeId).then((data) => setDownloadFile(data))
+  //   //   : currentTapeId &&
+  //   //     subInstance
+  //   //       .downloadTrack(currentTapeId)
+  //   //       .then((data) => setDownloadFile(data));
+
+  //   handleDownloadClick(currentTrack?.result.audioLink as string);
+
+  // };
+
+  const handleDownloadClick = () => {
+    if (currentFile) {
+      const downloadLink = document.createElement('a');
+      downloadLink.href = currentFile;
+      downloadLink.download = 'audio.wav';
+      downloadLink.target = '_blank';
+      downloadLink.rel = 'noopener noreferrer';
+      window.open(downloadLink.href);
+    }
   };
 
   return (
@@ -160,12 +187,8 @@ const CreateTapeCompleted = () => {
 
       <AudioPlayer
         disabled={!currentTapeId || tracks.length < 3}
-        audioLink={
-          !isFullTape && currentTapeId
-            ? (currentTrack?.result.audioLink as string)
-            : (fullTapeLink as string)
-        }
-        onhandleDownload={downloadAudioFile}
+        audioLink={currentFile}
+        onhandleDownload={handleDownloadClick}
         onhandleBackward={MoveBackward}
         onhandleForward={MoveForward}
       />
