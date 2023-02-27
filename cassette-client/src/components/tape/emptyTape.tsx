@@ -22,7 +22,7 @@ const EmptyTape = ({ emptyNum, MaxNum, isShown }: EmptyTapeProps) => {
     const arr = [];
     for (let i = 0; i < MaxNum - emptyNum; i++) {
       arr.push(
-        <GuestTrack isShown={isShown}>
+        <GuestTrack isShown={isShown} key={i}>
           <EmptyTapeZone></EmptyTapeZone>
           <TapeName>
             Tape{' '}
