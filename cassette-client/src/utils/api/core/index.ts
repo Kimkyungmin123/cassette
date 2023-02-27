@@ -51,14 +51,19 @@ instance.interceptors.response.use(
   (error) => {
     const code = error.code;
     const status = error.response?.status;
-
     const refreshToken = getAuthToken('refreshToken');
-    if ((status === 401 || code === 'EMPTY_TOKEN') && refreshToken) {
-      mainInstance.getNewToken(refreshToken).then(({ data }) => {
-        if (data.result.accessToken) {
-          setAuthToken('accessToken', data.data.result.accessToken);
-        }
-      });
+    try {
+      if (!refreshToken) return alert('로그인을 다시 해주세요');
+
+      if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
+        mainInstance.getNewToken(refreshToken).then(({ data }) => {
+          if (data.result.accessToken) {
+            setAuthToken('accessToken', data.data.result.accessToken);
+          }
+        });
+      }
+    } catch (e: any) {
+      alert('로그인을 다시 해주세요');
     }
   },
 );
