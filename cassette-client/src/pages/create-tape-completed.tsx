@@ -40,7 +40,6 @@ const CreateTapeCompleted = () => {
   const [fullTapeLink, setFullTapeLink] = useState<string | null>('');
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [currentFile, setCurrentFile] = useState<string>('');
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
   const MAX_NUMBER = 99999999;
@@ -75,12 +74,12 @@ const CreateTapeCompleted = () => {
     onCopy(text);
   };
 
-  useEffect(() => {
-    if (currentTapeId)
-      !isFullTape && currentTapeId
-        ? setCurrentFile(currentTrack?.result.audioLink as string)
-        : setCurrentFile(fullTapeLink as string);
-  }, [currentTapeId, currentTrack?.result.audioLink, fullTapeLink, isFullTape]);
+  // useEffect(() => {
+  //   if (currentTapeId)
+  //     !isFullTape && currentTapeId
+  //       ? currentTrack?.result.audioLink as string)
+  //       : fullTapeLink as string);
+  // }, [currentTapeId, currentTrack?.result.audioLink, fullTapeLink, isFullTape]);
 
   const MoveForward = () => {
     if (currentIndex <= 0 || tracks.length - 1 < currentIndex) return;
@@ -143,7 +142,12 @@ const CreateTapeCompleted = () => {
   // };
 
   const handleDownloadClick = () => {
-    if (currentFile) {
+    if (currentTapeId) {
+      const currentFile =
+        !isFullTape && currentTapeId
+          ? (currentTrack?.result.audioLink as string)
+          : (fullTapeLink as string);
+
       const downloadLink = document.createElement('a');
       downloadLink.href = currentFile;
       downloadLink.download = 'audio.wav';
@@ -187,7 +191,11 @@ const CreateTapeCompleted = () => {
 
       <AudioPlayer
         disabled={!currentTapeId || tracks.length < 3}
-        audioLink={currentFile}
+        audioLink={
+          !isFullTape && currentTapeId
+            ? (currentTrack?.result.audioLink as string)
+            : (fullTapeLink as string)
+        }
         onhandleDownload={handleDownloadClick}
         onhandleBackward={MoveBackward}
         onhandleForward={MoveForward}
