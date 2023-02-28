@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { getAuthToken, setAuthToken } from 'utils/storage/authCookie';
+import {
+  getAuthToken,
+  removeAuthToken,
+  setAuthToken,
+} from 'utils/storage/authCookie';
 
 import mainInstance from '../main';
 
@@ -21,6 +25,7 @@ instance.interceptors.request.use(
       }
     } catch (e: any) {
       console.error('Authorization or env 삽입 실패');
+      window.location.href = '/';
     }
 
     return config;
@@ -52,18 +57,23 @@ instance.interceptors.response.use(
     const code = error.code;
     const status = error.response?.status;
     const refreshToken = getAuthToken('refreshToken');
-    try {
-      if (!refreshToken) return alert('로그인을 다시 해주세요');
 
-      if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
-        mainInstance.getNewToken(refreshToken).then(({ data }) => {
+    if (!refreshToken) return alert('로그인을 다시 해주세요');
+
+    if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
+      mainInstance
+        .getNewToken(refreshToken)
+        .then(({ data }) => {
           if (data.result.accessToken) {
             setAuthToken('accessToken', data.data.result.accessToken);
           }
+        })
+        .catch((e: any) => {
+          alert('로그인을 다시 해주세요');
+          removeAuthToken('accessToken');
+          removeAuthToken('refreshToken');
+          window.location.href = '/';
         });
-      }
-    } catch (e: any) {
-      alert('로그인을 다시 해주세요');
     }
   },
 );
