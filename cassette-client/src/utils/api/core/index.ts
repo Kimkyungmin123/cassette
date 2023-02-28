@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
   getAuthToken,
   removeAuthToken,
@@ -53,31 +53,40 @@ instance.interceptors.response.use(
     const res = response.data;
     return res;
   },
-  (error) => {
+  (error: AxiosError) => {
     const code = error.code;
     const status = error.response?.status;
     const refreshToken = getAuthToken('refreshToken');
 
-    if (!refreshToken) {
-      alert('로그인을 다시 해주세요');
-      window.location.href = '/';
-    }
+    if (!refreshToken) window.location.href = '/';
 
     if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
-      mainInstance
-        .getNewToken(refreshToken)
-        .then(({ data }) => {
-          if (data.result.accessToken) {
-            setAuthToken('accessToken', data.data.result.accessToken);
-          }
-        })
-        .catch((e: any) => {
-          alert('로그인을 다시 해주세요');
-          removeAuthToken('accessToken');
-          removeAuthToken('refreshToken');
-          window.location.href = '/';
-        });
+      return new Promise((resolve, reject) => {
+        mainInstance
+          .getNewToken(refreshToken)
+          .then(({ data }) => {
+            if (data.result.accessToken) {
+              setAuthToken('accessToken', data.data.result.accessToken);
+
+              if (error.config) {
+                error.config.headers[
+                  'Authorization'
+                ] = `Bearer ${data.result.accessToken}`;
+                resolve(instance(error.config));
+              }
+            }
+          })
+          .catch((e: any) => {
+            alert('로그인을 다시 해주세요');
+            removeAuthToken('accessToken');
+            removeAuthToken('refreshToken');
+            window.location.href = '/';
+            reject(error);
+          });
+      });
     }
+
+    return Promise.reject(error);
   },
 );
 
