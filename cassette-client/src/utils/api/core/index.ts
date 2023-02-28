@@ -58,8 +58,6 @@ instance.interceptors.response.use(
     const status = error.response?.status;
     const refreshToken = getAuthToken('refreshToken');
 
-    if (!refreshToken) window.location.href = '/';
-
     if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
       return new Promise((resolve, reject) => {
         mainInstance
