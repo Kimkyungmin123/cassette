@@ -24,7 +24,7 @@ instance.interceptors.request.use(
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
       }
     } catch (e: any) {
-      console.error('Authorization or env 삽입 실패');
+      console.error('인증 실패');
       window.location.href = '/';
     }
 
@@ -58,7 +58,10 @@ instance.interceptors.response.use(
     const status = error.response?.status;
     const refreshToken = getAuthToken('refreshToken');
 
-    if (!refreshToken) return alert('로그인을 다시 해주세요');
+    if (!refreshToken) {
+      alert('로그인을 다시 해주세요');
+      window.location.href = '/';
+    }
 
     if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
       mainInstance
