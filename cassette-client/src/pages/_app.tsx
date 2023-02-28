@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           sizes="16x16"
         />
         <link
-          href="images/favicons/favicon-32x32.png"
+          href="favicons/favicon-32x32.png"
           rel="icon"
           type="image/png"
           sizes="32x32"
