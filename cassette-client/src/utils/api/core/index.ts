@@ -24,7 +24,7 @@ instance.interceptors.request.use(
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
       }
     } catch (e: any) {
-      window.location.href = '/';
+      console.error('인증 실패');
     }
 
     return config;
@@ -32,7 +32,6 @@ instance.interceptors.request.use(
 
   (error) => {
     Promise.reject(error);
-    window.location.href = '/';
   },
 );
 
@@ -63,6 +62,13 @@ instance.interceptors.response.use(
           .then(({ data }) => {
             if (data.result.accessToken) {
               setAuthToken('accessToken', data.data.result.accessToken);
+            }
+
+            if (error.config) {
+              error.config.headers[
+                'Authorization'
+              ] = `Bearer ${data.result.accessToken}`;
+              return instance(error.config);
             }
           })
           .catch((e: any) => {
