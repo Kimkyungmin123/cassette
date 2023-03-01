@@ -24,7 +24,6 @@ instance.interceptors.request.use(
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
       }
     } catch (e: any) {
-      console.error('인증 실패');
       window.location.href = '/';
     }
 
@@ -32,8 +31,6 @@ instance.interceptors.request.use(
   },
 
   (error) => {
-    console.log(error);
-
     return Promise.reject(error);
   },
 );
@@ -53,37 +50,39 @@ instance.interceptors.response.use(
     const res = response.data;
     return res;
   },
-  (error: AxiosError) => {
-    const code = error.code;
-    const status = error.response?.status;
-    const refreshToken = getAuthToken('refreshToken');
+  async (error: AxiosError) => {
+    try {
+      const code = error.code;
+      const status = error.response?.status;
+      const refreshToken = await getAuthToken('refreshToken');
 
-    if (status === 401 || (code === 'EXPIRED_JWT_TOKEN' && refreshToken)) {
-      return new Promise((resolve, reject) => {
-        mainInstance
-          .getNewToken(refreshToken)
-          .then(({ data }) => {
-            if (data.result.accessToken) {
-              setAuthToken('accessToken', data.data.result.accessToken);
+      if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
+        return new Promise((resolve, reject) => {
+          mainInstance
+            .getNewToken(refreshToken)
+            .then(({ data }) => {
+              if (data.result.accessToken) {
+                setAuthToken('accessToken', data.data.result.accessToken);
 
-              if (error.config) {
-                error.config.headers[
-                  'Authorization'
-                ] = `Bearer ${data.result.accessToken}`;
-                resolve(instance(error.config));
+                if (error.config) {
+                  error.config.headers[
+                    'Authorization'
+                  ] = `Bearer ${data.result.accessToken}`;
+                  resolve(instance(error.config));
+                }
               }
-            }
-          })
-          .catch((e: any) => {
-            removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
-            window.location.href = '/';
-            reject(error);
-          });
-      });
+            })
+            .catch((e: any) => {
+              removeAuthToken('accessToken');
+              removeAuthToken('refreshToken');
+              window.location.href = '/';
+              reject(error);
+            });
+        });
+      }
+    } catch (e: any) {
+      return Promise.reject(error);
     }
-
-    return Promise.reject(error);
   },
 );
 

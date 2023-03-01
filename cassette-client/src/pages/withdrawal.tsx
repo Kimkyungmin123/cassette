@@ -98,10 +98,13 @@ const Withdrawal = () => {
           as="button"
           aria-label="탈퇴하기"
           onClick={() => {
-            mainInstance.deleteUser(dropType as WithdrawalType, opinion);
+            mainInstance
+              .deleteUser(dropType as WithdrawalType, opinion)
+              .then(() => {
+                removeAuthToken('accessToken'), removeAuthToken('refreshToken');
+              });
             window.localStorage.removeItem('persist');
-            removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
+
             router.push('/');
           }}
         >
