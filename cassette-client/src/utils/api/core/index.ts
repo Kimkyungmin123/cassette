@@ -58,29 +58,19 @@ instance.interceptors.response.use(
       const refreshToken = await getAuthToken('refreshToken');
 
       if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
-        return new Promise((resolve, reject) => {
-          refreshToken &&
-            mainInstance
-              .getNewToken(refreshToken)
-              .then(({ data }) => {
-                if (data.result.accessToken) {
-                  setAuthToken('accessToken', data.data.result.accessToken);
-
-                  if (error.config) {
-                    error.config.headers[
-                      'Authorization'
-                    ] = `Bearer ${data.result.accessToken}`;
-                    resolve(instance(error.config));
-                  }
-                }
-              })
-              .catch((e: any) => {
-                removeAuthToken('accessToken');
-                removeAuthToken('refreshToken');
-                window.location.href = '/';
-                reject(error);
-              });
-        });
+        refreshToken &&
+          mainInstance
+            .getNewToken(refreshToken)
+            .then(({ data }) => {
+              if (data.result.accessToken) {
+                setAuthToken('accessToken', data.data.result.accessToken);
+              }
+            })
+            .catch((e: any) => {
+              removeAuthToken('accessToken');
+              removeAuthToken('refreshToken');
+              window.location.href = '/';
+            });
       }
     } catch (e: any) {
       window.location.href = '/';
