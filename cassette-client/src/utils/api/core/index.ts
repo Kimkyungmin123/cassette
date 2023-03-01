@@ -75,7 +75,6 @@ instance.interceptors.response.use(
             }
           })
           .catch((e: any) => {
-            alert('로그인을 다시 해주세요');
             removeAuthToken('accessToken');
             removeAuthToken('refreshToken');
             window.location.href = '/';
