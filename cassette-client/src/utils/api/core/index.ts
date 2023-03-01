@@ -57,20 +57,19 @@ instance.interceptors.response.use(
       const status = error.response?.status;
       const refreshToken = await getAuthToken('refreshToken');
 
-      if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
-        refreshToken &&
-          mainInstance
-            .getNewToken(refreshToken)
-            .then(({ data }) => {
-              if (data.result.accessToken) {
-                setAuthToken('accessToken', data.data.result.accessToken);
-              }
-            })
-            .catch((e: any) => {
-              removeAuthToken('accessToken');
-              removeAuthToken('refreshToken');
-              window.location.href = '/';
-            });
+      if ((status === 401 || code === 'EXPIRED_JWT_TOKEN') && refreshToken) {
+        mainInstance
+          .getNewToken(refreshToken)
+          .then(({ data }) => {
+            if (data.result.accessToken) {
+              setAuthToken('accessToken', data.data.result.accessToken);
+            }
+          })
+          .catch((e: any) => {
+            removeAuthToken('accessToken');
+            removeAuthToken('refreshToken');
+            window.location.href = '/';
+          });
       }
     } catch (e: any) {
       window.location.href = '/';
