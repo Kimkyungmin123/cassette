@@ -50,11 +50,20 @@ export const ProgressBar = styled.input`
 
   ::-webkit-slider-thumb {
     -webkit-appearance: none;
-    display: none;
   }
 
   &:active::-webkit-slider-thumb {
     transform: scale(1.2);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: ${theme.colors.gray_300};
+    cursor: pointer;
+    position: relative;
+    margin-top: -4px;
+    z-index: 3;
+    box-sizing: border-box;
   }
 `;
 
