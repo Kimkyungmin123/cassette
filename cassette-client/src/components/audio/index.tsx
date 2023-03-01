@@ -71,7 +71,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     const calculateTime = (secs: number) => {
       const minutes = Math.floor(secs / 60);
       const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.ceil(secs % 60);
+      const seconds = Math.round(secs % 60);
       const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${returnedMinutes}:${returnedSeconds}`;
     };
