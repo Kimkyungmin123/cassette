@@ -83,7 +83,8 @@ instance.interceptors.response.use(
         });
       }
     } catch (e: any) {
-      return Promise.reject(error);
+      window.location.href = '/';
+      Promise.reject(error);
     }
   },
 );
