@@ -72,6 +72,7 @@ export const TapeName = styled.div<{ isEmpty?: boolean }>`
 
 export const AlertBox = styled.div<{ isRecording: boolean }>`
   margin: 15px 0 14px 0;
+  word-break: keep-all;
 
   div {
     ${({ isRecording }) =>
@@ -89,7 +90,7 @@ export const AlertBox = styled.div<{ isRecording: boolean }>`
     line-height: 16px;
     margin: 0;
 
-    &:after {
+    &::after {
       top: -33px;
       right: 95px;
       position: relative;

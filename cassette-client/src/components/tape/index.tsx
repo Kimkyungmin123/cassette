@@ -73,7 +73,7 @@ const Tape = ({
   }, [recordingBlob]);
 
   useEffect(() => {
-    if (Math.ceil(recordingTime) === 13) {
+    if (recordingTime === 12) {
       stopRecording();
       setIsRedording?.(false);
     }
