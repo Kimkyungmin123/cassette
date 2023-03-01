@@ -58,7 +58,7 @@ instance.interceptors.response.use(
     const status = error.response?.status;
     const refreshToken = getAuthToken('refreshToken');
 
-    if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
+    if (status === 401 || (code === 'EXPIRED_JWT_TOKEN' && refreshToken)) {
       return new Promise((resolve, reject) => {
         mainInstance
           .getNewToken(refreshToken)
