@@ -1,9 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import {
-  getAuthToken,
-  removeAuthToken,
-  setAuthToken,
-} from 'utils/storage/authCookie';
+import { getAuthToken, setAuthToken } from 'utils/storage/authCookie';
 
 import mainInstance from '../main';
 
@@ -24,13 +20,14 @@ instance.interceptors.request.use(
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
       }
     } catch (e: any) {
-      console.error('인증 실패');
+      window.location.href = '/';
     }
 
     return config;
   },
 
   (error) => {
+    window.location.href = '/';
     Promise.reject(error);
   },
 );
@@ -55,13 +52,13 @@ instance.interceptors.response.use(
       const code = error.code;
       const status = error.response?.status;
       const refreshToken = await getAuthToken('refreshToken');
-
-      if ((status === 401 || code === 'EXPIRED_JWT_TOKEN') && refreshToken) {
+      if (!refreshToken) return;
+      if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
         mainInstance
           .getNewToken(refreshToken)
           .then(({ data }) => {
             if (data.result.accessToken) {
-              setAuthToken('accessToken', data.data.result.accessToken);
+              setAuthToken('accessToken', data.result.accessToken);
             }
 
             if (error.config) {
@@ -72,8 +69,6 @@ instance.interceptors.response.use(
             }
           })
           .catch((e: any) => {
-            removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
             window.location.href = '/';
           });
       }
