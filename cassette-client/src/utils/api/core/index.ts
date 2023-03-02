@@ -1,5 +1,9 @@
 import axios, { AxiosError } from 'axios';
-import { getAuthToken, setAuthToken } from 'utils/storage/authCookie';
+import {
+  getAuthToken,
+  removeAuthToken,
+  setAuthToken,
+} from 'utils/storage/authCookie';
 
 import mainInstance from '../main';
 
@@ -69,11 +73,14 @@ instance.interceptors.response.use(
             }
           })
           .catch((e: any) => {
+            removeAuthToken('accessToken');
+            removeAuthToken('refreshToken');
             window.location.href = '/';
           });
       }
     } catch (e: any) {
       window.location.href = '/';
+
       Promise.reject(error);
     }
   },
