@@ -205,6 +205,7 @@ const CreateTapeCompleted = () => {
                   <Tape
                     width="88"
                     height="58"
+                    date={data.createAt.slice(2, 10).replaceAll('-', '.')}
                     title={data.title}
                     color={data.colorCode}
                     audioLink={tracks.length > 2 ? data.audioLink : ''}
