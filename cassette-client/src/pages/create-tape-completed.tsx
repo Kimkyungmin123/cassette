@@ -57,7 +57,6 @@ const CreateTapeCompleted = () => {
         setFullTapeLink(tapeData['audioLink']);
         setDate(tapeData['createAt'].slice(2, 10).replaceAll('-', '.'));
       }
-      console.log(tapeColor);
     });
   }, [setResponsUser, setUserData, setTapeColor, setDate]);
 

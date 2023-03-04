@@ -2,7 +2,6 @@ import { DefaultTheme } from '@emotion/react';
 
 const colors = {
   primary: '#FFFFE0', //   main_color
-
   black: '#000000',
   black_900: '#212121',
   black_800: '#424242',
@@ -38,14 +37,14 @@ const colors = {
 };
 
 const fontSize = {
-  title: '28px',
-  xxl: '24px',
-  xl: '22px',
-  lg: '20px',
-  md: '16px',
-  smd: '15px',
-  sm: '14px',
-  xs: '12px',
+  title: '1.75rem', // 28px
+  xxl: '1.5rem', // 24px
+  xl: '1.375rem', // 22px
+  lg: '1.25rem', // 20px
+  md: '1rem', // 16px
+  smd: '0.9375rem', // 15px
+  sm: '0.875rem', // 14px
+  xs: '0.75rem', // 12px
 };
 
 export type ColorsTypes = typeof colors;

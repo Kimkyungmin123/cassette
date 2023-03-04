@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
+import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 
 const ModifyDecorateTape = () => {
@@ -16,7 +17,12 @@ const ModifyDecorateTape = () => {
 
   const submit = () => {
     subInstance
-      .modifyUseTape(tapeId as number, tapeColor, tapename, userNickname)
+      .modifyUseTape(
+        tapeId as number,
+        tapeColor as Color,
+        tapename,
+        userNickname,
+      )
       .then((data) => {
         setTapeColor(data.result.colorCode);
       });
@@ -25,7 +31,7 @@ const ModifyDecorateTape = () => {
   return (
     <>
       <MenuLayout name={userNickname} />
-      <DecoContainer color={tapeColor}>
+      <DecoContainer color={tapeColor as Color}>
         <DecoZone css={{ gap: '24px', marginTop: '93px' }}>
           <Title name={userNickname} color={theme.colors.white} />
           <TapeSVG title={tapename} date={date} sec="144" />
@@ -34,7 +40,7 @@ const ModifyDecorateTape = () => {
               <div>
                 <p>
                   테이프{' '}
-                  <span css={{ color: theme.colors[tapeColor] }}>
+                  <span css={{ color: theme.colors[tapeColor as Color] }}>
                     안쪽 색상
                   </span>
                   를 골라주세요!

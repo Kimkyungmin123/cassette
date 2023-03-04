@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useGuestColorStore, useGuestInfoStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
+import { Color } from 'types';
 
 const DecorateTapeGuest = () => {
   const { query } = useRouter();
@@ -32,7 +33,9 @@ const DecorateTapeGuest = () => {
             <div>
               <p>
                 테이프{' '}
-                <span css={{ color: theme.colors[guestColor] }}>안쪽 색상</span>
+                <span css={{ color: theme.colors[guestColor as Color] }}>
+                  안쪽 색상
+                </span>
                 를 골라주세요!
               </p>
               <ColorPlate isOwner={false} />
