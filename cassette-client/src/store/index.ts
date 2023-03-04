@@ -11,7 +11,7 @@ import { devtools, persist } from 'zustand/middleware';
 export const useColorStore = create<ColorStore>()(
   persist(
     (set) => ({
-      tapeColor: 'cassette_orange',
+      tapeColor: '',
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },
@@ -63,7 +63,7 @@ export const tokenStore = create<TokenStore>()(
 export const useGuestColorStore = create<ColorStore>()(
   persist(
     (set) => ({
-      tapeColor: 'cassette_orange',
+      tapeColor: '',
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },

@@ -1,7 +1,7 @@
 import { Color, WithdrawalType } from 'types';
 
 export interface ColorStore {
-  tapeColor: Color;
+  tapeColor: Color | '';
   setTapeColor: (tapeColor: Color) => void;
 }
 

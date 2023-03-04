@@ -18,6 +18,7 @@ import {
   WarningZone,
 } from 'styles/make-track';
 import theme from 'styles/theme';
+import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 import audioInstance from 'utils/audio/audio';
 
@@ -45,7 +46,13 @@ const MakeTrack = () => {
         });
         if (!isRedording) {
           subInstance
-            .createTrack(tapeColor, tapename, userNickname, `${id}`, audiofile)
+            .createTrack(
+              tapeColor as Color,
+              tapename,
+              userNickname,
+              `${id}`,
+              audiofile,
+            )
             .then(() => {
               setModalOpen(true);
             })

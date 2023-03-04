@@ -35,6 +35,7 @@ export interface Tape {
   tapeLink: string;
   fileName: null;
   audioLink: null;
+  createAt: string;
 }
 
 interface LoginTape extends Omit<Tape, 'fileName' | 'title'> {
@@ -57,6 +58,7 @@ export interface Track {
   name: string;
   fileName: string;
   audioLink: string;
+  createAt: string;
 }
 
 type SocialLogin = 'KAKAO';
