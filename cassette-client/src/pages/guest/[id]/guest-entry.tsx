@@ -91,8 +91,7 @@ const GuestEntry = () => {
             </Button>
           </Zone>
         </Container>
-      ) : //TODO: 탈퇴한 유저 링크 들어갔을 때 처리
-      null}
+      ) : null}
     </>
   );
 };

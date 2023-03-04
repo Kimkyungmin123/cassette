@@ -18,7 +18,6 @@ instance.interceptors.request.use(
     config.withCredentials = true;
     try {
       const token = await getAuthToken('accessToken');
-
       if (config.headers) {
         config.headers['Authorization'] = token && `Bearer ${token}`;
         config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
@@ -55,14 +54,14 @@ instance.interceptors.response.use(
     try {
       const code = error.code;
       const status = error.response?.status;
-      const refreshToken = await getAuthToken('refreshToken');
-      if (!refreshToken) return;
+
       if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
         mainInstance
-          .getNewToken(refreshToken)
+          .getNewToken()
           .then(({ data }) => {
             if (data.result.accessToken) {
               setAuthToken('accessToken', data.result.accessToken);
+              window.location.reload();
             }
 
             if (error.config) {
