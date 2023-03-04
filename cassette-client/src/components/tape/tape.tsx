@@ -182,8 +182,8 @@ const TapeSvg = ({
             color
               ? color && theme.colors[color]
               : isOwner
-              ? theme.colors[tapeColor]
-              : theme.colors[guestColor]
+              ? theme.colors[tapeColor as Color]
+              : theme.colors[guestColor as Color]
           }
         />
         <path
