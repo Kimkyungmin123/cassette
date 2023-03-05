@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { stat } from 'fs';
 import {
   getAuthToken,
   removeAuthToken,
@@ -54,6 +55,10 @@ instance.interceptors.response.use(
     try {
       const code = error.code;
       const status = error.response?.status;
+
+      if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
+        window.location.href = '/';
+      }
 
       if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
         mainInstance
