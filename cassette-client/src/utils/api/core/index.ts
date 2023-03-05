@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import { stat } from 'fs';
 import {
   getAuthToken,
   removeAuthToken,
@@ -56,7 +55,6 @@ instance.interceptors.response.use(
       const code = error.response?.data?.code;
       const status = error.response?.status;
 
-      console.log(error);
       if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
         removeAuthToken('accessToken');
         removeAuthToken('refreshToken');
