@@ -20,6 +20,7 @@ const CheckBox = ({
   return (
     <CheckboxContainer>
       <CheckboxWrapper
+        isChecked={isChecked}
         type="checkbox"
         checked={isChecked}
         onChange={onChange}
