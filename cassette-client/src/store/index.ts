@@ -1,6 +1,7 @@
 import {
   ColorStore,
   DropdownStore,
+  PlayStore,
   ResponseUserStore,
   TokenStore,
   UserStore,
@@ -108,6 +109,16 @@ export const dropdownStore = create<DropdownStore>()(
 
     setDropData: (dropContent, dropType) => {
       set(() => ({ dropContent, dropType }));
+    },
+  })),
+);
+
+export const usePlayStore = create<PlayStore>()(
+  devtools((set) => ({
+    isPlayAudio: false,
+
+    setIsPlayAudio: (isPlayAudio) => {
+      set(() => ({ isPlayAudio }));
     },
   })),
 );

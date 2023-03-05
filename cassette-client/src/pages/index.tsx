@@ -15,7 +15,7 @@ export default function Home() {
         </div>
         <TapeSVG
           title="2023 한정판 테이프"
-          date="21.01.01"
+          date="23.01.01"
           sec="144"
           color="cassette_orange"
         />

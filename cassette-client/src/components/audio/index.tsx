@@ -4,6 +4,7 @@ import PauseIcon from '@icon/pause.svg';
 import Play from '@icon/play.svg';
 import Right from '@icon/right.svg';
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import { usePlayStore } from 'store';
 import theme from 'styles/theme';
 
 import {
@@ -42,10 +43,14 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
+    const [tempPause, setTempPause] = useState<boolean>(false);
 
     const audioPlayer = useRef<HTMLAudioElement>(null);
     const progressBar = useRef<HTMLInputElement>(null);
     const animationRef = useRef<number>();
+
+    const { setIsPlayAudio } = usePlayStore();
+
     useEffect(() => {
       const audio = audioPlayer.current;
 
@@ -64,9 +69,13 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
 
     useEffect(() => {
       currentTime === 0 || duration === currentTime
-        ? setIsPlaying(false)
+        ? (setIsPlaying(false), setTempPause(false))
         : setIsPlaying(true);
     }, [currentTime, duration]);
+
+    useEffect(() => {
+      isPlaying && !tempPause ? setIsPlayAudio(true) : setIsPlayAudio(false);
+    }, [isPlaying, setIsPlayAudio, tempPause]);
 
     const calculateTime = (secs: number) => {
       const minutes = Math.floor(secs / 60);
@@ -81,9 +90,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
       setIsPlaying(!prevValue);
       if (!prevValue) {
         audioPlayer?.current?.play();
+        setTempPause(false);
         animationRef.current = requestAnimationFrame(() => whilePlaying());
       } else {
         audioPlayer?.current?.pause();
+        setTempPause(true);
         cancelAnimationFrame(animationRef.current as number);
       }
     };
@@ -154,9 +165,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                   onClick={togglePlayPause}
                   as="button"
                   disabled={disabled}
-                  aria-label={isPlaying ? '일시정지하기' : '재생하기'}
+                  aria-label={
+                    isPlaying && !tempPause ? '일시정지하기' : '재생하기'
+                  }
                 >
-                  {isPlaying ? (
+                  {isPlaying && !tempPause ? (
                     <PauseIcon width="24" height="24" />
                   ) : (
                     <Play width="24" height="24" />
@@ -192,9 +205,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                   variant="clear"
                   onClick={togglePlayPause}
                   as="button"
-                  aria-label={isPlaying ? '일시정지하기' : '재생하기'}
+                  aria-label={
+                    isPlaying && !tempPause ? '일시정지하기' : '재생하기'
+                  }
                 >
-                  {isPlaying ? (
+                  {isPlaying && !tempPause ? (
                     <PauseIcon width="20" height="20" />
                   ) : (
                     <Play width="20" height="20" />

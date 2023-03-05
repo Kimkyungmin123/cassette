@@ -30,3 +30,9 @@ export interface DropdownStore {
 
   setDropData: (dropContent?: string, dropType?: WithdrawalType) => void;
 }
+
+export interface PlayStore {
+  isPlayAudio: boolean;
+
+  setIsPlayAudio: (isPlayAudio: boolean) => void;
+}
