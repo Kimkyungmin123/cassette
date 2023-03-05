@@ -19,8 +19,6 @@ export const global = css`
 
   html {
     box-sizing: border-box;
-    height: 100vh;
-    margin-bottom: 10px;
   }
 
   body {
