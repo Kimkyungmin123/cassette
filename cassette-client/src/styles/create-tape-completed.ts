@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import theme from './theme';
 
 export const CompletedTapeContainer = styled.div`
-  padding: 93px 24px 0 24px;
+  padding: 93px 24px 92px 24px;
   display: flex;
   justify-content: center;
   align-items: center;

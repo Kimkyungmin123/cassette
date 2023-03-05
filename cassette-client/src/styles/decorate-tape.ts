@@ -9,7 +9,7 @@ export const DecoContainer = styled.div`
   justify-content: center;
   font-family: 'Ycomputer-Regular';
   font-style: normal;
-  padding: 0 24px;
+  padding: 0 24px 92px 24px;
 
   p {
     text-align: start;

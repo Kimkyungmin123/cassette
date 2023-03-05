@@ -24,7 +24,7 @@ const CreateTape = () => {
   };
 
   return (
-    <Box css={{ padding: '93px 24px 0 24px ' }}>
+    <Box css={{ padding: '93px 24px 92px 24px ' }}>
       <Box margin="0 0 24px 0">
         <Title name="닉네임" />
       </Box>

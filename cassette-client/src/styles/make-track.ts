@@ -11,7 +11,7 @@ export const BackButtonZone = styled.div`
 `;
 
 export const MakeTapeContainer = styled.div`
-  margin: 143px 24px 0 24px;
+  padding: 143px 24px 92px 24px;
 `;
 
 export const WarningZone = styled.div<{ firstEntry: boolean }>`
