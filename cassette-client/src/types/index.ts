@@ -21,7 +21,8 @@ export type WithdrawalType =
   | 'REJOIN'
   | 'INCONVENIENCE'
   | 'SERVICE_NOT_USED'
-  | 'NOT_REMOVE_TAPE';
+  | 'NOT_REMOVE_TAPE'
+  | 'ETC';
 
 export interface WithdrawalData {
   type: WithdrawalType;
