@@ -140,6 +140,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 defaultValue="0"
                 ref={progressBar}
                 onChange={changeRange}
+                disabled={disabled}
               />
               <span>
                 {duration
