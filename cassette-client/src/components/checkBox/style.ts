@@ -26,6 +26,7 @@ export const CheckboxWrapper = styled.input<{ isChecked: boolean }>`
   ${({ isChecked }) =>
     isChecked &&
     `
+    &:checked {
     &::after {
       content: url(assets/check.svg);
       display: flex;
@@ -34,6 +35,7 @@ export const CheckboxWrapper = styled.input<{ isChecked: boolean }>`
       height: 23px;
       scale:0.9;
     }
+  }
   }
   `}
 `;
