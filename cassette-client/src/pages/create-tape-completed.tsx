@@ -40,17 +40,17 @@ const getUserTape = async () => {
   return data?.result[0];
 };
 
-// export async function getServerSideProps() {
-//   const queryClient = new QueryClient();
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
 
-//   await queryClient.prefetchQuery(['tapeData'], getUserTape);
+  await queryClient.prefetchQuery(['tapeData'], getUserTape);
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL, tapeId } = useResponsUserStore();
