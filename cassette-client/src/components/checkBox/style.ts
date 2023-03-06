@@ -28,7 +28,7 @@ export const CheckboxWrapper = styled.input<{ isChecked: boolean }>`
     `
     &:checked {
     &::after {
-      content: url(assets/check.svg);
+      content: url(../../../assets/check.svg);
       display: flex;
       justify-content: center;
       align-items: center;
