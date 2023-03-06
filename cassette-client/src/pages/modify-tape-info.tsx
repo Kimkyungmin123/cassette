@@ -1,4 +1,3 @@
-import Button from 'components/button';
 import Input from 'components/input';
 import MenuLayout from 'components/menu';
 import TapeSVG from 'components/tape/tape';
@@ -8,7 +7,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import subInstance from 'utils/api/sub';
 
-import { Box, Info, InputBox } from '../styles/create-tape';
+import {
+  Box,
+  CreateTapeInfoButton,
+  Info,
+  InputBox,
+} from '../styles/create-tape';
 
 const MAX_LENGTH = {
   NICKNAME: 5,
@@ -17,7 +21,7 @@ const MAX_LENGTH = {
 const ModifyTapeInfo = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
-  const { setUserData, userNickname } = useUserStore();
+  const { setUserData, userNickname, date } = useUserStore();
   const { setResponsUser } = useResponsUserStore();
   const { setTapeColor } = useColorStore();
   const [userName, setUserName] = useState<string>('');
@@ -33,7 +37,9 @@ const ModifyTapeInfo = () => {
         data?.result?.slice(-1)[0]['id'],
       );
     });
-  }, [setResponsUser, setTapeColor]);
+    setNickname(userName);
+    setTitle(userTapeName);
+  }, [setResponsUser, setTapeColor, userName, userTapeName]);
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);
@@ -42,11 +48,10 @@ const ModifyTapeInfo = () => {
   const handleChangeTitle = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setTitle(target.value);
   };
-  // TODO: server, client tape fill 매치되지 않는 에러 해결하기
 
   return (
     <>
-      <Box css={{ padding: '0 24px' }}>
+      <Box css={{ padding: '93px 24px 0 24px' }}>
         <MenuLayout name={userNickname} />
         <Box margin="0 0 24px 0">
           <TitleWrapper>
@@ -54,7 +59,7 @@ const ModifyTapeInfo = () => {
           </TitleWrapper>
         </Box>
         <Box margin="0 0 44px 0">
-          <TapeSVG title={userTapeName} date="21.01.01" sec="144" />
+          <TapeSVG title={userTapeName} date={date} sec="144" />
         </Box>
         <InputBox>
           <Input
@@ -62,7 +67,6 @@ const ModifyTapeInfo = () => {
             onChange={handleChangeNickname}
             label="카세트 주인장의 닉네임을 적어주세요."
             highlightWords={['닉네임']}
-            placeholder={userName}
             maxLength={MAX_LENGTH.NICKNAME}
           />
         </InputBox>
@@ -73,7 +77,6 @@ const ModifyTapeInfo = () => {
             onChange={handleChangeTitle}
             label="테이프의 제목을 적어주세요."
             highlightWords={['테이프의 제목']}
-            placeholder={userTapeName}
             maxLength={MAX_LENGTH.TITLE}
           />
           <Info>
@@ -82,15 +85,16 @@ const ModifyTapeInfo = () => {
             ex&#41; 2023년 나의 새로운 도전을 응원해줘!
           </Info>
         </InputBox>
-        <Link href="/modify-decorate-tape">
-          <Button
+        <Link href={nickname && title ? '/modify-decorate-tape' : '#'}>
+          <CreateTapeInfoButton
             onClick={() => {
-              setUserData(nickname, title);
+              nickname && title && setUserData(nickname, title);
             }}
             variant="main"
+            disabled={!nickname || !title}
           >
             수정 완료
-          </Button>
+          </CreateTapeInfoButton>
         </Link>
       </Box>
     </>

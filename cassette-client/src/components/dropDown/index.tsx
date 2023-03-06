@@ -1,4 +1,5 @@
 import Down from '@icon/down.svg';
+import Up from '@icon/up.svg';
 import { WITHDRAWAL } from 'constants/withdrawal';
 import { dropdownStore } from 'store';
 import { WithdrawalData } from 'types';
@@ -43,7 +44,8 @@ const Dropdown = ({
         onClick={onSelected}
         selectContent={dropContent}
       >
-        <span>{dropContent ? dropContent : defaultText}</span> <Down />
+        <span>{dropContent ? dropContent : defaultText}</span>{' '}
+        {selected ? <Up /> : <Down />}
       </SelectBox>
       {selected ? (
         <WithdrawalList>

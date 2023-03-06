@@ -31,7 +31,7 @@ export const WithdrawalContainer = styled.div`
 export const CloseZone = styled.div`
   position: absolute;
   display: flex;
-  top: 71px;
+  top: 40px;
   right: 26px;
 
   svg {
@@ -44,11 +44,11 @@ export const Title = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding-top: 121px;
+  padding-top: 100px;
 
   h1 {
     font-family: 'Ycomputer-Regular';
-    font-size: ${theme.fontSize.xl};
+    font-size: ${theme.fontSize.xxl};
     font-weight: 400;
   }
 
@@ -82,7 +82,7 @@ export const SubmitZone = styled.div`
   display: grid;
   flex-direction: column;
   gap: 12px;
-  padding-top: 135px;
+  padding-top: 83px;
 `;
 
 export const WithdrawalButton = styled(ButtonLayout)`

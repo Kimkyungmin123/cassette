@@ -29,13 +29,11 @@ const deleteUser = (
   });
 };
 
-const getNewToken = (refreshToken: string) =>
+const getNewToken = () =>
   axios.post(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/v1/auth/refresh`,
     {},
-    {
-      headers: { Authorization: `Bearer ${refreshToken}` },
-    },
+    { withCredentials: true },
   );
 
 const mainInstance = {

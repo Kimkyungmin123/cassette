@@ -5,7 +5,7 @@ import { Color } from 'types';
 import { CircleStyle, Item } from './style';
 
 export interface CircleProps {
-  color: Color;
+  color: Color | '';
   isOwner?: boolean;
 }
 

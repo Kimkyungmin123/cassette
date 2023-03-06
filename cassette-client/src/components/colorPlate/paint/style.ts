@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import theme from 'styles/theme';
+import { Color } from 'types';
 
 import { CircleProps } from '.';
 
@@ -18,7 +19,7 @@ export const CircleStyle = styled.input<CircleProps>`
   -webkit-appearance: none;
   -moz-appearance: none;
   margin: 0;
-  background-color: ${({ color }) => theme.colors[color]};
+  background-color: ${({ color }) => theme.colors[color as Color]};
 
   &:hover {
     opacity: 0.8;

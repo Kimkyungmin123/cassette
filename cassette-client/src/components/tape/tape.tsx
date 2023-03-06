@@ -1,9 +1,11 @@
+import { useEffect, useRef } from 'react';
 import { useColorStore, useGuestColorStore } from 'store';
 import theme from 'styles/theme';
 import { Color } from 'types';
+
 export interface TapeSvgProps {
-  title: string;
-  date: string;
+  title?: string;
+  date?: string;
   sec?: string;
   width?: string;
   color?: Color;
@@ -12,8 +14,8 @@ export interface TapeSvgProps {
 }
 
 const TapeSvg = ({
-  title,
-  date,
+  title = '',
+  date = '',
   sec,
   width = '260px',
   height = '170px',
@@ -180,8 +182,8 @@ const TapeSvg = ({
             color
               ? color && theme.colors[color]
               : isOwner
-              ? theme.colors[tapeColor]
-              : theme.colors[guestColor]
+              ? theme.colors[tapeColor as Color]
+              : theme.colors[guestColor as Color]
           }
         />
         <path

@@ -1,7 +1,7 @@
 {
-  "theme_color": "#E9A133",
-  "background_color": "#E9A133",
-  "display": "standalone",
+  "theme_color": "#242729",
+  "background_color": "#242729",
+  "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
   "name": "Voice Tape",

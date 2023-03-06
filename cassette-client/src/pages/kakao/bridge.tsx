@@ -14,6 +14,7 @@ const Bridge = () => {
   useEffect(() => {
     if (code) {
       mainInstance.KakaoSocialLogin(code as string).then((data) => {
+        if (!data) router.push('/');
         setAuthToken('accessToken', data.result.jwtInformation.accessToken),
           data.result.tapes.length === 0
             ? (router.push('/create-tape'), setTapeColor('cassette_orange'))
@@ -33,6 +34,7 @@ const Bridge = () => {
         height: '100%',
         display: 'flex',
         justifyContent: 'cneter',
+        alignItems: 'center',
       }}
     >
       <Roading />

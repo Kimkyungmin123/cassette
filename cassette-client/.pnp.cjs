@@ -3626,6 +3626,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regenerator-runtime", "npm:0.13.11"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:7.21.0", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.21.0-c4ef698c89-7b33e25bfa.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.21.0"],\
+            ["regenerator-runtime", "npm:0.13.11"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@babel/runtime-corejs3", [\
@@ -9151,7 +9159,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/match-sorter-npm-4.2.1-dd63b8f9e9-7f3cd8f84c.zip/node_modules/match-sorter/",\
           "packageDependencies": [\
             ["match-sorter", "npm:4.2.1"],\
-            ["@babel/runtime", "npm:7.20.7"],\
+            ["@babel/runtime", "npm:7.21.0"],\
             ["remove-accents", "npm:0.4.2"]\
           ],\
           "linkType": "HARD"\

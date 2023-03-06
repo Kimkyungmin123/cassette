@@ -11,7 +11,7 @@ import { devtools, persist } from 'zustand/middleware';
 export const useColorStore = create<ColorStore>()(
   persist(
     (set) => ({
-      tapeColor: 'cassette_orange',
+      tapeColor: '',
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },
@@ -25,8 +25,12 @@ export const useUserStore = create<UserStore>()(
     (set) => ({
       userNickname: '',
       tapename: '',
+      date: '',
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
+      },
+      setDate: (date) => {
+        set(() => ({ date }));
       },
     }),
     { name: 'persist' },
@@ -59,7 +63,7 @@ export const tokenStore = create<TokenStore>()(
 export const useGuestColorStore = create<ColorStore>()(
   persist(
     (set) => ({
-      tapeColor: 'cassette_orange',
+      tapeColor: '',
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },
@@ -73,14 +77,17 @@ export const useGuestInfoStore = create<UserStore>()(
     (set) => ({
       userNickname: '',
       tapename: '',
+      date: '',
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
+      },
+      setDate: (date) => {
+        set(() => ({ date }));
       },
     }),
     { name: 'persist' },
   ),
 );
-
 export const useGuestResponsStore = create<ResponseUserStore>()(
   persist(
     (set) => ({

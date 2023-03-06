@@ -7,11 +7,18 @@ interface PortalProps {
   children: ReactNode;
   id?: string;
   closeModal: () => void;
+  isCreatedTrack?: boolean;
 }
-const Portal = ({ children, closeModal, id = 'modal' }: PortalProps) => {
+const Portal = ({
+  children,
+  closeModal,
+  id = 'modal',
+  isCreatedTrack = false,
+}: PortalProps) => {
   const [el, setEl] = useState<HTMLElement | null>(null);
 
   const handleClose = (e: MouseEvent) => {
+    if (isCreatedTrack) return;
     if (e.target !== e.currentTarget) return;
     closeModal();
   };

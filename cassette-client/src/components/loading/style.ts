@@ -7,15 +7,18 @@ export const LoadingCotainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  svg {
+    padding-bottom: 16px;
+  }
 `;
+
 export const TextContent = styled.div`
   display: flex;
   align-items: center;
   color: ${theme.colors.white};
-  gap: 6px;
 
   span {
+    padding-right: 6px;
     font-family: 'Ycomputer-regular';
     font-size: 24px;
     font-weight: 400;
@@ -25,6 +28,7 @@ export const TextContent = styled.div`
   }
 
   div {
+    margin-right: 6px;
     border-top: solid 3px;
     margin-top: 3px;
     width: 3px;

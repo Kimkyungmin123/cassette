@@ -28,7 +28,10 @@ export const ToastBox = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  gap: 8px;
+  word-break: keep-all;
   justify-content: center;
   align-items: center;
+  svg {
+    padding-right: 8px;
+  }
 `;
