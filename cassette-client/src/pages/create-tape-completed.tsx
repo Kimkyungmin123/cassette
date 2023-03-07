@@ -215,7 +215,11 @@ const CreateTapeCompleted = () => {
         onhandleBackward={MoveBackward}
         onhandleForward={MoveForward}
         preventMovingForward={currentIndex === 0}
-        preventMovingBack={currentIndex >= tracks.length - 1}
+        preventMovingBack={
+          ((!fullTapeLink && currentIndex === tracks.length - 1) as boolean) ||
+          ((fullTapeLink &&
+            currentTapeId === (tapeId as number) * MAX_NUMBER) as boolean)
+        }
       />
       <TapeCount>
         <span> Total {tracks.length}/12</span>
