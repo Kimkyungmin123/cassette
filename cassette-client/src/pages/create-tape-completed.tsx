@@ -64,8 +64,9 @@ const CreateTapeCompleted = () => {
   const [fullTapeLink, setFullTapeLink] = useState<string | null>('');
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+
   const { setDate } = useUserStore();
-  const { isPlayAudio } = usePlayStore();
+  const { isPlayAudio, setIsPlayAudio } = usePlayStore();
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
   const MAX_NUMBER = 99999999;
@@ -121,6 +122,7 @@ const CreateTapeCompleted = () => {
 
       setCurrentTapeId(forwardId);
       setCurrentIndex(forwardIndex);
+      setIsPlayAudio(false);
     }
   };
 
@@ -139,6 +141,7 @@ const CreateTapeCompleted = () => {
       setCurrentTapeId(backwardId);
       setCurrentIndex(backwardIndex);
       setIsFullTape(false);
+      setIsPlayAudio(false);
     }
   };
 
@@ -211,6 +214,8 @@ const CreateTapeCompleted = () => {
         onhandleDownload={handleDownloadClick}
         onhandleBackward={MoveBackward}
         onhandleForward={MoveForward}
+        preventMovingForward={currentIndex === 0}
+        preventMovingBack={currentIndex >= tracks.length - 1}
       />
       <TapeCount>
         <span> Total {tracks.length}/12</span>
