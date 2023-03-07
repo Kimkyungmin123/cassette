@@ -1,7 +1,9 @@
 // netlify.toml
 [build]
-  command = "npm run build"
+  command = "yarn build"
   publish = "build"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+
