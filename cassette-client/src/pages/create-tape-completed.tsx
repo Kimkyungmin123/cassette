@@ -101,13 +101,6 @@ const CreateTapeCompleted = () => {
     onCopy(text);
   };
 
-  // useEffect(() => {
-  //   if (currentTapeId)
-  //     !isFullTape && currentTapeId
-  //       ? currentTrack?.result.audioLink as string)
-  //       : fullTapeLink as string);
-  // }, [currentTapeId, currentTrack?.result.audioLink, fullTapeLink, isFullTape]);
-
   const MoveForward = () => {
     if (currentIndex <= 0 || tracks.length - 1 < currentIndex) return;
     if (fullTapeLink && isFullTape) {
