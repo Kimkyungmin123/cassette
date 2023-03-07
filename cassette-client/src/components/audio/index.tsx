@@ -74,19 +74,12 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     }, [audioPlayer]);
 
     useEffect(() => {
-      if (!tempPause && currentTime !== 0 && currentTime !== duration) {
-        setIsPlaying(true);
-        setIsPlayAudio(true);
-      }
-    }, [currentTime, duration, setIsPlayAudio, tempPause]);
-
-    useEffect(() => {
-      (currentTime === 0 || duration === currentTime) && setIsPlaying(false);
-    }, [currentTime, duration]);
-
-    useEffect(() => {
-      isPlaying && !tempPause ? setIsPlayAudio(true) : setIsPlayAudio(false);
+      setIsPlayAudio(isPlaying && !tempPause);
     }, [isPlaying, setIsPlayAudio, tempPause]);
+
+    useEffect(() => {
+      setIsPlaying(currentTime !== 0 && currentTime !== duration && !tempPause);
+    }, [currentTime, duration, tempPause]);
 
     useEffect(() => {
       const link = audioLink;
