@@ -50,10 +50,16 @@ instance.interceptors.response.use(
     const res = response.data;
     return res;
   },
-  async (error: AxiosError) => {
+  async (error: AxiosError<any>) => {
     try {
-      const code = error.code;
+      const code = error.response?.data?.code;
       const status = error.response?.status;
+
+      if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
+        removeAuthToken('accessToken');
+        removeAuthToken('refreshToken');
+        window.location.href = '/';
+      }
 
       if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
         mainInstance

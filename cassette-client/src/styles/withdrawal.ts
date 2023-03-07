@@ -9,7 +9,7 @@ export const WithdrawalContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 24px;
-  padding: 0 24px;
+  padding: 0 24px 92px 24px;
   grid-template-columns: 1fr;
 
   h1,

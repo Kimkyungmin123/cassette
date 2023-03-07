@@ -1,6 +1,7 @@
 import {
   ColorStore,
   DropdownStore,
+  PlayStore,
   ResponseUserStore,
   TokenStore,
   UserStore,
@@ -12,6 +13,7 @@ export const useColorStore = create<ColorStore>()(
   persist(
     (set) => ({
       tapeColor: '',
+
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },
@@ -26,6 +28,7 @@ export const useUserStore = create<UserStore>()(
       userNickname: '',
       tapename: '',
       date: '',
+
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
       },
@@ -42,6 +45,7 @@ export const useResponsUserStore = create<ResponseUserStore>()(
     (set) => ({
       userURL: '',
       tapeId: 0,
+
       setResponsUser: (userURL, tapeId) => {
         set(() => ({ userURL, tapeId }));
       },
@@ -64,6 +68,7 @@ export const useGuestColorStore = create<ColorStore>()(
   persist(
     (set) => ({
       tapeColor: '',
+
       setTapeColor: (value) => {
         set(() => ({ tapeColor: value }));
       },
@@ -78,6 +83,7 @@ export const useGuestInfoStore = create<UserStore>()(
       userNickname: '',
       tapename: '',
       date: '',
+
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
       },
@@ -108,6 +114,16 @@ export const dropdownStore = create<DropdownStore>()(
 
     setDropData: (dropContent, dropType) => {
       set(() => ({ dropContent, dropType }));
+    },
+  })),
+);
+
+export const usePlayStore = create<PlayStore>()(
+  devtools((set) => ({
+    isPlayAudio: false,
+
+    setIsPlayAudio: (isPlayAudio) => {
+      set(() => ({ isPlayAudio }));
     },
   })),
 );

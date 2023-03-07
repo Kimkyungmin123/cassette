@@ -88,7 +88,9 @@ export const Content = styled.div`
 
 export const GuideButtonZone = styled.div`
   width: 100%;
+  padding-bottom: 92px;
 `;
+
 export const GuideButton = styled(ButtonLayout)`
   background-color: ${theme.colors.black_800};
   color: ${theme.colors.primary};
@@ -96,6 +98,7 @@ export const GuideButton = styled(ButtonLayout)`
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+
   div {
     width: 100%;
     display: flex;

@@ -1,5 +1,6 @@
 import Completed from '@icon/completed.svg';
 import Copy from '@icon/copy.svg';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
 import MenuLayout from 'components/menu';
@@ -10,7 +11,12 @@ import Title from 'components/title';
 import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
 import { useEffect, useState } from 'react';
-import { useColorStore, useResponsUserStore, useUserStore } from 'store';
+import {
+  useColorStore,
+  usePlayStore,
+  useResponsUserStore,
+  useUserStore,
+} from 'store';
 import {
   BottomZone,
   Box,
@@ -29,6 +35,23 @@ import { Color } from 'types';
 import { TapeResponse, Track } from 'types/serverResponse';
 import subInstance from 'utils/api/sub';
 
+const getUserTape = async () => {
+  const data = await subInstance.getUserTape();
+  return data?.result[0];
+};
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['tapeData'], getUserTape);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
+
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL, tapeId } = useResponsUserStore();
   const { userNickname, tapename, setUserData, date } = useUserStore();
@@ -41,24 +64,25 @@ const CreateTapeCompleted = () => {
   const [fullTapeLink, setFullTapeLink] = useState<string | null>('');
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+
   const { setDate } = useUserStore();
+  const { isPlayAudio, setIsPlayAudio } = usePlayStore();
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
   const MAX_NUMBER = 99999999;
 
+  const { data: tapeData } = useQuery(['tapeData'], getUserTape);
+
   useEffect(() => {
-    subInstance.getUserTape().then((data) => {
-      const tapeData = data?.result[0];
-      if (tapeData) {
-        setUserData(tapeData['name'], tapeData['title']);
-        setResponsUser(tapeData['tapeLink'], tapeData['id']);
-        setTapeColor(tapeData['colorCode']);
-        setTracks(tapeData.tracks);
-        setFullTapeLink(tapeData['audioLink']);
-        setDate(tapeData['createAt'].slice(2, 10).replaceAll('-', '.'));
-      }
-    });
-  }, [setResponsUser, setUserData, setTapeColor, setDate]);
+    if (tapeData) {
+      setUserData(tapeData['name'], tapeData['title']);
+      setResponsUser(tapeData['tapeLink'], tapeData['id']);
+      setTapeColor(tapeData['colorCode']);
+      setTracks(tapeData.tracks);
+      setFullTapeLink(tapeData['audioLink']);
+      setDate(tapeData['createAt'].slice(2, 10).replaceAll('-', '.'));
+    }
+  }, [setResponsUser, setUserData, setTapeColor, setDate, tapeData]);
 
   useEffect(() => {
     if (currentTapeId && currentTapeId !== (tapeId as number) * MAX_NUMBER)
@@ -77,13 +101,6 @@ const CreateTapeCompleted = () => {
     onCopy(text);
   };
 
-  // useEffect(() => {
-  //   if (currentTapeId)
-  //     !isFullTape && currentTapeId
-  //       ? currentTrack?.result.audioLink as string)
-  //       : fullTapeLink as string);
-  // }, [currentTapeId, currentTrack?.result.audioLink, fullTapeLink, isFullTape]);
-
   const MoveForward = () => {
     if (currentIndex <= 0 || tracks.length - 1 < currentIndex) return;
     if (fullTapeLink && isFullTape) {
@@ -98,6 +115,7 @@ const CreateTapeCompleted = () => {
 
       setCurrentTapeId(forwardId);
       setCurrentIndex(forwardIndex);
+      setIsPlayAudio(false);
     }
   };
 
@@ -116,6 +134,7 @@ const CreateTapeCompleted = () => {
       setCurrentTapeId(backwardId);
       setCurrentIndex(backwardIndex);
       setIsFullTape(false);
+      setIsPlayAudio(false);
     }
   };
 
@@ -174,6 +193,7 @@ const CreateTapeCompleted = () => {
               : (tapeColor as Color)
           }
           sec="144"
+          isPlaying={isPlayAudio}
         />
       </TrackBox>
 
@@ -187,6 +207,12 @@ const CreateTapeCompleted = () => {
         onhandleDownload={handleDownloadClick}
         onhandleBackward={MoveBackward}
         onhandleForward={MoveForward}
+        preventMovingForward={currentIndex === 0}
+        preventMovingBack={
+          ((!fullTapeLink && currentIndex === tracks.length - 1) as boolean) ||
+          ((fullTapeLink &&
+            currentTapeId === (tapeId as number) * MAX_NUMBER) as boolean)
+        }
       />
       <TapeCount>
         <span> Total {tracks.length}/12</span>

@@ -4,7 +4,9 @@ import PauseIcon from '@icon/pause.svg';
 import Play from '@icon/play.svg';
 import Right from '@icon/right.svg';
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import { usePlayStore } from 'store';
 import theme from 'styles/theme';
+import calculateTime from 'utils/audio/calculateTime';
 
 import {
   Audio,
@@ -21,6 +23,8 @@ interface AudioPlayerProps {
   audioLink: string;
   isOwner?: boolean;
   disabled?: boolean;
+  preventMovingBack?: boolean;
+  preventMovingForward?: boolean;
   onhandleBackward?: () => void;
   onhandleForward?: () => void;
   onhandleDownload?: () => void;
@@ -35,6 +39,8 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
       onhandleBackward,
       onhandleForward,
       onhandleDownload,
+      preventMovingBack,
+      preventMovingForward,
       ...rest
     },
     ref,
@@ -42,10 +48,15 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
+    const [tempPause, setTempPause] = useState<boolean>(false);
+    const [currentAudioLink, setCurrentAudioLink] = useState<string>('');
 
     const audioPlayer = useRef<HTMLAudioElement>(null);
     const progressBar = useRef<HTMLInputElement>(null);
     const animationRef = useRef<number>();
+
+    const { setIsPlayAudio } = usePlayStore();
+
     useEffect(() => {
       const audio = audioPlayer.current;
 
@@ -63,27 +74,29 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     }, [audioPlayer]);
 
     useEffect(() => {
-      currentTime === 0 || duration === currentTime
-        ? setIsPlaying(false)
-        : setIsPlaying(true);
-    }, [currentTime, duration]);
+      setIsPlayAudio(isPlaying && !tempPause);
+    }, [isPlaying, setIsPlayAudio, tempPause]);
 
-    const calculateTime = (secs: number) => {
-      const minutes = Math.floor(secs / 60);
-      const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.round(secs % 60);
-      const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-      return `${returnedMinutes}:${returnedSeconds}`;
-    };
+    useEffect(() => {
+      setIsPlaying(currentTime !== 0 && currentTime !== duration && !tempPause);
+    }, [currentTime, duration, tempPause]);
+
+    useEffect(() => {
+      const link = audioLink;
+      setCurrentAudioLink(audioLink);
+      if (currentAudioLink !== link) resetAudio();
+    }, [currentAudioLink, audioLink]);
 
     const togglePlayPause = () => {
       const prevValue = isPlaying;
       setIsPlaying(!prevValue);
       if (!prevValue) {
         audioPlayer?.current?.play();
+        setTempPause(false);
         animationRef.current = requestAnimationFrame(() => whilePlaying());
       } else {
         audioPlayer?.current?.pause();
+        setTempPause(true);
         cancelAnimationFrame(animationRef.current as number);
       }
     };
@@ -117,6 +130,13 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
       setCurrentTime(currentTime);
     };
 
+    const resetAudio = () => {
+      progressBar?.current?.style.setProperty('--movewidth', `${0}%`);
+      setCurrentTime(0);
+      setIsPlayAudio(false);
+      setTempPause(false);
+    };
+
     return (
       <AudioCOntainer ref={ref} disabled={disabled as boolean}>
         <Audio ref={audioPlayer} src={audioLink} preload="metadata" />
@@ -129,6 +149,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 defaultValue="0"
                 ref={progressBar}
                 onChange={changeRange}
+                disabled={disabled}
               />
               <span>
                 {duration
@@ -143,8 +164,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 <AudioButton
                   variant="clear"
                   as="button"
-                  disabled={disabled}
-                  onClick={onhandleForward}
+                  disabled={disabled || preventMovingForward}
+                  onClick={() => {
+                    onhandleForward && onhandleForward();
+                    resetAudio();
+                  }}
                   aria-label="앞으로 이동하기"
                 >
                   <Left />
@@ -154,9 +178,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                   onClick={togglePlayPause}
                   as="button"
                   disabled={disabled}
-                  aria-label={isPlaying ? '일시정지하기' : '재생하기'}
+                  aria-label={
+                    isPlaying && !tempPause ? '일시정지하기' : '재생하기'
+                  }
                 >
-                  {isPlaying ? (
+                  {isPlaying && !tempPause ? (
                     <PauseIcon width="24" height="24" />
                   ) : (
                     <Play width="24" height="24" />
@@ -165,8 +191,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 <AudioButton
                   variant="clear"
                   as="button"
-                  disabled={disabled}
-                  onClick={onhandleBackward}
+                  disabled={disabled || preventMovingBack}
+                  onClick={() => {
+                    onhandleBackward && onhandleBackward();
+                    resetAudio();
+                  }}
                   aria-label="뒤로 이동하기"
                 >
                   <Right fill={theme.colors.gray_300} />
@@ -192,9 +221,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                   variant="clear"
                   onClick={togglePlayPause}
                   as="button"
-                  aria-label={isPlaying ? '일시정지하기' : '재생하기'}
+                  aria-label={
+                    isPlaying && !tempPause ? '일시정지하기' : '재생하기'
+                  }
                 >
-                  {isPlaying ? (
+                  {isPlaying && !tempPause ? (
                     <PauseIcon width="20" height="20" />
                   ) : (
                     <Play width="20" height="20" />

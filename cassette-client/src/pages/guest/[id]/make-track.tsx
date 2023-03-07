@@ -20,7 +20,7 @@ import {
 import theme from 'styles/theme';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
-import audioInstance from 'utils/audio/audio';
+import audioInstance from 'utils/audio/convert';
 
 const MakeTrack = () => {
   const route = useRouter();

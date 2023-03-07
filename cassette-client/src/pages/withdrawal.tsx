@@ -101,9 +101,9 @@ const Withdrawal = () => {
             mainInstance
               .deleteUser(dropType as WithdrawalType, opinion)
               .then(() => {
+                window.localStorage.removeItem('persist');
                 removeAuthToken('accessToken'), removeAuthToken('refreshToken');
               });
-            window.localStorage.removeItem('persist');
 
             router.push('/');
           }}

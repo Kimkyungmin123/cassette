@@ -2,6 +2,7 @@ import { Color, WithdrawalType } from 'types';
 
 export interface ColorStore {
   tapeColor: Color | '';
+
   setTapeColor: (tapeColor: Color) => void;
 }
 
@@ -9,6 +10,7 @@ export interface UserStore {
   userNickname: string;
   tapename: string;
   date: string;
+
   setUserData: (userNickname: string, tapename: string) => void;
   setDate: (date: string) => void;
 }
@@ -16,11 +18,13 @@ export interface UserStore {
 export interface ResponseUserStore {
   userURL: string;
   tapeId?: number;
+
   setResponsUser: (useURL: string, tapeId?: number) => void;
 }
 
 export interface TokenStore {
   refreshToken: string;
+
   setToken: (refreshToken: string) => void;
 }
 
@@ -29,4 +33,10 @@ export interface DropdownStore {
   dropType: WithdrawalType | null;
 
   setDropData: (dropContent?: string, dropType?: WithdrawalType) => void;
+}
+
+export interface PlayStore {
+  isPlayAudio: boolean;
+
+  setIsPlayAudio: (isPlayAudio: boolean) => void;
 }

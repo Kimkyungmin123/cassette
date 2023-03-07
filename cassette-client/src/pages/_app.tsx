@@ -1,6 +1,10 @@
 import { Global, ThemeProvider } from '@emotion/react';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import Layout from 'components/layout';
-import ReactQueryWrapper from 'lib/reactQueryWrapper';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -16,6 +20,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const auth = getAuthToken('accessToken');
   const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {
     if (auth && router.pathname === '/') {
@@ -110,22 +115,22 @@ const App = ({ Component, pageProps }: AppProps) => {
           rel="apple-touch-startup-image"
         />
       </Head>
-      {/* <ReactQueryWrapper> */}
-      <Suspense fallback={<Custom404 />}>
-        <>
-          {hydrated && (
-            <ThemeProvider theme={theme}>
-              <Global styles={global} />
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Suspense fallback={<Custom404 />}>
+            {hydrated && (
+              <ThemeProvider theme={theme}>
+                <Global styles={global} />
 
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-              <div id="modal" />
-            </ThemeProvider>
-          )}
-        </>
-      </Suspense>
-      {/* </ReactQueryWrapper> */}
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+                <div id="modal" />
+              </ThemeProvider>
+            )}
+          </Suspense>
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 };

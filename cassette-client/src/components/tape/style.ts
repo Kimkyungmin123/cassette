@@ -1,7 +1,9 @@
-import { keyframes } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ButtonLayout } from 'components/button/style';
 import theme from 'styles/theme';
+
+import { PathProps } from './tape';
 
 export const rotateAnimation = keyframes`
   from {
@@ -104,7 +106,12 @@ export const AlertBox = styled.div<{ isRecording: boolean }>`
   }
 `;
 
-export const RotatingPath = styled.path`
-  transform-origin: center center;
-  animation: ${rotateAnimation} 2s linear infinite;
+export const RotatingPath = styled.path<PathProps>`
+  transform-origin: ${({ x, y }) => `${x}%  ${y}%`};
+
+  ${({ isPlaying }) =>
+    isPlaying &&
+    css`
+      animation: ${rotateAnimation} 2s linear infinite;
+    `};
 `;

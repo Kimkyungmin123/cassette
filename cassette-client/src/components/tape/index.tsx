@@ -3,6 +3,7 @@ import AudioPlayer from 'components/audio';
 import useAudio from 'hooks/useAudio';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
+import { usePlayStore } from 'store';
 
 import {
   AlertBox,
@@ -45,6 +46,7 @@ const Tape = ({
   const recordRef = useRef<null | HTMLDivElement>(null);
   const [isRecorded, setIsRecorded] = useState(false);
   const [url, setUrl] = useState<string>('');
+  const { isPlayAudio } = usePlayStore();
 
   const {
     startRecording,
@@ -89,6 +91,7 @@ const Tape = ({
         height={height}
         color={color}
         isOwner={false}
+        isPlaying={isPlayAudio && isRecorded}
       />
       {/* TODO: 추후에 연결할 것 */}
       {/* {audioLink && (

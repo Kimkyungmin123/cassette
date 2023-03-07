@@ -14,7 +14,7 @@ export const CheckboxContainer = styled.div`
   text-align: left;
 `;
 
-export const CheckboxWrapper = styled.input`
+export const CheckboxWrapper = styled.input<{ isChecked: boolean }>`
   background-color: ${theme.colors.gray_600};
   appearance: none;
   width: 20px;
@@ -23,9 +23,21 @@ export const CheckboxWrapper = styled.input`
   cursor: pointer;
   margin-right: 8px;
 
-  &:checked {
-    content: url(assets/check.svg);
+  ${({ isChecked }) =>
+    isChecked &&
+    `
+    &:checked {
+    &::after {
+      content: url(../../../assets/check.svg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 23px;
+      scale:0.9;
+    }
   }
+  }
+  `}
 `;
 
 export const CheckBoxLabel = styled.label`
