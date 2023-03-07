@@ -74,31 +74,11 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
     }, [audioPlayer]);
 
     useEffect(() => {
-      const progressCircle = progressBar.current;
-      const handlePresse = () => {
-        setIsPlaying(false);
-        setIsPlayAudio(false);
-        setTempPause(true);
-      };
-      if (tempPause) {
-        progressCircle?.addEventListener('mousedown', handlePresse);
-        progressCircle?.addEventListener('mouseup', handlePresse);
-
-        progressCircle?.addEventListener('touchstart', handlePresse);
-        progressCircle?.addEventListener('touchend', handlePresse);
-        progressCircle?.addEventListener('touchmove', handlePresse);
-        progressCircle?.addEventListener('touchcancel', handlePresse);
+      if (!tempPause && currentTime !== 0 && currentTime !== duration) {
+        setIsPlaying(true);
+        setIsPlayAudio(true);
       }
-      return () => {
-        progressCircle?.removeEventListener('mousedown', handlePresse);
-        progressCircle?.removeEventListener('mouseup', handlePresse);
-
-        progressCircle?.removeEventListener('touchstart', handlePresse);
-        progressCircle?.removeEventListener('touchend', handlePresse);
-        progressCircle?.removeEventListener('touchmove', handlePresse);
-        progressCircle?.removeEventListener('touchcancel', handlePresse);
-      };
-    }, [tempPause, setIsPlayAudio]);
+    }, [currentTime, duration, setIsPlayAudio, tempPause]);
 
     useEffect(() => {
       (currentTime === 0 || duration === currentTime) && setIsPlaying(false);
