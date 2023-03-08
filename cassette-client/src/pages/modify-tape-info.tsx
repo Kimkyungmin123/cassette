@@ -3,6 +3,7 @@ import MenuLayout from 'components/menu';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import subInstance from 'utils/api/sub';
@@ -27,16 +28,23 @@ const ModifyTapeInfo = () => {
   const [userName, setUserName] = useState<string>('');
   const [userTapeName, setUserTapeName] = useState<string>('');
 
+  const route = useRouter();
+
   useEffect(() => {
-    subInstance.getUserTape().then((data) => {
-      setUserName(data?.result?.slice(-1)[0]['name']);
-      setUserTapeName(data?.result?.slice(-1)[0]['title']);
-      setTapeColor(data?.result?.slice(-1)[0]['colorCode']);
-      setResponsUser(
-        data?.result?.slice(-1)[0]['tapeLink'],
-        data?.result?.slice(-1)[0]['id'],
-      );
-    });
+    subInstance
+      .getUserTape()
+      .then((data) => {
+        setUserName(data?.result?.slice(-1)[0]['name']);
+        setUserTapeName(data?.result?.slice(-1)[0]['title']);
+        setTapeColor(data?.result?.slice(-1)[0]['colorCode']);
+        setResponsUser(
+          data?.result?.slice(-1)[0]['tapeLink'],
+          data?.result?.slice(-1)[0]['id'],
+        );
+      })
+      .catch((e: any) => {
+        () => route.push('/');
+      });
     setNickname(userName);
     setTitle(userTapeName);
   }, [setResponsUser, setTapeColor, userName, userTapeName]);
