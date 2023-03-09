@@ -7,11 +7,13 @@ import instance from './core';
 const fetcher = (url: string) =>
   instance.get(url).then((response) => response.data);
 
-const KakaoSocialLogin = (code: string) => {
+const kakaoSocialLogin = (code: string) => {
   return instance<Login, Login>(`/callback`, {
     params: { code: `${code}` },
   });
 };
+
+const logout = () => instance({ url: 'api/v1/member/logout' });
 
 const getUserInfo = () => instance({ url: `/api/v1/member` });
 
@@ -38,7 +40,8 @@ const getNewToken = () =>
 
 const mainInstance = {
   fetcher,
-  KakaoSocialLogin,
+  kakaoSocialLogin,
+  logout,
   getUserInfo,
   deleteUser,
   getNewToken,
