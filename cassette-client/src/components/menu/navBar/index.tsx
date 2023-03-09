@@ -8,6 +8,7 @@ import Withdrawal from '@icon/withdrawal.svg';
 import { ButtonLayout } from 'components/button/style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import mainInstance from 'utils/api/main';
 import { removeAuthToken } from 'utils/storage/authCookie';
 
 import {
@@ -84,10 +85,11 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
         <LogoutLi
           css={{ cursor: 'pointer' }}
           onClick={() => {
-            removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
-            window.localStorage.removeItem('persist');
-            route.push('/');
+            mainInstance.logout().then(() => {
+              removeAuthToken('accessToken');
+              window.localStorage.removeItem('persist');
+              route.push('/');
+            });
           }}
         >
           <Logout />
