@@ -2,7 +2,8 @@ import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useUserStore } from 'store';
 import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
 
@@ -14,6 +15,11 @@ const CreateTape = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
   const { setUserData, date } = useUserStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    date ? router.push('/modify-tape-info') : null;
+  }, [date]);
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);

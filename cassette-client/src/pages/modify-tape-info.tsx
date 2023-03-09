@@ -28,7 +28,7 @@ const ModifyTapeInfo = () => {
   const [userName, setUserName] = useState<string>('');
   const [userTapeName, setUserTapeName] = useState<string>('');
 
-  const route = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     subInstance
@@ -42,12 +42,15 @@ const ModifyTapeInfo = () => {
           data?.result?.slice(-1)[0]['id'],
         );
       })
-      .catch((e: any) => {
-        () => route.push('/');
+      .then(() => {
+        !userNickname ? router.push('/create-tape') : null;
+      })
+      .catch(() => {
+        router.push('/create-tape');
       });
     setNickname(userName);
     setTitle(userTapeName);
-  }, [setResponsUser, setTapeColor, userName, userTapeName]);
+  }, [setResponsUser, setTapeColor, userName, userTapeName, userNickname]);
 
   const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value);
