@@ -9,6 +9,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Suspense, useEffect, useState } from 'react';
+import { useUserStore } from 'store';
 import { global } from 'styles/globals';
 import theme from 'styles/theme';
 import { getAuthToken } from 'utils/storage/authCookie';
@@ -21,12 +22,15 @@ const App = ({ Component, pageProps }: AppProps) => {
   const auth = getAuthToken('accessToken');
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
+  const { date } = useUserStore();
 
   useEffect(() => {
     if (auth && router.pathname === '/') {
-      router.push('/create-tape-completed');
+      date
+        ? router.push('/create-tape-completed')
+        : router.push('/create-tape');
     }
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     setHydrated(true);
@@ -117,18 +121,18 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Suspense fallback={<Custom404 />}>
-            {hydrated && (
-              <ThemeProvider theme={theme}>
-                <Global styles={global} />
+          {/* <Suspense fallback={<Custom404 />}> */}
+          {hydrated && (
+            <ThemeProvider theme={theme}>
+              <Global styles={global} />
 
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-                <div id="modal" />
-              </ThemeProvider>
-            )}
-          </Suspense>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+              <div id="modal" />
+            </ThemeProvider>
+          )}
+          {/* </Suspense> */}
         </Hydrate>
       </QueryClientProvider>
     </>

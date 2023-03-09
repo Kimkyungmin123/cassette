@@ -44,7 +44,7 @@ export const useResponsUserStore = create<ResponseUserStore>()(
   persist(
     (set) => ({
       userURL: '',
-      tapeId: 0,
+      tapeId: -1,
 
       setResponsUser: (userURL, tapeId) => {
         set(() => ({ userURL, tapeId }));

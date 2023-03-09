@@ -10,6 +10,7 @@ import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {
   useColorStore,
@@ -70,8 +71,13 @@ const CreateTapeCompleted = () => {
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${userURL}/guest-entry`;
   const MAX_NUMBER = 99999999;
+  const router = useRouter();
 
-  const { data: tapeData } = useQuery(['tapeData'], getUserTape);
+  const { data: tapeData } = useQuery(['tapeData'], getUserTape, {
+    onError: () => {
+      router.push('create-tape');
+    },
+  });
 
   useEffect(() => {
     if (tapeData) {

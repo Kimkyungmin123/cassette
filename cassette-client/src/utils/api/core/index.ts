@@ -57,7 +57,7 @@ instance.interceptors.response.use(
 
       if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
         removeAuthToken('accessToken');
-        removeAuthToken('refreshToken');
+        window.localStorage.removeItem('persist');
         window.location.href = '/';
       }
 
@@ -79,7 +79,7 @@ instance.interceptors.response.use(
           })
           .catch((e: any) => {
             removeAuthToken('accessToken');
-            removeAuthToken('refreshToken');
+            window.localStorage.removeItem('persist');
             window.location.href = '/';
           });
       }
