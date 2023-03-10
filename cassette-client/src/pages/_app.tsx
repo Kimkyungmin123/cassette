@@ -9,9 +9,9 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Suspense, useEffect, useState } from 'react';
-import { useUserStore } from 'store';
 import { global } from 'styles/globals';
 import theme from 'styles/theme';
+import mainInstance from 'utils/api/main';
 import { getAuthToken } from 'utils/storage/authCookie';
 
 import Custom404 from './404';
@@ -22,15 +22,16 @@ const App = ({ Component, pageProps }: AppProps) => {
   const auth = getAuthToken('accessToken');
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
-  const { date } = useUserStore();
 
   useEffect(() => {
     if (auth && router.pathname === '/') {
-      date
-        ? router.push('/create-tape-completed')
-        : router.push('/create-tape');
+      mainInstance.getUserInfo().then((data) => {
+        data?.result.tapes.length === 0
+          ? router.push('/create-tape')
+          : router.push('/create-tape-completed');
+      });
     }
-  }, [date]);
+  }, []);
 
   useEffect(() => {
     setHydrated(true);
@@ -121,18 +122,18 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          {/* <Suspense fallback={<Custom404 />}> */}
-          {hydrated && (
-            <ThemeProvider theme={theme}>
-              <Global styles={global} />
+          <Suspense fallback={<Custom404 />}>
+            {hydrated && (
+              <ThemeProvider theme={theme}>
+                <Global styles={global} />
 
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-              <div id="modal" />
-            </ThemeProvider>
-          )}
-          {/* </Suspense> */}
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+                <div id="modal" />
+              </ThemeProvider>
+            )}
+          </Suspense>
         </Hydrate>
       </QueryClientProvider>
     </>

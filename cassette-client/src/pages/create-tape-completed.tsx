@@ -75,7 +75,7 @@ const CreateTapeCompleted = () => {
 
   const { data: tapeData } = useQuery(['tapeData'], getUserTape, {
     onError: () => {
-      router.push('create-tape');
+      router.push('/create-tape');
     },
   });
 

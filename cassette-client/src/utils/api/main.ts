@@ -15,7 +15,7 @@ const kakaoSocialLogin = (code: string) => {
 
 const logout = () => instance({ url: 'api/v1/member/logout' });
 
-const getUserInfo = () => instance({ url: `/api/v1/member` });
+const getUserInfo = () => instance<Login, Login>({ url: `/api/v1/member` });
 
 const deleteUser = (
   withdrawalType: WithdrawalType,
