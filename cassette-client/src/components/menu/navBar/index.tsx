@@ -87,6 +87,7 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
           onClick={() => {
             mainInstance.logout().then(() => {
               removeAuthToken('accessToken');
+              window.localStorage.removeItem('persist');
               route.push('/');
             });
           }}
