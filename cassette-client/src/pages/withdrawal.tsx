@@ -103,9 +103,8 @@ const Withdrawal = () => {
               .then(() => {
                 window.localStorage.removeItem('persist');
                 removeAuthToken('accessToken');
+                router.push('/');
               });
-
-            router.push('/');
           }}
         >
           <div>탈퇴하기</div>

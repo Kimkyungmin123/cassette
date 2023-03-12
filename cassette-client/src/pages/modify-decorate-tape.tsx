@@ -3,7 +3,7 @@ import ColorPlate from 'components/colorPlate';
 import MenuLayout from 'components/menu';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
@@ -14,6 +14,7 @@ const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename, date } = useUserStore();
   const { tapeId } = useResponsUserStore();
+  const router = useRouter();
 
   const submit = () => {
     subInstance
@@ -25,6 +26,7 @@ const ModifyDecorateTape = () => {
       )
       .then((data) => {
         setTapeColor(data.result.colorCode);
+        router.push('/create-tape-completed');
       });
   };
 
@@ -48,11 +50,10 @@ const ModifyDecorateTape = () => {
                 <ColorPlate />
               </div>
             </Middie>
-            <Link href="create-tape-completed">
-              <Button variant="main" onClick={() => submit()}>
-                <span>꾸미기 완료 </span>
-              </Button>
-            </Link>
+
+            <Button variant="main" onClick={() => submit()}>
+              <span>꾸미기 완료 </span>
+            </Button>
           </DecoZone>
         </DecoZone>
       </DecoContainer>
