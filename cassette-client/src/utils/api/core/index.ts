@@ -58,6 +58,7 @@ instance.interceptors.response.use(
       if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
         removeAuthToken('accessToken');
         window.localStorage.removeItem('persist');
+        alert('탈퇴한 사용자입니다.');
         window.location.href = '/';
       }
 

@@ -1,6 +1,6 @@
 import Completed from '@icon/completed.svg';
 import Copy from '@icon/copy.svg';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
 import MenuLayout from 'components/menu';
@@ -38,20 +38,8 @@ import subInstance from 'utils/api/sub';
 
 const getUserTape = async () => {
   const data = await subInstance.getUserTape();
-  return data?.result[0];
+  return data;
 };
-
-// export async function getServerSideProps() {
-//   const queryClient = new QueryClient();
-
-//   await queryClient.prefetchQuery(['tapeData'], getUserTape);
-
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
 
 const CreateTapeCompleted = () => {
   const { setResponsUser, userURL, tapeId } = useResponsUserStore();
@@ -73,22 +61,23 @@ const CreateTapeCompleted = () => {
   const MAX_NUMBER = 99999999;
   const router = useRouter();
 
-  const { data: tapeData } = useQuery(['tapeData'], getUserTape, {
-    onError: () => {
-      router.push('/create-tape');
-    },
-  });
+  const { data: tapeData, isLoading } = useQuery(['tapeData'], getUserTape);
 
   useEffect(() => {
-    if (tapeData) {
-      setUserData(tapeData['name'], tapeData['title']);
-      setResponsUser(tapeData['tapeLink'], tapeData['id']);
-      setTapeColor(tapeData['colorCode']);
-      setTracks(tapeData.tracks);
-      setFullTapeLink(tapeData['audioLink']);
-      setDate(tapeData['createAt'].slice(2, 10).replaceAll('-', '.'));
+    const tape = tapeData?.result[0];
+    if (isLoading) return;
+
+    if (tape) {
+      setUserData(tape['name'], tape['title']);
+      setResponsUser(tape['tapeLink'], tape['id']);
+      setTapeColor(tape['colorCode']);
+      setTracks(tape.tracks);
+      setFullTapeLink(tape['audioLink']);
+      setDate(tape['createAt'].slice(2, 10).replaceAll('-', '.'));
+    } else {
+      router.push('/create-tape');
     }
-  }, [setResponsUser, setUserData, setTapeColor, setDate, tapeData]);
+  }, [setResponsUser, setUserData, setTapeColor, setDate, tapeData, isLoading]);
 
   useEffect(() => {
     if (currentTapeId && currentTapeId !== (tapeId as number) * MAX_NUMBER)

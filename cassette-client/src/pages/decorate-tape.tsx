@@ -23,6 +23,10 @@ const DecorateTape = () => {
         setResponsUser(data.result.tapeLink);
         setTapeColor(data.result.colorCode);
         router.push('/create-tape-completed');
+      })
+      .catch(() => {
+        alert(`테이프 생성 실패`);
+        router.push('/');
       });
   };
 

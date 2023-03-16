@@ -7,6 +7,7 @@ export const global = css`
       format('woff');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
@@ -15,6 +16,7 @@ export const global = css`
       format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 
   html {
