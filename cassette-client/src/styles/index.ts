@@ -12,7 +12,7 @@ export const Container = styled.div`
   padding: 0 24px 92px 24px;
 
   h1,
-  h3,
+  h2,
   p {
     margin: 0;
     color: ${theme.colors.white};
@@ -27,7 +27,7 @@ export const Container = styled.div`
     padding: 113px 0 10px 0;
   }
 
-  h3 {
+  h2 {
     font-size: ${theme.fontSize.lg};
   }
 

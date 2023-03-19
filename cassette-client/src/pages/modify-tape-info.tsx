@@ -1,7 +1,7 @@
 import Input from 'components/input';
-import MenuLayout from 'components/menu';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -19,6 +19,9 @@ const MAX_LENGTH = {
   NICKNAME: 5,
   TITLE: 16,
 };
+
+const MenuLayout = dynamic(() => import('components/menu'));
+
 const ModifyTapeInfo = () => {
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');

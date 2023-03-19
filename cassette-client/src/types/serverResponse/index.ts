@@ -34,7 +34,7 @@ export interface Tape {
   name: string;
   tapeLink: string;
   fileName: null;
-  audioLink: null;
+  audioLink: null | string;
   createAt: string;
 }
 
@@ -43,7 +43,7 @@ interface LoginTape extends Omit<Tape, 'fileName' | 'title'> {
   colorCode: Color;
   name: string;
   tapeLink: string;
-  audioLink: null;
+  audioLink: null | string;
 }
 
 export interface Cassette extends Tape {

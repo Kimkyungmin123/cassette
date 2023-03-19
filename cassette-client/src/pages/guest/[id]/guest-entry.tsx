@@ -1,15 +1,16 @@
 'use client';
-import Cry from '@icon/cry.svg';
 import Button from 'components/button';
 import Modal from 'components/modal';
 import ModalPortal from 'components/modal/portal';
 import TapeSVG from 'components/tape/tape';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useGuestResponsStore } from 'store';
 import { Container, Zone } from 'styles';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
+
+const Cry = dynamic(() => import('@icon/cry.svg'));
 
 const GuestEntry = () => {
   const router = useRouter();
@@ -20,7 +21,6 @@ const GuestEntry = () => {
   const [ownerTapeColor, setOwnerTapeColor] =
     useState<Color>('cassette_orange');
   const [hasFullTape, setHasfullTape] = useState<boolean>(false);
-  const { setResponsUser } = useGuestResponsStore();
   const [date, setDate] = useState<string>('');
 
   const GUEST_CREATE_URL = `/guest/${id}/create-tape-guest`;
@@ -42,7 +42,7 @@ const GuestEntry = () => {
           route.push('/404');
         });
     }
-  }, [id, ownerName, ownerTapeTitle, setResponsUser]);
+  }, [id, ownerName, ownerTapeTitle]);
 
   const closeModal = () => setModalOpen(false);
   return (
@@ -64,7 +64,7 @@ const GuestEntry = () => {
           <Zone css={{ gap: '32px' }}>
             <div>
               <h1>{ownerName}&apos;s Tape</h1>
-              <h3>{ownerTapeTitle}</h3>
+              <h2>{ownerTapeTitle}</h2>
             </div>
 
             <TapeSVG

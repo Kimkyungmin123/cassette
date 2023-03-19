@@ -1,6 +1,7 @@
-import { Icon } from '@iconify/react';
-import AudioPlayer from 'components/audio';
+import RecordIcon from '@icon/record.svg';
+import StopIcon from '@icon/stop.svg';
 import useAudio from 'hooks/useAudio';
+import dynamic from 'next/dynamic';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
 import { usePlayStore } from 'store';
@@ -25,6 +26,8 @@ interface TapeProps extends TapeSvgProps {
   setFirstEntry?: Dispatch<SetStateAction<boolean>>;
   setIsRedording?: Dispatch<SetStateAction<boolean>>;
 }
+
+const AudioPlayer = dynamic(() => import('components/audio'));
 
 const Tape = ({
   hasAudio,
@@ -115,11 +118,7 @@ const Tape = ({
                   as="button"
                   aria-label="녹음하기"
                 >
-                  <Icon
-                    icon="uim:record-audio"
-                    color={'#CD0E00'}
-                    width="35px"
-                  />
+                  <RecordIcon />
                 </ClearButton>
               </>
             ) : null}
@@ -144,11 +143,7 @@ const Tape = ({
                   as="button"
                   aria-label="녹음 중지하기"
                 >
-                  <Icon
-                    icon="material-symbols:stop-circle-rounded"
-                    color="white"
-                    width="35px"
-                  />
+                  <StopIcon />
                 </ClearButton>
               </>
             ) : null}
@@ -175,11 +170,7 @@ const Tape = ({
                   as="button"
                   aria-label="재녹음하기"
                 >
-                  <Icon
-                    icon="uim:record-audio"
-                    color={'#CD0E00'}
-                    width="35px"
-                  />
+                  <RecordIcon />
                 </ClearButton>
               </RecordButtonZone>
             </>

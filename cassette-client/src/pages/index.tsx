@@ -11,7 +11,7 @@ export default function Home() {
       <Zone css={{ gridGap: '32px' }}>
         <div>
           <h1>2023 Vioce Tape</h1>
-          <h3>테이프에 담은 내 마음</h3>
+          <h2>테이프에 담은 내 마음</h2>
         </div>
         <TapeSVG
           title="2023 한정판 테이프"

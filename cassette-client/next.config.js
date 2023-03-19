@@ -1,11 +1,26 @@
 /** @type {import('next').NextConfig} */
 const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+  compress: true,
+  webpack(config) {
+    const prod = process.env.NODE_ENV === 'production';
+    const plugins = [...config.plugins];
+    return {
+      ...config,
+      mode: prod ? 'producton' : 'development',
+      devtool: prod ? 'hidden-source-map' : 'eval',
+      plugins,
+    };
+  },
+});
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   presets: ['next/babel'],
+  productionBrowserSourceMaps: true,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -17,6 +32,6 @@ const nextConfig = {
 };
 
 module.exports = withPlugins(
-  [[withPWA, { pwa: { dest: 'public' } }]],
+  [[withBundleAnalyzer], [withPWA, { pwa: { dest: 'public' } }]],
   nextConfig,
 );
