@@ -1,5 +1,3 @@
-import CheckeRectangle from '@icon/checkeRectangle.svg';
-import Cry from '@icon/cry.svg';
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
 import Button from 'components/button';
@@ -7,6 +5,7 @@ import Modal from 'components/modal';
 import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useGuestColorStore, useGuestInfoStore } from 'store';
@@ -21,6 +20,9 @@ import theme from 'styles/theme';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
 import audioInstance from 'utils/audio/convert';
+
+const Cry = dynamic(() => import('@icon/cry.svg'));
+const CheckeRectangle = dynamic(() => import('@icon/checkeRectangle.svg'));
 
 const MakeTrack = () => {
   const route = useRouter();

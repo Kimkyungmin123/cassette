@@ -1,14 +1,16 @@
 import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
-import MenuLayout from 'components/menu';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import theme from 'styles/theme';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
+
+const MenuLayout = dynamic(() => import('components/menu'));
 
 const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();

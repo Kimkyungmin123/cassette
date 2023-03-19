@@ -94,18 +94,6 @@ export const useGuestInfoStore = create<UserStore>()(
     { name: 'persist' },
   ),
 );
-export const useGuestResponsStore = create<ResponseUserStore>()(
-  persist(
-    (set) => ({
-      userURL: '',
-
-      setResponsUser: (userURL) => {
-        set(() => ({ userURL }));
-      },
-    }),
-    { name: 'persist' },
-  ),
-);
 
 export const dropdownStore = create<DropdownStore>()(
   devtools((set) => ({
