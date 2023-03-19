@@ -60,13 +60,13 @@ const App = ({ Component, pageProps }: AppProps) => {
           <link rel="manifest" href="/manifest.json" />
           <link rel="preload" as="font" href="https://cdn.jsdelivr.net" />
           <link
-            href="favicons/favicon-16x16.png"
+            href="../../favicons/favicon-16x16.png"
             rel="icon"
             type="image/png"
             sizes="16x16"
           />
           <link
-            href="favicons/favicon-32x32.png"
+            href="../../favicons/favicon-32x32.png"
             rel="icon"
             type="image/png"
             sizes="32x32"
