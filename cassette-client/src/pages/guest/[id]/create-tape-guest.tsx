@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useGuestInfoStore } from 'store';
 import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
+import date from 'utils/format/date';
 
 const MAX_LENGTH = {
   NICKNAME: 5,
@@ -31,10 +32,8 @@ const CreateTapeGuest = () => {
 
   useEffect(() => {
     const createTrackDate = new Date();
-    setTrackDate(
-      createTrackDate.toLocaleDateString().slice(2).split(' ').join(''),
-    );
-    setDate(createTrackDate.toLocaleDateString().slice(2).split(' ').join(''));
+    setTrackDate(date.formattedCreateDate(createTrackDate));
+    setDate(date.formattedCreateDate(createTrackDate));
   }, [setDate]);
 
   return (

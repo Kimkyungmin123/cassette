@@ -37,13 +37,11 @@ const ModifyTapeInfo = () => {
     subInstance
       .getUserTape()
       .then((data) => {
-        setUserName(data?.result?.slice(-1)[0]['name']);
-        setUserTapeName(data?.result?.slice(-1)[0]['title']);
-        setTapeColor(data?.result?.slice(-1)[0]['colorCode']);
-        setResponsUser(
-          data?.result?.slice(-1)[0]['tapeLink'],
-          data?.result?.slice(-1)[0]['id'],
-        );
+        const userData = data?.result?.slice(-1)[0];
+        setUserName(userData['name']);
+        setUserTapeName(userData['title']);
+        setTapeColor(userData['colorCode']);
+        setResponsUser(userData['tapeLink'], userData['id']);
       })
       .then(() => {
         !userNickname ? router.push('/create-tape') : null;

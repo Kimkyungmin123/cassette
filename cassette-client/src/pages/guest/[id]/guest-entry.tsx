@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Container, Zone } from 'styles';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
+import date from 'utils/format/date';
 
 const Cry = dynamic(() => import('@icon/cry.svg'));
 
@@ -21,7 +22,7 @@ const GuestEntry = () => {
   const [ownerTapeColor, setOwnerTapeColor] =
     useState<Color>('cassette_orange');
   const [hasFullTape, setHasfullTape] = useState<boolean>(false);
-  const [date, setDate] = useState<string>('');
+  const [createDate, setcreateDate] = useState<string>('');
 
   const GUEST_CREATE_URL = `/guest/${id}/create-tape-guest`;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
@@ -36,7 +37,8 @@ const GuestEntry = () => {
             setOwnerTapeTitle(data?.result?.title),
             setOwnerTapeColor(data?.result?.colorCode),
             setHasfullTape(data?.result?.hasAudioLink),
-            setDate(data?.timestamp.slice(2, 10).replaceAll('-', '.'));
+            //TODO: 추후 서버 res data createAt 필드 추가되면 변경
+            setcreateDate(date.formattedDate(data?.timestamp));
         })
         .catch((e) => {
           route.push('/404');
@@ -69,7 +71,7 @@ const GuestEntry = () => {
 
             <TapeSVG
               title={ownerTapeTitle}
-              date={date}
+              date={createDate}
               sec="144"
               color={ownerTapeColor}
             />

@@ -58,7 +58,17 @@ const App = ({ Component, pageProps }: AppProps) => {
 목소리로 담아보내요. "
           />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="preload" as="font" href="https://cdn.jsdelivr.net" />
+          <link
+            rel="preload"
+            as="font"
+            href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
+          />
+
+          <link
+            rel="preload"
+            as="font"
+            href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2"
+          />
           <link
             href="../../favicons/favicon-16x16.png"
             rel="icon"
