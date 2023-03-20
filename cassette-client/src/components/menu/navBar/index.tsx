@@ -34,6 +34,7 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
       <ButtonLayout
         variant="clear"
         as="button"
+        aria-label="메뉴 닫기"
         onClick={isOpen}
         css={{
           padding: '0px',

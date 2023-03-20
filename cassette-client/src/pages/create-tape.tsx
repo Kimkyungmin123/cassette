@@ -45,6 +45,7 @@ const CreateTape = () => {
           highlightWords={['닉네임']}
           placeholder="닉네임을 적어주세요."
           maxLength={MAX_LENGTH.NICKNAME}
+          aria-label="생성할 닉네임 입력칸"
         />
       </InputBox>
 
@@ -56,6 +57,7 @@ const CreateTape = () => {
           highlightWords={['테이프의 제목']}
           placeholder="테이프의 제목을 적어주세요."
           maxLength={MAX_LENGTH.TITLE}
+          aria-label="생성할 테이프 제목 입력칸"
         />
         <Info>
           친구들에게 어떤 얘기를 듣고싶나요?

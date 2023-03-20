@@ -1,6 +1,6 @@
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
-import Button from 'components/button';
+import { ButtonLayout } from 'components/button/style';
 import Modal from 'components/modal';
 import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
@@ -70,9 +70,14 @@ const MakeTrack = () => {
   return (
     <MakeTapeContainer>
       <BackButtonZone>
-        <Button variant="clear" onClick={() => route.back()}>
+        <ButtonLayout
+          as="button"
+          variant="clear"
+          aria-label="뒤로 가기"
+          onClick={() => route.back()}
+        >
           <Left fill={theme.colors.gray_700} />
-        </Button>
+        </ButtonLayout>
       </BackButtonZone>
       <ModalPortal closeModal={closeModal} isCreatedTrack={true}>
         {modalOpen && (

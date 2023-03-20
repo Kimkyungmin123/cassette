@@ -37,7 +37,7 @@ const DecorateTape = () => {
         <TapeSVG title={tapename} date={date} sec="144" />
         <DecoZone>
           <Middie>
-            <div>
+            <label>
               <p>
                 테이프{' '}
                 <span css={{ color: theme.colors[tapeColor as Color] }}>
@@ -46,7 +46,7 @@ const DecorateTape = () => {
                 를 골라주세요!
               </p>
               <ColorPlate />
-            </div>
+            </label>
           </Middie>
           <Button variant="main" onClick={() => submit()}>
             <span>꾸미기 완료</span>

@@ -150,6 +150,7 @@ const AudioPlayer = forwardRef<HTMLDivElement, AudioPlayerProps>(
                 ref={progressBar}
                 onChange={changeRange}
                 disabled={disabled}
+                aria-label="오디오 플레이어"
               />
               <span>
                 {duration

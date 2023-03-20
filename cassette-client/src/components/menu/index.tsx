@@ -1,5 +1,5 @@
 import User from '@icon/user.svg';
-import Button from 'components/button';
+import { ButtonLayout } from 'components/button/style';
 import { useState } from 'react';
 
 import NavBar from './navBar';
@@ -15,14 +15,16 @@ const MenuLayout = ({ name }: MenuLayoutProps) => {
   return (
     <>
       <IconContainer>
-        <Button
+        <ButtonLayout
           variant="clear"
+          as="button"
+          aria-label="메뉴 열기"
           onClick={() => {
             setOpenMenu('open');
           }}
         >
           <User />
-        </Button>
+        </ButtonLayout>
       </IconContainer>
 
       <MenuContainer>
