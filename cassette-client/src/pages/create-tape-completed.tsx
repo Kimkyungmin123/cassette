@@ -1,6 +1,6 @@
 import Completed from '@icon/completed.svg';
 import Copy from '@icon/copy.svg';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
 import Tape from 'components/tape';
@@ -29,6 +29,8 @@ import {
 import theme from 'styles/theme';
 import { TapeResponse, Track } from 'types/serverResponse';
 import subInstance from 'utils/api/sub';
+import downloadFile from 'utils/audio/download';
+import date from 'utils/format/date';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 
@@ -36,18 +38,6 @@ const getUserTape = async () => {
   const data = await subInstance.getUserTape();
   return data?.result[0];
 };
-
-export async function getServerSideProps() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(['tapeData'], getUserTape);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
 
 const CreateTapeCompleted = () => {
   const [isCopied, onCopy] = useCopy();
@@ -149,12 +139,7 @@ const CreateTapeCompleted = () => {
           ? (currentTrack?.result.audioLink as string)
           : (tapeData?.audioLink as string);
 
-      const downloadLink = document.createElement('a');
-      downloadLink.href = currentFile;
-      downloadLink.download = 'audio.wav';
-      downloadLink.target = '_blank';
-      downloadLink.rel = 'noopener noreferrer';
-      window.open(downloadLink.href);
+      downloadFile(currentFile);
     }
   };
 
@@ -182,10 +167,8 @@ const CreateTapeCompleted = () => {
               }
               date={
                 !isFullTape && currentTapeId
-                  ? currentTrack?.result.createAt
-                      .slice(2, 10)
-                      .replaceAll('-', '.')
-                  : tapeData.createAt.slice(2, 10).replaceAll('-', '.')
+                  ? date.formattedDate(currentTrack?.result.createAt as string)
+                  : date.formattedDate(tapeData.createAt)
               }
               color={
                 !isFullTape && currentTapeId
@@ -233,7 +216,7 @@ const CreateTapeCompleted = () => {
                       <Tape
                         width="88"
                         height="58"
-                        date={data.createAt.slice(2, 10).replaceAll('-', '.')}
+                        date={date.formattedDate(data.createAt)}
                         title={data.title}
                         color={data.colorCode}
                         audioLink={
