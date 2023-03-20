@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
+const prod = process.env.NODE_ENV === 'production';
 const withPlugins = require('next-compose-plugins');
-const withPWA = require('next-pwa');
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+});
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
   compress: true,
   webpack(config) {
-    const prod = process.env.NODE_ENV === 'production';
     const plugins = [...config.plugins];
     return {
       ...config,
@@ -16,7 +20,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   },
 });
 
-const nextConfig = {
+const nextConfig = withPWA({
   reactStrictMode: true,
   swcMinify: true,
   presets: ['next/babel'],
@@ -29,9 +33,6 @@ const nextConfig = {
     });
     return config;
   },
-};
+});
 
-module.exports = withPlugins(
-  [[withBundleAnalyzer], [withPWA, { pwa: { dest: 'public' } }]],
-  nextConfig,
-);
+module.exports = withPlugins([[nextConfig], [withBundleAnalyzer]]);

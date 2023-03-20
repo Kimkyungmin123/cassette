@@ -30,7 +30,7 @@ const DecorateTapeGuest = () => {
         <TapeSVG title={tapename} date={date} sec="144" isOwner={false} />
         <DecoZone>
           <Middie>
-            <div>
+            <label>
               <p>
                 테이프{' '}
                 <span css={{ color: theme.colors[guestColor as Color] }}>
@@ -39,7 +39,7 @@ const DecorateTapeGuest = () => {
                 를 골라주세요!
               </p>
               <ColorPlate isOwner={false} />
-            </div>
+            </label>
           </Middie>
           <Link href={GUEST_MAKE_TRACK_URL}>
             <Button variant="main">꾸미기 완료</Button>
