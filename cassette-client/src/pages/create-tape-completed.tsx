@@ -47,7 +47,7 @@ const CreateTapeCompleted = () => {
   const [currentTrack, setCurrentTrack] = useState<TapeResponse<Track>>();
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [modalOpen, setModalOpen] = useState<boolean>(true);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const { isPlayAudio, setIsPlayAudio } = usePlayStore();
   const { data: tapeData } = useQuery(['tapeData'], getUserTape);
@@ -73,6 +73,14 @@ const CreateTapeCompleted = () => {
     );
     setCurrentIndex(index);
   }, [setCurrentIndex]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!tapeData) setModalOpen(true);
+    }, 700);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const closeModal = () => setModalOpen(false);
 
