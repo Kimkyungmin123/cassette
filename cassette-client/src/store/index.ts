@@ -2,6 +2,7 @@ import {
   ColorStore,
   DropdownStore,
   PlayStore,
+  RecordStore,
   ResponseUserStore,
   TokenStore,
   UserStore,
@@ -112,6 +113,16 @@ export const usePlayStore = create<PlayStore>()(
 
     setIsPlayAudio: (isPlayAudio) => {
       set(() => ({ isPlayAudio }));
+    },
+  })),
+);
+
+export const useRecordStore = create<RecordStore>()(
+  devtools((set) => ({
+    isGlobalRecording: false,
+
+    setIsGlobalRecording: (isGlobalRecording) => {
+      set(() => ({ isGlobalRecording }));
     },
   })),
 );

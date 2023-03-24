@@ -8,7 +8,7 @@ import Title from 'components/title';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { useGuestColorStore, useGuestInfoStore } from 'store';
+import { useGuestColorStore, useGuestInfoStore, useRecordStore } from 'store';
 import { Box } from 'styles/create-tape';
 import {
   BackButtonZone,
@@ -31,6 +31,7 @@ const MakeTrack = () => {
   const [firstEntry, setFirstEntry] = useState<boolean>(true);
   const [isRedording, setIsRedording] = useState<boolean>(false);
   const [fullTape, setFullTape] = useState<boolean>(false);
+  const { isGlobalRecording } = useRecordStore();
   const { date, userNickname, tapename } = useGuestInfoStore();
   const { tapeColor } = useGuestColorStore();
   const router = useRouter();
@@ -119,7 +120,7 @@ const MakeTrack = () => {
         />
       </Box>
       <WarningZone firstEntry={firstEntry}>
-        {!firstEntry ? (
+        {!firstEntry && isGlobalRecording ? (
           <>
             <Siren />
             <p>

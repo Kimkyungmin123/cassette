@@ -3,6 +3,8 @@ import Copy from '@icon/copy.svg';
 import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
+import Modal from 'components/modal';
+import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import EmptyTape from 'components/tape/emptyTape';
 import TapeSVG from 'components/tape/tape';
@@ -10,7 +12,6 @@ import Title from 'components/title';
 import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { usePlayStore } from 'store';
 import {
@@ -46,15 +47,13 @@ const CreateTapeCompleted = () => {
   const [currentTrack, setCurrentTrack] = useState<TapeResponse<Track>>();
   const [isFullTape, setIsFullTape] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [modalOpen, setModalOpen] = useState<boolean>(true);
 
   const { isPlayAudio, setIsPlayAudio } = usePlayStore();
-  const { data: tapeData } = useQuery(['tapeData'], getUserTape, {
-    onError: () => router.push('/create-tape'),
-  });
+  const { data: tapeData } = useQuery(['tapeData'], getUserTape);
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${tapeData?.tapeLink}/guest-entry`;
   const MAX_NUMBER = 99999999;
-  const router = useRouter();
 
   useEffect(() => {
     if (
@@ -74,6 +73,8 @@ const CreateTapeCompleted = () => {
     );
     setCurrentIndex(index);
   }, [setCurrentIndex]);
+
+  const closeModal = () => setModalOpen(false);
 
   const handleCopyClipBoard = (text: string) => {
     onCopy(text);
@@ -143,6 +144,8 @@ const CreateTapeCompleted = () => {
     }
   };
 
+  const Cry = dynamic(() => import('@icon/cry.svg'));
+
   return (
     <>
       {tapeData ? (
@@ -153,7 +156,9 @@ const CreateTapeCompleted = () => {
           </Box>
           <CurrentName>
             {!isFullTape && currentTapeId ? (
-              <span>{currentTrack?.result.name}</span>
+              <div>
+                <span>{currentTrack?.result.name}</span>
+              </div>
             ) : (
               <div></div>
             )}
@@ -281,7 +286,21 @@ const CreateTapeCompleted = () => {
             ) : null}
           </BottomZone>
         </CompletedTapeContainer>
-      ) : null}
+      ) : (
+        <ModalPortal closeModal={closeModal} isCreatedTrack={true}>
+          {modalOpen && (
+            <Modal
+              icon={<Cry />}
+              title={<>테이프가 생성되지 않았어요!</>}
+              detail="테이프를 만들어야 사용할 수 있는 서비스예요."
+              btnText="내 테이프 만들기"
+              link={'/create-tape'}
+              onClickBtn={closeModal}
+              entryLink={'/create-tape'}
+            />
+          )}
+        </ModalPortal>
+      )}
     </>
   );
 };
