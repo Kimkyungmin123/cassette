@@ -75,85 +75,67 @@ const App = ({ Component, pageProps }: AppProps) => {
             href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2"
           />
           <link
-            href="../../favicons/favicon-16x16.png"
+            href="../../favicons/favicon-16x16.jpg"
             rel="icon"
-            type="image/png"
+            type="image/jpg"
             sizes="16x16"
           />
           <link
-            href="../../favicons/favicon-32x32.png"
+            href="../../favicons/favicon-32x32.jpg"
             rel="icon"
-            type="image/png"
+            type="image/jpg"
             sizes="32x32"
           />
-          <link rel="apple-touch-icon" href="favicons/apple-icon.png"></link>
+          <link rel="apple-touch-icon" href="favicons/apple-icon.jpg"></link>
           <meta name="msapplication-TileColor" content="#242729"></meta>
+
           <link
-            href="splashscreens/iphone5_splash.png"
-            media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-          />
-          <link
-            href="splashscreens/iphone6_splash.png"
+            href="splashscreens/iphone6_splash.jpg"
             media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphoneplus_splash.png"
+            href="splashscreens/iphoneplus_splash.jpg"
             media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonex_splash.png"
+            href="splashscreens/iphonex_splash.jpg"
             media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonexr_splash.png"
+            href="splashscreens/iphonexr_splash.jpg"
             media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonexsmax_splash.png"
+            href="splashscreens/iphonexsmax_splash.jpg"
             media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
-          <link
-            href="splashscreens/ipad_splash.png"
-            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-          />
-          <link
-            href="splashscreens/ipadpro1_splash.png"
-            media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-          />
+
           <link
             href="splashscreens/ipadpro3_splash.png"
             media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-          />
-          <link
-            href="splashscreens/ipadpro2_splash.png"
-            media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
         </Head>
       </html>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Suspense fallback={<Custom404 />}>
-            {hydrated && (
-              <ThemeProvider theme={theme}>
-                <Global styles={global} />
+          {/* <Suspense fallback={<Custom404 />}> */}
+          {hydrated && (
+            <ThemeProvider theme={theme}>
+              <Global styles={global} />
 
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-                <div id="modal" />
-              </ThemeProvider>
-            )}
-          </Suspense>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+              <div id="modal" />
+            </ThemeProvider>
+          )}
+          {/* </Suspense> */}
         </Hydrate>
       </QueryClientProvider>
     </>
