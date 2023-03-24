@@ -40,3 +40,9 @@ export interface PlayStore {
 
   setIsPlayAudio: (isPlayAudio: boolean) => void;
 }
+
+export interface RecordStore {
+  isGlobalRecording: boolean;
+
+  setIsGlobalRecording: (isGlobalRecording: boolean) => void;
+}

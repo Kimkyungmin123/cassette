@@ -106,6 +106,10 @@ export const AlertBox = styled.div<{ isRecording: boolean }>`
   }
 `;
 
+export const RecordingHeight = styled.div`
+  height: 146px;
+`;
+
 export const RotatingPath = styled.path<PathProps>`
   transform-origin: ${({ x, y }) => `${x}%  ${y}%`};
 

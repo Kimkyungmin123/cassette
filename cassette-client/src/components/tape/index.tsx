@@ -4,7 +4,7 @@ import useAudio from 'hooks/useAudio';
 import dynamic from 'next/dynamic';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
-import { usePlayStore } from 'store';
+import { usePlayStore, useRecordStore } from 'store';
 
 import {
   AlertBox,
@@ -12,6 +12,7 @@ import {
   ClearButton,
   RecordButtonZone,
   RecordingContainer,
+  RecordingHeight,
   Time,
   TypeStyle,
 } from './style';
@@ -50,6 +51,7 @@ const Tape = ({
   const [isRecorded, setIsRecorded] = useState(false);
   const [url, setUrl] = useState<string>('');
   const { isPlayAudio } = usePlayStore();
+  const { setIsGlobalRecording } = useRecordStore();
 
   const {
     startRecording,
@@ -83,6 +85,10 @@ const Tape = ({
       setIsRedording?.(false);
     }
   }, [recordingTime]);
+
+  useEffect(() => {
+    isRecording ? setIsGlobalRecording(true) : setIsGlobalRecording(false);
+  }, [isRecording]);
 
   return (
     <TypeStyle>
@@ -121,7 +127,9 @@ const Tape = ({
                   <RecordIcon />
                 </ClearButton>
               </>
-            ) : null}
+            ) : (
+              !isRecording && !isRecorded && <RecordingHeight></RecordingHeight>
+            )}
 
             {isRecording ? (
               <>
