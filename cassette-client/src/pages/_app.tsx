@@ -75,46 +75,46 @@ const App = ({ Component, pageProps }: AppProps) => {
             href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2"
           />
           <link
-            href="../../favicons/favicon-16x16.webp"
+            href="../../favicons/favicon-16x16.png"
             rel="icon"
-            type="image/webp"
+            type="image/png"
             sizes="16x16"
           />
           <link
-            href="../../favicons/favicon-32x32.webp"
+            href="../../favicons/favicon-32x32.png"
             rel="icon"
-            type="image/webp"
+            type="image/png"
             sizes="32x32"
           />
-          <link rel="apple-touch-icon" href="favicons/apple-icon.webp"></link>
+          <link rel="apple-touch-icon" href="favicons/apple-icon.png"></link>
           <meta name="msapplication-TileColor" content="#242729"></meta>
           <link
-            href="splashscreens/iphone5_splash.webp"
+            href="splashscreens/iphone5_splash.png"
             media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphone6_splash.webp"
+            href="splashscreens/iphone6_splash.png"
             media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphoneplus_splash.webp"
+            href="splashscreens/iphoneplus_splash.png"
             media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonex_splash.webp"
+            href="splashscreens/iphonex_splash.png"
             media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonexr_splash.webp"
+            href="splashscreens/iphonexr_splash.png"
             media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="splashscreens/iphonexsmax_splash.webp"
+            href="splashscreens/iphonexsmax_splash.png"
             media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
