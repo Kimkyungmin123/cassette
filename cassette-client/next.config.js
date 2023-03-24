@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const prod = process.env.NODE_ENV === 'production';
 const withPlugins = require('next-compose-plugins');
+const CompressionPlugin = require('compression-webpack-plugin');
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
@@ -9,8 +10,9 @@ const withPWA = require('next-pwa')({
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
   compress: true,
-  webpack(config) {
+  webpack: (config) => {
     const plugins = [...config.plugins];
+    prod && config.plugins.push(new CompressionPlugin());
     return {
       ...config,
       mode: prod ? 'producton' : 'development',
