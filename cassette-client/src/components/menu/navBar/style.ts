@@ -114,7 +114,7 @@ export const List = styled.ul`
 `;
 
 export const Bar = styled.div`
-  border: solid 2px ${theme.colors.black_800};
+  border: solid 1px ${theme.colors.black_800};
 `;
 
 export const Bottom = styled.div`
