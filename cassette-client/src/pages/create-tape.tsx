@@ -1,33 +1,28 @@
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import { MAX_LENGTH } from 'constants/maxTextLen';
+import useInput from 'hooks/useInput';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useUserStore } from 'store';
 import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
 
-const MAX_LENGTH = {
-  NICKNAME: 5,
-  TITLE: 16,
-};
 const CreateTape = () => {
-  const [nickname, setNickname] = useState('');
-  const [title, setTitle] = useState('');
   const { setUserData, date } = useUserStore();
+  const { value: nickname, handleChangeValue: handleChangeNickname } = useInput(
+    MAX_LENGTH.NICKNAME,
+  );
+
+  const { value: title, handleChangeValue: handleChangeTitle } = useInput(
+    MAX_LENGTH.TITLE,
+  );
   const router = useRouter();
 
   useEffect(() => {
     date ? router.push('/modify-tape-info') : null;
   }, [date]);
-
-  const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setNickname(target.value);
-  };
-
-  const handleChangeTitle = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setTitle(target.value);
-  };
 
   return (
     <Box css={{ padding: '93px 24px 92px 24px ' }}>

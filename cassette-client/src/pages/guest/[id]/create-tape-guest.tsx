@@ -1,32 +1,27 @@
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import { MAX_LENGTH } from 'constants/maxTextLen';
+import useInput from 'hooks/useInput';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGuestInfoStore } from 'store';
 import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
 import date from 'utils/format/date';
 
-const MAX_LENGTH = {
-  NICKNAME: 5,
-  TITLE: 16,
-};
-
 const CreateTapeGuest = () => {
   const { query } = useRouter();
-  const [nickname, setNickname] = useState('');
-  const [title, setTitle] = useState('');
   const { setUserData, setDate } = useGuestInfoStore();
   const [trackDate, setTrackDate] = useState('');
 
-  const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setNickname(target.value);
-  };
+  const { value: nickname, handleChangeValue: handleChangeNickname } = useInput(
+    MAX_LENGTH.NICKNAME,
+  );
 
-  const handleChangeTitle = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setTitle(target.value);
-  };
+  const { value: title, handleChangeValue: handleChangeTitle } = useInput(
+    MAX_LENGTH.TITLE,
+  );
 
   const GUEST_DECORATE_TAPE_URL = `/guest/${query.id}/decorate-tape-guest`;
 
