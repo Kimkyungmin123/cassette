@@ -1,10 +1,12 @@
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
+import { MAX_LENGTH } from 'constants/maxTextLen';
+import useInput from 'hooks/useInput';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import subInstance from 'utils/api/sub';
 import date from 'utils/format/date';
@@ -16,23 +18,26 @@ import {
   InputBox,
 } from '../styles/create-tape';
 
-const MAX_LENGTH = {
-  NICKNAME: 5,
-  TITLE: 16,
-};
-
 const MenuLayout = dynamic(() => import('components/menu'));
 
 const ModifyTapeInfo = () => {
-  const [modifiedUserName, setModifiedUserName] = useState('');
-  const [modifiedTapeTitle, setModifiedTapeTitle] = useState('');
   const { setUserData, userNickname } = useUserStore();
   const { setResponsUser } = useResponsUserStore();
   const { setTapeColor } = useColorStore();
   const [userName, setUserName] = useState<string>('');
   const [userTapeTitle, setUserTapeTitle] = useState<string>('');
   const [createDate, setCreateDate] = useState<string>('');
+  const {
+    value: modifiedUserName,
+    handleChangeValue: handleChangeNickname,
+    setValue: setModifiedUserName,
+  } = useInput(MAX_LENGTH.NICKNAME);
 
+  const {
+    value: modifiedTapeTitle,
+    handleChangeValue: handleChangeTitle,
+    setValue: setModifiedTapeTitle,
+  } = useInput(MAX_LENGTH.TITLE);
   const router = useRouter();
 
   useEffect(() => {
@@ -54,14 +59,6 @@ const ModifyTapeInfo = () => {
     setModifiedUserName(userName);
     setModifiedTapeTitle(userTapeTitle);
   }, [setResponsUser, setTapeColor, userName, userTapeTitle, userNickname]);
-
-  const handleChangeNickname = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setModifiedUserName(target.value);
-  };
-
-  const handleChangeTitle = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setModifiedTapeTitle(target.value);
-  };
 
   return (
     <>
