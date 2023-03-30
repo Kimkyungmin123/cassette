@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const prod = process.env.NODE_ENV === 'production';
 const withPlugins = require('next-compose-plugins');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -12,7 +11,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   compress: true,
   webpack: (config) => {
     const plugins = [...config.plugins];
-    prod && config.plugins.push(new CompressionPlugin());
     return {
       ...config,
       mode: prod ? 'producton' : 'development',
@@ -22,12 +20,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   },
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = withPWA({
   reactStrictMode: true,
   swcMinify: true,
   presets: ['next/babel'],
   productionBrowserSourceMaps: true,
   webpack: (config) => {
+    config.plugins.push(new CompressionPlugin());
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -37,4 +37,4 @@ const nextConfig = withPWA({
   },
 });
 
-module.exports = withPlugins([[nextConfig], [withBundleAnalyzer]]);
+module.exports = withPlugins([[withBundleAnalyzer]], nextConfig);
