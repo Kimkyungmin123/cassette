@@ -89,6 +89,8 @@ const App = ({ Component, pageProps }: AppProps) => {
             as="font"
             href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2"
           />
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
           <link
             href="../../favicons/favicon-16x16.png"
             rel="icon"

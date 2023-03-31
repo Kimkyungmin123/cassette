@@ -1,7 +1,5 @@
 'use client';
 import Button from 'components/button';
-import Modal from 'components/modal';
-import ModalPortal from 'components/modal/portal';
 import TapeSVG from 'components/tape/tape';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -12,6 +10,8 @@ import subInstance from 'utils/api/sub';
 import date from 'utils/format/date';
 
 const Cry = dynamic(() => import('@icon/cry.svg'));
+const Modal = dynamic(() => import('components/modal'));
+const ModalPortal = dynamic(() => import('components/modal/portal'));
 
 const GuestEntry = () => {
   const router = useRouter();

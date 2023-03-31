@@ -3,8 +3,6 @@ import Copy from '@icon/copy.svg';
 import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
-import Modal from 'components/modal';
-import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import EmptyTape from 'components/tape/emptyTape';
 import TapeSVG from 'components/tape/tape';
@@ -13,6 +11,7 @@ import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import withESI from 'react-esi';
 import { usePlayStore } from 'store';
 import {
   BottomZone,
@@ -34,6 +33,11 @@ import downloadFile from 'utils/audio/download';
 import date from 'utils/format/date';
 
 const MenuLayout = dynamic(() => import('components/menu'));
+const Modal = dynamic(() => import('components/modal'));
+const ModalPortal = dynamic(() => import('components/modal/portal'));
+const Cry = dynamic(() => import('@icon/cry.svg'));
+
+const AudioPlayerESI = withESI(AudioPlayer, 'AudioPlayer');
 
 const getUserTape = async () => {
   const data = await subInstance.getUserTape();
@@ -152,8 +156,6 @@ const CreateTapeCompleted = () => {
     }
   };
 
-  const Cry = dynamic(() => import('@icon/cry.svg'));
-
   return (
     <>
       {tapeData ? (
@@ -193,7 +195,7 @@ const CreateTapeCompleted = () => {
             />
           </TrackBox>
 
-          <AudioPlayer
+          <AudioPlayerESI
             disabled={!currentTapeId || tapeData?.tracks.length < 3}
             audioLink={
               !isFullTape && currentTapeId

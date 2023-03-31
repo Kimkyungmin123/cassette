@@ -1,6 +1,5 @@
 const prod = process.env.NODE_ENV === 'production';
 const withPlugins = require('next-compose-plugins');
-const CompressionPlugin = require('compression-webpack-plugin');
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
@@ -27,7 +26,6 @@ const nextConfig = withPWA({
   presets: ['next/babel'],
   productionBrowserSourceMaps: true,
   webpack: (config) => {
-    config.plugins.push(new CompressionPlugin());
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
