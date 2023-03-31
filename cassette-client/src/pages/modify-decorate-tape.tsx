@@ -2,6 +2,7 @@ import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
@@ -16,9 +17,14 @@ const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename, date } = useUserStore();
   const { tapeId } = useResponsUserStore();
+
+  const { isLoading, setIsLoading } = useLoading();
+
   const router = useRouter();
 
   const submit = () => {
+    setIsLoading(true);
+
     subInstance
       .modifyUseTape(
         tapeId as number,
@@ -53,7 +59,7 @@ const ModifyDecorateTape = () => {
               </label>
             </Middie>
 
-            <Button variant="main" onClick={() => submit()}>
+            <Button variant="main" onClick={submit} isLoading={isLoading}>
               <span>꾸미기 완료 </span>
             </Button>
           </DecoZone>

@@ -1,9 +1,11 @@
 import Close from '@icon/close.svg';
+import SpinnerIcon from 'components/button/spinner';
 import CheckBox from 'components/checkBox';
 import Dropdown from 'components/dropDown';
 import TapeSvg from 'components/tape/tape';
 import Textarea from 'components/textarea';
 import { WITHDRAWAL } from 'constants/withdrawal';
+import useLoading from 'hooks/useLoading';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import { dropdownStore, useUserStore } from 'store';
@@ -23,10 +25,14 @@ import { removeAuthToken } from 'utils/storage/authCookie';
 const Withdrawal = () => {
   const [checked, setChecked] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);
+  const [opinion, setOpinion] = useState<string>('');
 
   const router = useRouter();
+
   const { userNickname } = useUserStore();
-  const [opinion, setOpinion] = useState<string>('');
+  const { dropContent, dropType, setDropData } = dropdownStore();
+
+  const { isLoading, setIsLoading } = useLoading();
 
   const handleChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -38,7 +44,15 @@ const Withdrawal = () => {
     setOpinion(target.value);
   };
 
-  const { dropContent, dropType, setDropData } = dropdownStore();
+  const submit = () => {
+    setIsLoading(true);
+
+    mainInstance.deleteUser(dropType as WithdrawalType, opinion).then(() => {
+      window.localStorage.removeItem('persist');
+      removeAuthToken('accessToken');
+      router.push('/');
+    });
+  };
 
   return (
     <WithdrawalContainer>
@@ -97,17 +111,10 @@ const Withdrawal = () => {
           disabled={!checked || !dropContent}
           as="button"
           aria-label="탈퇴하기"
-          onClick={() => {
-            mainInstance
-              .deleteUser(dropType as WithdrawalType, opinion)
-              .then(() => {
-                window.localStorage.removeItem('persist');
-                removeAuthToken('accessToken');
-                router.push('/');
-              });
-          }}
+          onClick={submit}
+          isLoading={isLoading}
         >
-          <div>탈퇴하기</div>
+          {isLoading ? <SpinnerIcon /> : <div>탈퇴하기</div>}
         </WithdrawalButton>
       </SubmitZone>
     </WithdrawalContainer>

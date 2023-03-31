@@ -21,7 +21,7 @@ const Guide = () => {
   return (
     <>
       <CloseZone>
-        <Close onClick={() => router.back()} />
+        <Close onClick={router.back} />
       </CloseZone>
       <GuideContainer>
         <Title>

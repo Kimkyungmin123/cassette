@@ -1,8 +1,10 @@
+import SpinnerIcon from 'components/button/spinner';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
+import useLoading from 'hooks/useLoading';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -11,13 +13,15 @@ import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
 
 const CreateTape = () => {
   const { setUserData, date } = useUserStore();
+
   const { value: nickname, handleChangeValue: handleChangeNickname } = useInput(
     MAX_LENGTH.NICKNAME,
   );
-
   const { value: title, handleChangeValue: handleChangeTitle } = useInput(
     MAX_LENGTH.TITLE,
   );
+  const { isLoading, setIsLoading } = useLoading();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -63,12 +67,14 @@ const CreateTape = () => {
       <Link href={nickname && title ? '/decorate-tape' : '#'}>
         <CreateTapeInfoButton
           onClick={() => {
+            setIsLoading(true);
             nickname && title && setUserData(nickname, title);
           }}
           variant="main"
           disabled={!nickname || !title}
+          isLoading={isLoading}
         >
-          작성 완료
+          {isLoading ? <SpinnerIcon /> : <>작성 완료</>}
         </CreateTapeInfoButton>
       </Link>
     </Box>

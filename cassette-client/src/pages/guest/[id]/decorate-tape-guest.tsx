@@ -2,6 +2,7 @@ import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import useLoading from 'hooks/useLoading';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -16,6 +17,8 @@ const DecorateTapeGuest = () => {
 
   const guestColor = useGuestColorStore().tapeColor;
   const setGuestColor = useGuestColorStore().setTapeColor;
+
+  const { isLoading, setIsLoading } = useLoading();
 
   const GUEST_MAKE_TRACK_URL = `/guest/${query.id}/make-track`;
 
@@ -42,7 +45,13 @@ const DecorateTapeGuest = () => {
             </label>
           </Middie>
           <Link href={GUEST_MAKE_TRACK_URL}>
-            <Button variant="main">꾸미기 완료</Button>
+            <Button
+              variant="main"
+              isLoading={isLoading}
+              onClick={() => setIsLoading(true)}
+            >
+              꾸미기 완료
+            </Button>
           </Link>
         </DecoZone>
       </DecoZone>

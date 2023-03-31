@@ -1,12 +1,13 @@
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
+import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
 import Tape from 'components/tape';
 import Title from 'components/title';
+import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
-import withESI from 'react-esi';
 import { useGuestColorStore, useGuestInfoStore, useRecordStore } from 'store';
 import { Box } from 'styles/create-tape';
 import {
@@ -25,8 +26,6 @@ const CheckeRectangle = dynamic(() => import('@icon/checkeRectangle.svg'));
 const Modal = dynamic(() => import('components/modal'));
 const ModalPortal = dynamic(() => import('components/modal/portal'));
 
-const TapeESI = withESI(Tape, 'Tape');
-
 const MakeTrack = () => {
   const route = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
@@ -34,9 +33,13 @@ const MakeTrack = () => {
   const [firstEntry, setFirstEntry] = useState<boolean>(true);
   const [isRedording, setIsRedording] = useState<boolean>(false);
   const [fullTape, setFullTape] = useState<boolean>(false);
+
   const { isGlobalRecording } = useRecordStore();
   const { date, userNickname, tapename } = useGuestInfoStore();
   const { tapeColor } = useGuestColorStore();
+
+  const { isLoading, setIsLoading } = useLoading();
+
   const router = useRouter();
   const { id } = router.query;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
@@ -45,6 +48,8 @@ const MakeTrack = () => {
   const closeModal = () => setModalOpen(false);
 
   const sendTape = () => {
+    setIsLoading(true);
+
     if (blob) {
       audioInstance.getWaveBlob(blob, false).then((res) => {
         const audiofile = new File([res], 'audiofile.wav', {
@@ -61,10 +66,12 @@ const MakeTrack = () => {
             )
             .then(() => {
               setModalOpen(true);
+              setIsLoading(false);
             })
             .catch(() => {
               setFullTape(true);
               setModalOpen(true);
+              setIsLoading(false);
             });
         }
       });
@@ -110,7 +117,7 @@ const MakeTrack = () => {
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
       <Box margin="0 0 44px 0">
-        <TapeESI
+        <Tape
           title={tapename}
           date={date}
           sec="144"
@@ -138,8 +145,9 @@ const MakeTrack = () => {
         onClick={sendTape}
         variant="main"
         disabled={firstEntry || isRedording}
+        isLoading={isLoading}
       >
-        테이프 전송하기
+        {isLoading?<SpinnerIcon/>:<>테이프 전송하기</>}
       </SubmitTapeButton>
     </MakeTapeContainer>
   );

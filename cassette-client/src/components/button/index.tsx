@@ -1,9 +1,10 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import { Color } from 'types';
 
+import SpinnerIcon from './spinner';
 import { ButtonLayout } from './style';
 
-export type ButtonType = 'main' | 'kakao' | 'guest' | 'clear';
+export type ButtonType = 'main' | 'guest' | 'clear';
 
 export interface ButtonProps {
   children: ReactNode;
@@ -11,9 +12,16 @@ export interface ButtonProps {
   disabled?: boolean;
   variant: ButtonType;
   color?: Color;
+  isLoading?: boolean;
 }
 
-const Button = ({ children, onClick, variant, color }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  variant,
+  color,
+  isLoading,
+}: ButtonProps) => {
   return (
     <>
       <ButtonLayout
@@ -21,8 +29,9 @@ const Button = ({ children, onClick, variant, color }: ButtonProps) => {
         onClick={onClick}
         variant={variant}
         color={color}
+        isLoading={isLoading}
       >
-        <div>{children}</div>
+        <> {isLoading ? <SpinnerIcon /> : <div>{children}</div>}</>
       </ButtonLayout>
     </>
   );

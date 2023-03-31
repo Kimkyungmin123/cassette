@@ -3201,7 +3201,6 @@ __metadata:
     react-audio-voice-recorder: ^1.0.4
     react-cookie: ^4.1.1
     react-dom: next
-    react-esi: ^0.3.1
     react-query-devtools: ^2.6.3
     react-voice-recorder: ^2.1.2
     source-map-explorer: ^2.5.3
@@ -6627,15 +6626,6 @@ __metadata:
   peerDependencies:
     react: 18.3.0-next-ee8509801-20230117
   checksum: 8fbd931f13dba19dc49054a91f86cf0eaaff8d4975a6c23f5f7af907bdf164bf58c81df8d9f60ae0144545fd5b7116438faaebc6d2a920b0033aa8061474ad64
-  languageName: node
-  linkType: hard
-
-"react-esi@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "react-esi@npm:0.3.1"
-  peerDependencies:
-    react: ^16.7.0
-  checksum: 6dd0a87960958506215ead9a2601e2a05fdee3a6a17155b03fe566e198bfc901772cd88b476d1162e199e465ebd1f1322a2e439e94dd6a5d1250ea60aa9ccfb8
   languageName: node
   linkType: hard
 

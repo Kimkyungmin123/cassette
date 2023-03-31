@@ -1,8 +1,10 @@
+import SpinnerIcon from 'components/button/spinner';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
+import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -27,6 +29,8 @@ const ModifyTapeInfo = () => {
   const [userName, setUserName] = useState<string>('');
   const [userTapeTitle, setUserTapeTitle] = useState<string>('');
   const [createDate, setCreateDate] = useState<string>('');
+
+  const { isLoading, setIsLoading } = useLoading();
   const {
     value: modifiedUserName,
     handleChangeValue: handleChangeNickname,
@@ -107,14 +111,16 @@ const ModifyTapeInfo = () => {
         >
           <CreateTapeInfoButton
             onClick={() => {
+              setIsLoading(true);
               modifiedUserName &&
                 modifiedTapeTitle &&
                 setUserData(modifiedUserName, modifiedTapeTitle);
             }}
             variant="main"
             disabled={!modifiedUserName || !modifiedTapeTitle}
+            isLoading={isLoading}
           >
-            수정 완료
+            {isLoading ? <SpinnerIcon /> : <div>수정 완료</div>}
           </CreateTapeInfoButton>
         </Link>
       </Box>

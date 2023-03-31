@@ -24,6 +24,7 @@ export const WarningZone = styled.div<{ firstEntry: boolean }>`
 display: flex;
 justify-content: center;
 align-items: center;
+height: 40px;
 
 
 p {
