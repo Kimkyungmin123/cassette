@@ -1,13 +1,12 @@
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
 import { ButtonLayout } from 'components/button/style';
-import Modal from 'components/modal';
-import ModalPortal from 'components/modal/portal';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
+import withESI from 'react-esi';
 import { useGuestColorStore, useGuestInfoStore, useRecordStore } from 'store';
 import { Box } from 'styles/create-tape';
 import {
@@ -23,6 +22,10 @@ import audioInstance from 'utils/audio/convert';
 
 const Cry = dynamic(() => import('@icon/cry.svg'));
 const CheckeRectangle = dynamic(() => import('@icon/checkeRectangle.svg'));
+const Modal = dynamic(() => import('components/modal'));
+const ModalPortal = dynamic(() => import('components/modal/portal'));
+
+const TapeESI = withESI(Tape, 'Tape');
 
 const MakeTrack = () => {
   const route = useRouter();
@@ -107,7 +110,7 @@ const MakeTrack = () => {
         <Title name={userNickname} color={theme.colors.white} />
       </Box>
       <Box margin="0 0 44px 0">
-        <Tape
+        <TapeESI
           title={tapename}
           date={date}
           sec="144"
