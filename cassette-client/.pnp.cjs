@@ -62,7 +62,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-audio-voice-recorder", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:1.0.4"],\
             ["react-cookie", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:4.1.1"],\
             ["react-dom", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:18.3.0-next-ee8509801-20230117"],\
-            ["react-esi", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:0.3.1"],\
             ["react-query-devtools", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:2.6.3"],\
             ["react-voice-recorder", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:2.1.2"],\
             ["source-map-explorer", "npm:2.5.3"],\
@@ -6107,7 +6106,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-audio-voice-recorder", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:1.0.4"],\
             ["react-cookie", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:4.1.1"],\
             ["react-dom", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:18.3.0-next-ee8509801-20230117"],\
-            ["react-esi", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:0.3.1"],\
             ["react-query-devtools", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:2.6.3"],\
             ["react-voice-recorder", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:2.1.2"],\
             ["source-map-explorer", "npm:2.5.3"],\
@@ -10158,28 +10156,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["loose-envify", "npm:1.4.0"],\
             ["react", "npm:18.3.0-next-ee8509801-20230117"],\
             ["scheduler", "npm:0.24.0-next-ee8509801-20230117"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["react-esi", [\
-        ["npm:0.3.1", {\
-          "packageLocation": "./.yarn/cache/react-esi-npm-0.3.1-5914d46dd3-6dd0a87960.zip/node_modules/react-esi/",\
-          "packageDependencies": [\
-            ["react-esi", "npm:0.3.1"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:0.3.1", {\
-          "packageLocation": "./.yarn/__virtual__/react-esi-virtual-66a95a52ef/0/cache/react-esi-npm-0.3.1-5914d46dd3-6dd0a87960.zip/node_modules/react-esi/",\
-          "packageDependencies": [\
-            ["react-esi", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:0.3.1"],\
-            ["@types/react", "npm:18.0.26"],\
-            ["react", "npm:18.3.0-next-ee8509801-20230117"]\
           ],\
           "packagePeers": [\
             "@types/react",\

@@ -1,8 +1,10 @@
+import SpinnerIcon from 'components/button/spinner';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
+import useLoading from 'hooks/useLoading';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -12,13 +14,14 @@ import date from 'utils/format/date';
 
 const CreateTapeGuest = () => {
   const { query } = useRouter();
-  const { setUserData, setDate } = useGuestInfoStore();
   const [trackDate, setTrackDate] = useState('');
+
+  const { setUserData, setDate } = useGuestInfoStore();
+  const { isLoading, setIsLoading } = useLoading();
 
   const { value: nickname, handleChangeValue: handleChangeNickname } = useInput(
     MAX_LENGTH.NICKNAME,
   );
-
   const { value: title, handleChangeValue: handleChangeTitle } = useInput(
     MAX_LENGTH.TITLE,
   );
@@ -77,11 +80,13 @@ const CreateTapeGuest = () => {
         <CreateTapeInfoButton
           onClick={() => {
             setUserData(nickname, title);
+            setIsLoading(true);
           }}
           variant="main"
           disabled={!nickname || !title}
+          isLoading={isLoading}
         >
-          작성 완료
+          {isLoading ? <SpinnerIcon /> : <> 작성 완료</>}
         </CreateTapeInfoButton>
       </Link>
     </Box>

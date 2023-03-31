@@ -2,6 +2,7 @@ import Button from 'components/button';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
+import useLoading from 'hooks/useLoading';
 import { useRouter } from 'next/router';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
@@ -14,18 +15,25 @@ const DecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename, date } = useUserStore();
   const { setResponsUser } = useResponsUserStore();
+
+  const { isLoading, setIsLoading } = useLoading();
+
   const router = useRouter();
 
   const submit = () => {
+    setIsLoading(true);
+
     subInstance
       .createUserTape(tapeColor as Color, tapename, userNickname)
       .then((data) => {
         setResponsUser(data.result.tapeLink);
         setTapeColor(data.result.colorCode);
         router.push('/create-tape-completed');
+        setIsLoading(false);
       })
       .catch(() => {
         alert(`테이프 생성 실패`);
+        setIsLoading(false);
         router.push('/');
       });
   };
@@ -48,7 +56,7 @@ const DecorateTape = () => {
               <ColorPlate />
             </label>
           </Middie>
-          <Button variant="main" onClick={() => submit()}>
+          <Button variant="main" onClick={submit} isLoading={isLoading}>
             <span>꾸미기 완료</span>
           </Button>
         </DecoZone>

@@ -13,19 +13,6 @@ const mainButton = css`
   }
 `;
 
-const kakaoButton = css`
-  background-color: ${theme.colors.login_kakao};
-  justify-content: center;
-  color: ${theme.colors.black_900};
-  padding: 17.5px 0;
-  position: relative;
-
-  svg {
-    position: absolute;
-    left: 24.5px;
-  }
-`;
-
 const geustButton = css`
   color: ${theme.colors.white};
 `;
@@ -42,7 +29,7 @@ export const ButtonLayout = styled.div<ButtonProps>`
   width: 100%;
   font-size: ${theme.fontSize.md};
   border-radius: 50px;
-  padding: 17.5px 0;
+  padding: ${({ isLoading }) => (isLoading ? '13px 0' : '17.5px 0')};
   font-weight: 700;
   line-height: 19px;
   max-height: 54px;
@@ -71,8 +58,6 @@ export const ButtonLayout = styled.div<ButtonProps>`
     switch (variant) {
       case 'main':
         return mainButton;
-      case 'kakao':
-        return kakaoButton;
       case 'guest':
         return geustButton;
       case 'clear':
@@ -81,4 +66,43 @@ export const ButtonLayout = styled.div<ButtonProps>`
         return mainButton;
     }
   }}
+`;
+
+export const KaKaoButtonLayout = styled.div<{ isLoading: boolean }>`
+  display: flex;
+  justify-content: center;
+  padding: 17.5px 0;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  background-color: ${theme.colors.login_kakao};
+  color: ${theme.colors.black_900};
+  font-size: ${theme.fontSize.md};
+  border-radius: 50px;
+  padding: ${({ isLoading }) => (isLoading ? '13px 0' : '17.5px 0')};
+  font-weight: 700;
+  line-height: 19px;
+  max-height: 54px;
+  font-family: 'Pretendard-Regular';
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: keep-all;
+  }
+
+  ${({ isLoading }) =>
+    !isLoading &&
+    `span {
+    width: 100%;
+    display: inline;
+  }
+
+  svg {
+    position: absolute;
+    left: 24.5px;
+    max-width: 100px;
+  }`}
 `;

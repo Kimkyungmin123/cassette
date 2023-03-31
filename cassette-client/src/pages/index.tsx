@@ -1,7 +1,8 @@
-import Kakao from '@icon/kakao.svg';
 import Button from 'components/button';
+import KaKaoButton from 'components/button/kakao';
 import TapeSVG from 'components/tape/tape';
 import FontFaceObserver from 'fontfaceobserver';
+import useLoading from 'hooks/useLoading';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Container, Zone } from 'styles';
@@ -11,6 +12,11 @@ export default function Home() {
   const contYcomputer = new FontFaceObserver('Ycomputer-Regular');
 
   const [font1Load, setFont1Load] = useState<boolean>(false);
+
+  const { isLoading: isKaKaoLoading, setIsLoading: setIsKaKaoLoading } =
+    useLoading();
+  const { isLoading: isCommonLoading, setIsLoading: setIsCommonLoading } =
+    useLoading();
 
   useEffect(() => {
     Promise.all([fontPretend.load(), contYcomputer.load()]).then(() => {
@@ -46,14 +52,17 @@ export default function Home() {
             </p>
           </Zone>
           <Zone css={{ gap: '16px', paddingTop: ' 106px' }}>
+            <KaKaoButton
+              url={LOGIN_URL}
+              onClick={() => setIsKaKaoLoading(true)}
+              isLoading={isKaKaoLoading}
+            />
             <Link href={LOGIN_URL}>
-              <Button variant="kakao">
-                <Kakao />
-                <span>카카오 로그인</span>
-              </Button>
-            </Link>
-            <Link href={LOGIN_URL}>
-              <Button variant="main">
+              <Button
+                variant="main"
+                onClick={() => setIsCommonLoading(true)}
+                isLoading={isCommonLoading}
+              >
                 <span>내 테이프 만들기</span>
               </Button>
             </Link>

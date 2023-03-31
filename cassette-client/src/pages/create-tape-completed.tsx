@@ -11,7 +11,6 @@ import ToastUI from 'components/Toast';
 import useCopy from 'hooks/useCopy';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import withESI from 'react-esi';
 import { usePlayStore } from 'store';
 import {
   BottomZone,
@@ -36,8 +35,6 @@ const MenuLayout = dynamic(() => import('components/menu'));
 const Modal = dynamic(() => import('components/modal'));
 const ModalPortal = dynamic(() => import('components/modal/portal'));
 const Cry = dynamic(() => import('@icon/cry.svg'));
-
-const AudioPlayerESI = withESI(AudioPlayer, 'AudioPlayer');
 
 const getUserTape = async () => {
   const data = await subInstance.getUserTape();
@@ -195,7 +192,7 @@ const CreateTapeCompleted = () => {
             />
           </TrackBox>
 
-          <AudioPlayerESI
+          <AudioPlayer
             disabled={!currentTapeId || tapeData?.tracks.length < 3}
             audioLink={
               !isFullTape && currentTapeId

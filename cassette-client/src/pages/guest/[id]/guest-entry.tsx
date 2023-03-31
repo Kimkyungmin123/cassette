@@ -1,6 +1,7 @@
 'use client';
 import Button from 'components/button';
 import TapeSVG from 'components/tape/tape';
+import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -23,6 +24,8 @@ const GuestEntry = () => {
     useState<Color>('cassette_orange');
   const [hasFullTape, setHasfullTape] = useState<boolean>(false);
   const [createDate, setcreateDate] = useState<string>('');
+
+  const { isLoading, setIsLoading } = useLoading();
 
   const GUEST_CREATE_URL = `/guest/${id}/create-tape-guest`;
   const MAKE_TAPE_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}`;
@@ -83,11 +86,13 @@ const GuestEntry = () => {
             <Button
               variant="guest"
               color={ownerTapeColor}
-              onClick={
+              onClick={() => {
+                setIsLoading(true);
                 hasFullTape
-                  ? () => setModalOpen(true)
-                  : () => route.push(GUEST_CREATE_URL)
-              }
+                  ? (setModalOpen(true), setIsLoading(false))
+                  : route.push(GUEST_CREATE_URL);
+              }}
+              isLoading={isLoading}
             >
               목소리 남겨주기
             </Button>
