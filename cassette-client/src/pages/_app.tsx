@@ -1,22 +1,16 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import {
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import gtag from 'lib/gtag';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { global } from 'styles/globals';
 import theme from 'styles/theme';
 import mainInstance from 'utils/api/main';
 import { getAuthToken } from 'utils/storage/authCookie';
-
-import Custom404 from './404';
 
 const Layout = dynamic(() => import('components/layout'));
 
@@ -82,11 +76,15 @@ const App = ({ Component, pageProps }: AppProps) => {
           <link
             rel="preload"
             as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
             href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
           />
           <link
             rel="preload"
             as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
             href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2"
           />
           <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -126,20 +124,15 @@ const App = ({ Component, pageProps }: AppProps) => {
         }}
       />
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Suspense fallback={<Custom404 />}>
-            {hydrated && (
-              <ThemeProvider theme={theme}>
-                <Global styles={global} />
-
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-                <div id="modal" />
-              </ThemeProvider>
-            )}
-          </Suspense>
-        </Hydrate>
+        {hydrated && (
+          <ThemeProvider theme={theme}>
+            <Global styles={global} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+            <div id="modal" />
+          </ThemeProvider>
+        )}
       </QueryClientProvider>
     </>
   );
