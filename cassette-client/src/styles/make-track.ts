@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { ButtonProps } from 'components/button';
-import { ButtonLayout } from 'components/button/style';
 
 import theme from './theme';
 
@@ -37,9 +35,4 @@ p {
   text-align: left;
   margin: 0 0 0 8px;
 }`}
-`;
-
-export const SubmitTapeButton = styled(ButtonLayout)<ButtonProps>`
-  background-color: ${({ disabled }) =>
-    disabled ? theme.colors.disabled : theme.colors.primary};
 `;

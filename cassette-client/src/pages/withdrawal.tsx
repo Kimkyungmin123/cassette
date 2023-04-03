@@ -109,12 +109,11 @@ const Withdrawal = () => {
         <WithdrawalButton
           variant="main"
           disabled={!checked || !dropContent}
-          as="button"
           aria-label="탈퇴하기"
           onClick={submit}
           isLoading={isLoading}
         >
-          {isLoading ? <SpinnerIcon /> : <div>탈퇴하기</div>}
+          {isLoading ? <SpinnerIcon /> : <span>탈퇴하기</span>}
         </WithdrawalButton>
       </SubmitZone>
     </WithdrawalContainer>

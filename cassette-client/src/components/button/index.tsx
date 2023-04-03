@@ -1,14 +1,13 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import { Color } from 'types';
 
-import SpinnerIcon from './spinner';
 import { ButtonLayout } from './style';
 
 export type ButtonType = 'main' | 'guest' | 'clear';
 
 export interface ButtonProps {
   children: ReactNode;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   variant: ButtonType;
   color?: Color;
@@ -21,19 +20,18 @@ const Button = ({
   variant,
   color,
   isLoading,
+  disabled,
 }: ButtonProps) => {
   return (
-    <>
-      <ButtonLayout
-        role="button"
-        onClick={onClick}
-        variant={variant}
-        color={color}
-        isLoading={isLoading}
-      >
-        <> {isLoading ? <SpinnerIcon /> : <div>{children}</div>}</>
-      </ButtonLayout>
-    </>
+    <ButtonLayout
+      onClick={onClick}
+      disabled={disabled}
+      variant={variant}
+      color={color}
+      isLoading={isLoading}
+    >
+      <div>{children}</div>
+    </ButtonLayout>
   );
 };
 

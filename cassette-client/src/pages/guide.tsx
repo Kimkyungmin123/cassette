@@ -74,7 +74,7 @@ const Guide = () => {
             </p>
           </Content>
           <GuideButtonZone>
-            <GuideButton variant="main">
+            <GuideButton variant="main" as="div" role="button">
               <Link
                 href="https://www.notion.so/Voice-Tape-041b53af5dce4da880e360d250c1bcab"
                 target="_blank"
