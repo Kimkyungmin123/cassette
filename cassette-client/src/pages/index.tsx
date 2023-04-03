@@ -7,10 +7,14 @@ import useLoading from 'hooks/useLoading';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Zone } from 'styles';
+import mainInstance from 'utils/api/main';
+import { getAuthToken } from 'utils/storage/authCookie';
 
 export default function Home() {
   const fontPretend = new FontFaceObserver('Pretendard-Regular');
   const contYcomputer = new FontFaceObserver('Ycomputer-Regular');
+  const auth = getAuthToken('accessToken');
+  const router = useRouter();
 
   const [font1Load, setFont1Load] = useState<boolean>(false);
 
@@ -18,6 +22,16 @@ export default function Home() {
     useLoading();
   const { isLoading: isCommonLoading, setIsLoading: setIsCommonLoading } =
     useLoading();
+
+  useEffect(() => {
+    if (auth) {
+      mainInstance.getUserInfo().then((data) => {
+        data?.result.tapes.length === 0
+          ? router.push('/create-tape')
+          : router.push('/create-tape-completed');
+      });
+    }
+  }, []);
 
   useEffect(() => {
     Promise.all([fontPretend.load(), contYcomputer.load()]).then(() => {
@@ -30,8 +44,6 @@ export default function Home() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const router = useRouter();
 
   const LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_REST_API}&redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/kakao/bridge`;
   return (
