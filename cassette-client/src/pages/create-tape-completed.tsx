@@ -277,6 +277,7 @@ const CreateTapeCompleted = () => {
           <BottomZone>
             <Button
               variant="main"
+              aria-label="내 테이프 링크 공유"
               onClick={() => {
                 handleCopyClipBoard(`${GUEST_URL}`);
                 setOnToast(true);

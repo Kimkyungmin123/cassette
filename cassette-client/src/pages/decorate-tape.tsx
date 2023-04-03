@@ -1,4 +1,5 @@
-import Button from 'components/button';
+import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
@@ -56,9 +57,15 @@ const DecorateTape = () => {
               <ColorPlate />
             </label>
           </Middie>
-          <Button variant="main" onClick={submit} isLoading={isLoading}>
-            <span>꾸미기 완료</span>
-          </Button>
+          <ButtonLayout
+            variant="main"
+            onClick={submit}
+            isLoading={isLoading}
+            disabled={isLoading}
+            aria-label="꾸미기 완료"
+          >
+            {isLoading ? <SpinnerIcon /> : <span>꾸미기 완료</span>}
+          </ButtonLayout>
         </DecoZone>
       </DecoZone>
     </DecoContainer>

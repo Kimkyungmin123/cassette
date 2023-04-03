@@ -1,5 +1,6 @@
 'use client';
-import Button from 'components/button';
+import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import TapeSVG from 'components/tape/tape';
 import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
@@ -83,9 +84,10 @@ const GuestEntry = () => {
             </p>
           </Zone>
           <Zone css={{ paddingTop: '176px' }}>
-            <Button
+            <ButtonLayout
               variant="guest"
               color={ownerTapeColor}
+              aria-label="목소리 남겨주기"
               onClick={() => {
                 setIsLoading(true);
                 hasFullTape
@@ -93,9 +95,10 @@ const GuestEntry = () => {
                   : route.push(GUEST_CREATE_URL);
               }}
               isLoading={isLoading}
+              disabled={isLoading}
             >
-              목소리 남겨주기
-            </Button>
+              {isLoading ? <SpinnerIcon /> : <span>목소리 남겨주기</span>}
+            </ButtonLayout>
           </Zone>
         </Container>
       ) : null}

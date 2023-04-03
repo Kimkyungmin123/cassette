@@ -13,7 +13,6 @@ import { Box } from 'styles/create-tape';
 import {
   BackButtonZone,
   MakeTapeContainer,
-  SubmitTapeButton,
   WarningZone,
 } from 'styles/make-track';
 import theme from 'styles/theme';
@@ -82,7 +81,6 @@ const MakeTrack = () => {
     <MakeTapeContainer>
       <BackButtonZone>
         <ButtonLayout
-          as="button"
           variant="clear"
           aria-label="뒤로 가기"
           onClick={() => route.back()}
@@ -141,14 +139,14 @@ const MakeTrack = () => {
         ) : null}
       </WarningZone>
 
-      <SubmitTapeButton
+      <ButtonLayout
         onClick={sendTape}
         variant="main"
-        disabled={firstEntry || isRedording}
+        disabled={firstEntry || isRedording || isLoading}
         isLoading={isLoading}
       >
-        {isLoading?<SpinnerIcon/>:<>테이프 전송하기</>}
-      </SubmitTapeButton>
+        {isLoading ? <SpinnerIcon /> : <span>테이프 전송하기</span>}
+      </ButtonLayout>
     </MakeTapeContainer>
   );
 };

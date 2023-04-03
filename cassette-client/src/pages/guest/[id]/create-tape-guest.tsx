@@ -1,15 +1,15 @@
 import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useGuestInfoStore } from 'store';
-import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
+import { Box, Info, InputBox } from 'styles/create-tape';
 import date from 'utils/format/date';
 
 const CreateTapeGuest = () => {
@@ -27,6 +27,8 @@ const CreateTapeGuest = () => {
   );
 
   const GUEST_DECORATE_TAPE_URL = `/guest/${query.id}/decorate-tape-guest`;
+
+  const router = useRouter();
 
   useEffect(() => {
     const createTrackDate = new Date();
@@ -76,19 +78,20 @@ const CreateTapeGuest = () => {
           ex&#41; 친구야 사랑해!
         </Info>
       </InputBox>
-      <Link href={nickname && title ? GUEST_DECORATE_TAPE_URL : '#'}>
-        <CreateTapeInfoButton
-          onClick={() => {
-            setUserData(nickname, title);
-            setIsLoading(true);
-          }}
-          variant="main"
-          disabled={!nickname || !title}
-          isLoading={isLoading}
-        >
-          {isLoading ? <SpinnerIcon /> : <> 작성 완료</>}
-        </CreateTapeInfoButton>
-      </Link>
+
+      <ButtonLayout
+        onClick={() => {
+          setUserData(nickname, title);
+          setIsLoading(true);
+          router.push(GUEST_DECORATE_TAPE_URL);
+        }}
+        variant="main"
+        disabled={!nickname || !title || isLoading}
+        isLoading={isLoading}
+        aria-label="작성 완료"
+      >
+        {isLoading ? <SpinnerIcon /> : <span> 작성 완료</span>}
+      </ButtonLayout>
     </Box>
   );
 };

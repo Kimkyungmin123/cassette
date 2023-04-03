@@ -6,7 +6,7 @@ import { ButtonProps } from '.';
 import SpinnerIcon from './spinner';
 import { KaKaoButtonLayout } from './style';
 
-interface KaKaoButtonProps extends Pick<ButtonProps, 'isLoading' | 'onClick'> {
+interface KaKaoButtonProps extends Pick<ButtonProps, 'isLoading'> {
   isLoading: boolean;
   onClick: MouseEventHandler<HTMLDivElement>;
   url: string;
@@ -17,9 +17,9 @@ const KaKaoButton = ({ isLoading, url, onClick }: KaKaoButtonProps) => {
     <>
       <Link href={url}>
         <KaKaoButtonLayout
-          role="button"
           onClick={onClick}
           isLoading={isLoading}
+          role="button"
         >
           <>
             {isLoading ? (

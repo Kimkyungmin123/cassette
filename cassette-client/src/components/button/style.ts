@@ -11,10 +11,18 @@ const mainButton = css`
   svg {
     padding-right: 8px;
   }
+
+  :disabled {
+    opacity: 55%;
+  }
 `;
 
 const geustButton = css`
   color: ${theme.colors.white};
+
+  :disabled {
+    opacity: 0.5;
+  }
 `;
 
 const clearButton = css`
@@ -22,7 +30,7 @@ const clearButton = css`
   color: ${theme.colors.white};
 `;
 
-export const ButtonLayout = styled.div<ButtonProps>`
+export const ButtonLayout = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;

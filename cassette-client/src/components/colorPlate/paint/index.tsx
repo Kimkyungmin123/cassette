@@ -36,6 +36,7 @@ const Paint = ({ isOwner = true, color }: CircleProps) => {
         value={color}
         checked={isColorValue}
         onChange={handleColorChange}
+        aria-label={color.slice(9)}
       />
     </Item>
   );

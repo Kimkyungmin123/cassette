@@ -1,9 +1,10 @@
-import Button from 'components/button';
 import KaKaoButton from 'components/button/kakao';
+import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import TapeSVG from 'components/tape/tape';
 import FontFaceObserver from 'fontfaceobserver';
 import useLoading from 'hooks/useLoading';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Zone } from 'styles';
 
@@ -29,6 +30,8 @@ export default function Home() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const router = useRouter();
 
   const LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_REST_API}&redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/kakao/bridge`;
   return (
@@ -57,15 +60,23 @@ export default function Home() {
               onClick={() => setIsKaKaoLoading(true)}
               isLoading={isKaKaoLoading}
             />
-            <Link href={LOGIN_URL}>
-              <Button
-                variant="main"
-                onClick={() => setIsCommonLoading(true)}
-                isLoading={isCommonLoading}
-              >
+
+            <ButtonLayout
+              aria-label="로그인하기"
+              variant="main"
+              onClick={() => {
+                setIsCommonLoading(true);
+                router.push(LOGIN_URL);
+              }}
+              isLoading={isCommonLoading}
+              disabled={isCommonLoading}
+            >
+              {isCommonLoading ? (
+                <SpinnerIcon />
+              ) : (
                 <span>내 테이프 만들기</span>
-              </Button>
-            </Link>
+              )}
+            </ButtonLayout>
           </Zone>
         </Container>
       ) : null}

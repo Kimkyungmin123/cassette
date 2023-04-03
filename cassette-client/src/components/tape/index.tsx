@@ -121,7 +121,6 @@ const Tape = ({
                     setFirstEntry?.(false);
                     setIsRedording?.(true);
                   }}
-                  as="button"
                   aria-label="녹음하기"
                 >
                   <RecordIcon />
@@ -148,7 +147,6 @@ const Tape = ({
                     setIsRedording?.(false);
                   }}
                   disabled={recordingTime < 3}
-                  as="button"
                   aria-label="녹음 중지하기"
                 >
                   <StopIcon />
@@ -175,7 +173,6 @@ const Tape = ({
                     setIsRedording?.(true);
                   }}
                   disabled={isRecording}
-                  as="button"
                   aria-label="재녹음하기"
                 >
                   <RecordIcon />

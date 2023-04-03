@@ -1,4 +1,5 @@
 import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
@@ -6,19 +7,13 @@ import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import subInstance from 'utils/api/sub';
 import date from 'utils/format/date';
 
-import {
-  Box,
-  CreateTapeInfoButton,
-  Info,
-  InputBox,
-} from '../styles/create-tape';
+import { Box, Info, InputBox } from '../styles/create-tape';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 
@@ -42,6 +37,7 @@ const ModifyTapeInfo = () => {
     handleChangeValue: handleChangeTitle,
     setValue: setModifiedTapeTitle,
   } = useInput(MAX_LENGTH.TITLE);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -102,27 +98,22 @@ const ModifyTapeInfo = () => {
             ex&#41; 2023년 나의 새로운 도전을 응원해줘!
           </Info>
         </InputBox>
-        <Link
-          href={
-            modifiedUserName && modifiedTapeTitle
-              ? '/modify-decorate-tape'
-              : '#'
-          }
+
+        <ButtonLayout
+          onClick={() => {
+            setIsLoading(true);
+            modifiedUserName &&
+              modifiedTapeTitle &&
+              setUserData(modifiedUserName, modifiedTapeTitle);
+            router.push('/modify-decorate-tape');
+          }}
+          variant="main"
+          aria-label="수정 완료"
+          disabled={!modifiedUserName || !modifiedTapeTitle || isLoading}
+          isLoading={isLoading}
         >
-          <CreateTapeInfoButton
-            onClick={() => {
-              setIsLoading(true);
-              modifiedUserName &&
-                modifiedTapeTitle &&
-                setUserData(modifiedUserName, modifiedTapeTitle);
-            }}
-            variant="main"
-            disabled={!modifiedUserName || !modifiedTapeTitle}
-            isLoading={isLoading}
-          >
-            {isLoading ? <SpinnerIcon /> : <div>수정 완료</div>}
-          </CreateTapeInfoButton>
-        </Link>
+          {isLoading ? <SpinnerIcon /> : <span>수정 완료</span>}
+        </ButtonLayout>
       </Box>
     </>
   );

@@ -1,15 +1,14 @@
 import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useUserStore } from 'store';
-import { Box, CreateTapeInfoButton, Info, InputBox } from 'styles/create-tape';
+import { Box, Info, InputBox } from 'styles/create-tape';
 
 const CreateTape = () => {
   const { setUserData, date } = useUserStore();
@@ -23,10 +22,6 @@ const CreateTape = () => {
   const { isLoading, setIsLoading } = useLoading();
 
   const router = useRouter();
-
-  useEffect(() => {
-    date ? router.push('/modify-tape-info') : null;
-  }, [date]);
 
   return (
     <Box css={{ padding: '93px 24px 92px 24px ' }}>
@@ -64,19 +59,20 @@ const CreateTape = () => {
           ex&#41; 2023년 나의 새로운 도전을 응원해줘!
         </Info>
       </InputBox>
-      <Link href={nickname && title ? '/decorate-tape' : '#'}>
-        <CreateTapeInfoButton
-          onClick={() => {
-            setIsLoading(true);
-            nickname && title && setUserData(nickname, title);
-          }}
-          variant="main"
-          disabled={!nickname || !title}
-          isLoading={isLoading}
-        >
-          {isLoading ? <SpinnerIcon /> : <>작성 완료</>}
-        </CreateTapeInfoButton>
-      </Link>
+
+      <ButtonLayout
+        onClick={() => {
+          setIsLoading(true);
+          nickname && title && setUserData(nickname, title);
+          router.push(`/decorate-tape`);
+        }}
+        variant="main"
+        aria-label="작성 완료"
+        disabled={!nickname || !title || isLoading}
+        isLoading={isLoading}
+      >
+        {isLoading ? <SpinnerIcon /> : <span>작성 완료</span>}
+      </ButtonLayout>
     </Box>
   );
 };

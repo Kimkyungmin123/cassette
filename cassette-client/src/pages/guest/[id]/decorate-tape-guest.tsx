@@ -1,9 +1,9 @@
-import Button from 'components/button';
+import SpinnerIcon from 'components/button/spinner';
+import { ButtonLayout } from 'components/button/style';
 import ColorPlate from 'components/colorPlate';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useGuestColorStore, useGuestInfoStore } from 'store';
@@ -21,6 +21,8 @@ const DecorateTapeGuest = () => {
   const { isLoading, setIsLoading } = useLoading();
 
   const GUEST_MAKE_TRACK_URL = `/guest/${query.id}/make-track`;
+
+  const router = useRouter();
 
   useEffect(() => {
     setGuestColor('cassette_orange');
@@ -44,15 +46,18 @@ const DecorateTapeGuest = () => {
               <ColorPlate isOwner={false} />
             </label>
           </Middie>
-          <Link href={GUEST_MAKE_TRACK_URL}>
-            <Button
-              variant="main"
-              isLoading={isLoading}
-              onClick={() => setIsLoading(true)}
-            >
-              꾸미기 완료
-            </Button>
-          </Link>
+          <ButtonLayout
+            variant="main"
+            isLoading={isLoading}
+            disabled={isLoading}
+            aria-label="꾸미기 완료"
+            onClick={() => {
+              setIsLoading(true);
+              router.push(GUEST_MAKE_TRACK_URL);
+            }}
+          >
+            {isLoading ? <SpinnerIcon /> : <span> 꾸미기 완료</span>}
+          </ButtonLayout>
         </DecoZone>
       </DecoZone>
     </DecoContainer>
