@@ -162,6 +162,7 @@ const Tape = ({
                   ref={recordRef}
                   audioLink={url}
                   isOwner={isOwner}
+                  aria-label="음원 재생바"
                 />
               </RecordingContainer>
               <RecordButtonZone css={{ paddingBottom: '39px' }}>

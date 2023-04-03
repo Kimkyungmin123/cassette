@@ -9,15 +9,12 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { global } from 'styles/globals';
 import theme from 'styles/theme';
-import mainInstance from 'utils/api/main';
-import { getAuthToken } from 'utils/storage/authCookie';
 
 const Layout = dynamic(() => import('components/layout'));
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [hydrated, setHydrated] = useState<boolean>(false);
 
-  const auth = getAuthToken('accessToken');
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
 
@@ -33,16 +30,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       router.events.off('hashChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
-  useEffect(() => {
-    if (auth && router.pathname === '/') {
-      mainInstance.getUserInfo().then((data) => {
-        data?.result.tapes.length === 0
-          ? router.push('/create-tape')
-          : router.push('/create-tape-completed');
-      });
-    }
-  }, []);
 
   useEffect(() => {
     setHydrated(true);
