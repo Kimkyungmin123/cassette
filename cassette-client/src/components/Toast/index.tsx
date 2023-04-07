@@ -18,7 +18,7 @@ const ToastUI = ({ children, onClose }: ToastUIProps) => {
     };
   }, [onClose]);
   return (
-    <ToastBox>
+    <ToastBox role="alert">
       <Content>{children}</Content>
     </ToastBox>
   );
