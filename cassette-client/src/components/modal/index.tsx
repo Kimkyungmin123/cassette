@@ -33,7 +33,7 @@ const Modal = ({
   return (
     <ModalContainer>
       <ModalWrapper>
-        <ModalContent>
+        <ModalContent role="dialog">
           <ModalTitle>{icon}</ModalTitle>
           <ModalTitle>{title}</ModalTitle>
           <ModalDetail>{detail}</ModalDetail>
