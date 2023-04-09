@@ -1,6 +1,6 @@
-import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
+import SpinnerIcon from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import { MAX_LENGTH } from 'constants/maxTextLen';
