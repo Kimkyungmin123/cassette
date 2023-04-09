@@ -1,12 +1,11 @@
+import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
-import SpinnerIcon from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
-import { NextConfig } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,6 +16,7 @@ import date from 'utils/format/date';
 import { Box, Info, InputBox } from '../styles/create-tape';
 
 const MenuLayout = dynamic(() => import('components/menu'));
+
 
 export const getServerSideProps = (context: NextConfig) => {
   const { accessToken } = context.req.cookies;

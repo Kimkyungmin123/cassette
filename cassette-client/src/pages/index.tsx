@@ -1,6 +1,6 @@
 import KaKaoButton from 'components/button/kakao';
+import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
-import SpinnerIcon from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import FontFaceObserver from 'fontfaceobserver';
 import useLoading from 'hooks/useLoading';

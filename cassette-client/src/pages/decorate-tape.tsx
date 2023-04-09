@@ -1,10 +1,9 @@
+import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
 import ColorPlate from 'components/colorPlate';
-import SpinnerIcon from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';
-import { NextConfig } from 'next';
 import { useRouter } from 'next/router';
 import { useColorStore, useResponsUserStore, useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
@@ -26,6 +25,7 @@ export const getServerSideProps = (context: NextConfig) => {
   }
   return { props: {} };
 };
+
 
 const DecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
