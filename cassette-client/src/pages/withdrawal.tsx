@@ -7,7 +7,6 @@ import Textarea from 'components/textarea';
 import { WITHDRAWAL } from 'constants/withdrawal';
 import useLoading from 'hooks/useLoading';
 import { GetServerSidePropsContext } from 'next';
-
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import { dropdownStore, useUserStore } from 'store';
@@ -25,7 +24,6 @@ import mainInstance from 'utils/api/main';
 import { removeAuthToken } from 'utils/storage/authCookie';
 
 export const getServerSideProps = (context: GetServerSidePropsContext) => {
-
   const { accessToken } = context.req.cookies;
 
   if (!accessToken) {
@@ -38,7 +36,6 @@ export const getServerSideProps = (context: GetServerSidePropsContext) => {
   }
   return { props: {} };
 };
-
 
 const Withdrawal = () => {
   const [checked, setChecked] = useState<boolean>(false);
