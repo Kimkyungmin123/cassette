@@ -1,7 +1,7 @@
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
+import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
-import SpinnerIcon from 'components/spinner';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';
