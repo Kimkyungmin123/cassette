@@ -10,6 +10,22 @@ import { useRouter } from 'next/router';
 import { useUserStore } from 'store';
 import { Box, Info, InputBox } from 'styles/create-tape';
 
+
+export const getServerSideProps = (context: NextConfig) => {
+  const { accessToken } = context.req.cookies;
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+};
+
+
 const CreateTape = () => {
   const { setUserData, date } = useUserStore();
 

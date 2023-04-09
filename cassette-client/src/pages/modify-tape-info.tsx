@@ -17,6 +17,21 @@ import { Box, Info, InputBox } from '../styles/create-tape';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 
+
+export const getServerSideProps = (context: NextConfig) => {
+  const { accessToken } = context.req.cookies;
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+};
+
 const ModifyTapeInfo = () => {
   const { setUserData, userNickname } = useUserStore();
   const { setResponsUser } = useResponsUserStore();

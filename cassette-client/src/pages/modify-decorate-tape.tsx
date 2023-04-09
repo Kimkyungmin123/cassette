@@ -14,6 +14,22 @@ import subInstance from 'utils/api/sub';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 
+
+export const getServerSideProps = (context: NextConfig) => {
+  const { accessToken } = context.req.cookies;
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+};
+
+
 const ModifyDecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename, date } = useUserStore();

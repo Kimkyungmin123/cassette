@@ -22,6 +22,22 @@ import { WithdrawalType } from 'types';
 import mainInstance from 'utils/api/main';
 import { removeAuthToken } from 'utils/storage/authCookie';
 
+
+export const getServerSideProps = (context: NextConfig) => {
+  const { accessToken } = context.req.cookies;
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+};
+
+
 const Withdrawal = () => {
   const [checked, setChecked] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);

@@ -12,6 +12,21 @@ import subInstance from 'utils/api/sub';
 
 import theme from '../styles/theme';
 
+export const getServerSideProps = (context: NextConfig) => {
+  const { accessToken } = context.req.cookies;
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+};
+
+
 const DecorateTape = () => {
   const { tapeColor, setTapeColor } = useColorStore();
   const { userNickname, tapename, date } = useUserStore();

@@ -29,6 +29,16 @@ export interface NavBarProps {
 const NavBar = ({ name, isOpen, status }: NavBarProps) => {
   const route = useRouter();
 
+
+  const submit = () => {
+    mainInstance.logout().then(() => {
+      removeAuthToken('accessToken');
+      window.localStorage.removeItem('persist');
+      route.push('/');
+    });
+  };
+
+
   return (
     <NavContainer status={status}>
       <ButtonLayout
@@ -85,13 +95,7 @@ const NavBar = ({ name, isOpen, status }: NavBarProps) => {
         <Bar />
         <LogoutLi
           css={{ cursor: 'pointer' }}
-          onClick={() => {
-            mainInstance.logout().then(() => {
-              removeAuthToken('accessToken');
-              window.localStorage.removeItem('persist');
-              route.push('/');
-            });
-          }}
+          onClick={submit}
         >
           <Logout />
           <span>로그아웃</span>
