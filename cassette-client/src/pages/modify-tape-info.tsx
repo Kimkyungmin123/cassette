@@ -6,6 +6,8 @@ import { TitleName, TitleWrapper } from 'components/title/styles';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
+import { GetServerSidePropsContext } from 'next';
+
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,8 +19,8 @@ import { Box, Info, InputBox } from '../styles/create-tape';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
 
-export const getServerSideProps = (context: NextConfig) => {
   const { accessToken } = context.req.cookies;
 
   if (!accessToken) {
