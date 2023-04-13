@@ -7,6 +7,8 @@ import {
 
 import mainInstance from '../main';
 
+const isBrowser = typeof window !== 'undefined';
+
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
 });
@@ -17,21 +19,27 @@ instance.interceptors.request.use(
   async (config) => {
     config.withCredentials = true;
     try {
-      const token = await getAuthToken('accessToken');
-      if (config.headers) {
-        config.headers['Authorization'] = token && `Bearer ${token}`;
-        config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
+      if (isBrowser) {
+        const token = await getAuthToken('accessToken');
+        if (config.headers) {
+          config.headers['Authorization'] = token && `Bearer ${token}`;
+          config.headers['env'] = `${process.env.NEXT_PUBLIC_HEADERS_ENV}`;
+        }
       }
     } catch (e: any) {
-      window.location.href = '/';
+      if (isBrowser) {
+        window.location.href = '/';
+      }
     }
 
     return config;
   },
 
   (error) => {
-    window.location.href = '/';
-    Promise.reject(error);
+    if (isBrowser) {
+      window.location.href = '/';
+      Promise.reject(error);
+    }
   },
 );
 
@@ -57,36 +65,41 @@ instance.interceptors.response.use(
 
       if (status === 404 && code === 'INVALID_MEMBER_OR_NOT_FOUND') {
         removeAuthToken('accessToken');
-        window.localStorage.removeItem('persist');
-        alert('탈퇴한 사용자입니다.');
-        window.location.href = '/';
+        if (isBrowser) {
+          window.localStorage.removeItem('persist');
+          alert('탈퇴한 사용자입니다.');
+          window.location.href = '/';
+        }
       }
 
       if (status === 401 || code === 'EXPIRED_JWT_TOKEN') {
-        mainInstance
-          .getNewToken()
-          .then(({ data }) => {
-            if (data.result.accessToken) {
-              setAuthToken('accessToken', data.result.accessToken);
-              window.location.reload();
-            }
+        if (isBrowser) {
+          mainInstance
+            .getNewToken()
+            .then(({ data }) => {
+              if (data.result.accessToken) {
+                setAuthToken('accessToken', data.result.accessToken);
+                window.location.reload();
+              }
 
-            if (error.config) {
-              error.config.headers[
-                'Authorization'
-              ] = `Bearer ${data.result.accessToken}`;
-              return instance(error.config);
-            }
-          })
-          .catch((e: any) => {
-            removeAuthToken('accessToken');
-            window.localStorage.removeItem('persist');
-            window.location.href = '/';
-          });
+              if (error.config) {
+                error.config.headers[
+                  'Authorization'
+                ] = `Bearer ${data.result.accessToken}`;
+                return instance(error.config);
+              }
+            })
+            .catch((e: any) => {
+              removeAuthToken('accessToken');
+              window.localStorage.removeItem('persist');
+              window.location.href = '/';
+            });
+        }
       }
     } catch (e: any) {
-      window.location.href = '/';
-
+      if (isBrowser) {
+        window.location.href = '/';
+      }
       Promise.reject(error);
     }
   },
