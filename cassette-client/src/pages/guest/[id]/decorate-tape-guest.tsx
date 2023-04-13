@@ -1,6 +1,6 @@
-import SpinnerIcon from 'components/button/spinner';
 import { ButtonLayout } from 'components/button/style';
 import ColorPlate from 'components/colorPlate';
+import SpinnerIcon from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';

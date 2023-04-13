@@ -3,6 +3,7 @@ import Copy from '@icon/copy.svg';
 import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
+import { SpinnerView } from 'components/spinner';
 import Tape from 'components/tape';
 import EmptyTape from 'components/tape/emptyTape';
 import TapeSVG from 'components/tape/tape';
@@ -30,16 +31,17 @@ import { TapeResponse, Track } from 'types/serverResponse';
 import subInstance from 'utils/api/sub';
 import downloadFile from 'utils/audio/download';
 import date from 'utils/format/date';
+import { withPrefetchServerSideProps } from 'utils/ssr/withData';
 
 const MenuLayout = dynamic(() => import('components/menu'));
 const Modal = dynamic(() => import('components/modal'));
 const ModalPortal = dynamic(() => import('components/modal/portal'));
 const Cry = dynamic(() => import('@icon/cry.svg'));
 
-const getUserTape = async () => {
-  const data = await subInstance.getUserTape();
-  return data?.result[0];
-};
+export const getServerSideProps = withPrefetchServerSideProps(
+  'TapeData',
+  subInstance.getUserTape,
+);
 
 const CreateTapeCompleted = () => {
   const [isCopied, onCopy] = useCopy();
@@ -51,7 +53,10 @@ const CreateTapeCompleted = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const { isPlayAudio, setIsPlayAudio } = usePlayStore();
-  const { data: tapeData } = useQuery(['tapeData'], getUserTape);
+  const { data: tapeData, isLoading: tapeDataLoading } = useQuery(
+    ['tapeData'],
+    subInstance.getUserTape,
+  );
 
   const GUEST_URL = `${process.env.NEXT_PUBLIC_CLIENT_URL}/guest/${tapeData?.tapeLink}/guest-entry`;
   const MAX_NUMBER = 99999999;
@@ -152,6 +157,10 @@ const CreateTapeCompleted = () => {
       downloadFile(currentFile);
     }
   };
+
+  if (tapeDataLoading) {
+    return <SpinnerView />;
+  }
 
   return (
     <>

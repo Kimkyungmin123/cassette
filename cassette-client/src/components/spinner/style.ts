@@ -19,3 +19,11 @@ export const Spinner = styled.div`
   height: 20px;
   animation: ${spin} 1s linear infinite;
 `;
+
+export const SpinnerContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

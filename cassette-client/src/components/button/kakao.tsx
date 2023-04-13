@@ -2,8 +2,8 @@ import Kakao from '@icon/kakao.svg';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
 
+import SpinnerIcon from '../spinner';
 import { ButtonProps } from '.';
-import SpinnerIcon from './spinner';
 import { KaKaoButtonLayout } from './style';
 
 interface KaKaoButtonProps extends Pick<ButtonProps, 'isLoading'> {
