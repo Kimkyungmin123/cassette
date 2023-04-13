@@ -52,7 +52,6 @@ const ModifyTapeInfo = () => {
 
   useEffect(() => {
     if (tapeInfo) {
-      console.log(tapeInfo);
       setTapeColor(tapeInfo['colorCode']);
       setResponsUser(tapeInfo['tapeLink'], tapeInfo['id']);
       setModifiedUserName(tapeInfo['name']);
