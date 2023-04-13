@@ -4,10 +4,15 @@ import { Cassette, Tape, TapeResponse, Track } from 'types/serverResponse';
 
 import instance from './core';
 
-const getUserTape = () =>
-  instance<TapeResponse<Cassette[]>, TapeResponse<Cassette[]>>({
+const getUserTape = async () => {
+  const data = await instance<
+    TapeResponse<Cassette[]>,
+    TapeResponse<Cassette[]>
+  >({
     url: `/api/v1/tape`,
   });
+  return data?.result?.slice(-1)[0];
+};
 
 const getGuestTape = (id: number) => instance({ url: `/api/v1/tape${id}` });
 

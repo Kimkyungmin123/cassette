@@ -1,5 +1,9 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import gtag from 'lib/gtag';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
@@ -111,15 +115,17 @@ const App = ({ Component, pageProps }: AppProps) => {
         }}
       />
       <QueryClientProvider client={queryClient}>
-        {hydrated && (
-          <ThemeProvider theme={theme}>
-            <Global styles={global} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-            <div id="modal" />
-          </ThemeProvider>
-        )}
+        <Hydrate state={pageProps.dehydratedState}>
+          {hydrated && (
+            <ThemeProvider theme={theme}>
+              <Global styles={global} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+              <div id="modal" />
+            </ThemeProvider>
+          )}
+        </Hydrate>
       </QueryClientProvider>
     </>
   );
