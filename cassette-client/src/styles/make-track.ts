@@ -9,6 +9,7 @@ export const BackButtonZone = styled.div`
 `;
 
 export const MakeTapeContainer = styled.div`
+  padding: 0 24px;
   height: 100%;
 `;
 
