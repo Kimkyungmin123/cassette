@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 
+import theme from './theme';
+
 export const global = css`
   @font-face {
     font-family: 'Pretendard-Regular';
@@ -23,16 +25,17 @@ export const global = css`
 
   html {
     box-sizing: border-box;
+    background: ${theme.colors.background};
   }
 
   body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
-    background-image: url('../../assets/backgroundImg.svg');
   }
 
   #__next {
     width: 100%;
+    background-image: url('../../assets/backgroundImg.svg');
   }
 
   h1,
