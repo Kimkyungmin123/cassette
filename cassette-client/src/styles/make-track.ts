@@ -20,7 +20,7 @@ export const TapeLoading = styled.div`
 `;
 
 export const TapeContent = styled.div`
-  padding-top: 143px;
+  padding: 143px 0 92px 0;
 `;
 
 export const WarningZone = styled.div<{ firstEntry: boolean }>`
