@@ -1,6 +1,12 @@
 import Sandglass from '@icon/sandglass.svg';
 
-import { LoadingCotainer, TextContent } from './style';
+import {
+  DotStyle1,
+  DotStyle2,
+  DotStyle3,
+  LoadingCotainer,
+  TextContent,
+} from './style';
 
 const Loading = () => {
   return (
@@ -8,9 +14,9 @@ const Loading = () => {
       <Sandglass />
       <TextContent>
         <span>로딩중</span>
-        <div></div>
-        <div></div>
-        <div></div>
+        <DotStyle1 />
+        <DotStyle2 />
+        <DotStyle3 />
       </TextContent>
     </LoadingCotainer>
   );
