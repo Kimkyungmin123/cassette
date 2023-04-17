@@ -7,7 +7,7 @@ import Textarea from 'components/textarea';
 import { WITHDRAWAL } from 'constants/withdrawal';
 import useLoading from 'hooks/useLoading';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { dropdownStore, useUserStore } from 'store';
 import {
   CloseZone,
@@ -33,13 +33,17 @@ const Withdrawal = () => {
   const [checked, setChecked] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);
   const [opinion, setOpinion] = useState<string>('');
+  const [isWindow, setIsWindow] = useState<boolean>(false);
 
   const router = useRouter();
 
   const { userNickname } = useUserStore();
   const { dropContent, dropType, setDropData } = dropdownStore();
-
   const { isLoading, setIsLoading } = useLoading();
+
+  useEffect(() => {
+    setIsWindow(true);
+  }, []);
 
   const handleChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -75,13 +79,26 @@ const Withdrawal = () => {
         />
       </CloseZone>
       <Title>
-        <TapeSvg width="27px" height="25px" title="" date="" />
+        <TapeSvg
+          width="27px"
+          height="25px"
+          title=""
+          date=""
+          color="cassette_orange"
+        />
         <h1>Voice Tape 탈퇴하기</h1>
       </Title>
 
       <SubText>
         <h2>
-          {userNickname}님! Voice Tape를 <span>탈퇴</span>
+          {isWindow ? (
+            <>{userNickname}</>
+          ) : (
+            <div>
+              <SpinnerIcon />
+            </div>
+          )}
+          님! Voice Tape를 <span>탈퇴</span>
           하시나요? <br />
           탈퇴시 모든 Tape는 사라져요.
         </h2>

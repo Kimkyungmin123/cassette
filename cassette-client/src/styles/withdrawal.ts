@@ -60,9 +60,16 @@ export const Title = styled.div`
 export const SubText = styled.div`
   width: 100%;
   padding-top: 8px;
+  display: flex;
 
   span {
     color: ${theme.colors.warning_red};
+  }
+
+  div {
+    display: inline-block;
+    transform: scale(0.5);
+    margin-bottom: -10px;
   }
 `;
 

@@ -1,4 +1,4 @@
-import { useColorStore, useGuestColorStore } from 'store';
+import { useGuestInfoStore, useUserStore } from 'store';
 import theme from 'styles/theme';
 import { Color } from 'types';
 
@@ -31,8 +31,8 @@ const TapeSvg = ({
   isOwner = true,
   isPlaying = false,
 }: TapeSvgProps) => {
-  const { tapeColor } = useColorStore();
-  const guestColor = useGuestColorStore().tapeColor;
+  const { tapeColor } = useUserStore();
+  const { tapeColor: guestColor } = useGuestInfoStore();
 
   return (
     <svg

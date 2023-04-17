@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 import theme from 'styles/theme';
 
 import {
@@ -27,27 +27,26 @@ const Input = ({
   highlightWords,
   highlightColor,
 }: InputProps) => {
-  const [highlightedLabel, setHighlightedLabel] = useState('');
-
-  useEffect(() => {
-    highlightWords?.forEach((word) => {
+  const highlight = (words: string[]): string => {
+    let newLabel = label;
+    words?.forEach((word) => {
       const re = new RegExp(word, 'g');
-      const newLabel = label?.replace(
+      newLabel = newLabel?.replace(
         re,
         `<span style="color: ${theme.colors.mint};">${word}</span>`,
       );
-
-      if (!newLabel) return;
-      setHighlightedLabel(newLabel);
     });
-  }, [label]);
+    return newLabel || '';
+  };
 
   return (
     <LabeledInputContainer>
       {label && (
         <Label
           color={highlightColor}
-          dangerouslySetInnerHTML={{ __html: highlightedLabel }}
+          dangerouslySetInnerHTML={{
+            __html: highlight(highlightWords as string[]),
+          }}
         />
       )}
       <InputContainer>

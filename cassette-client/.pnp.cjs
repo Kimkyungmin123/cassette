@@ -36,7 +36,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@svgr/webpack", "npm:6.5.1"],\
             ["@tanstack/react-query", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:4.24.10"],\
             ["@types/cookie", "npm:0.5.1"],\
-            ["@types/fontfaceobserver", "npm:2.1.0"],\
             ["@types/gtag.js", "npm:0.0.12"],\
             ["@types/node", "npm:18.11.17"],\
             ["@types/react", "npm:18.0.26"],\
@@ -52,7 +51,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:8.6.0"],\
             ["eslint-plugin-jsx-a11y", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:6.7.1"],\
             ["eslint-plugin-simple-import-sort", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:8.0.0"],\
-            ["fontfaceobserver", "npm:2.3.0"],\
             ["husky", "npm:8.0.2"],\
             ["lint-staged", "npm:13.1.0"],\
             ["next", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:13.0.6"],\
@@ -4826,15 +4824,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@types/fontfaceobserver", [\
-        ["npm:2.1.0", {\
-          "packageLocation": "./.yarn/cache/@types-fontfaceobserver-npm-2.1.0-bd472e04f3-19bf653d82.zip/node_modules/@types/fontfaceobserver/",\
-          "packageDependencies": [\
-            ["@types/fontfaceobserver", "npm:2.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@types/glob", [\
         ["npm:7.2.0", {\
           "packageLocation": "./.yarn/cache/@types-glob-npm-7.2.0-772334bf9a-6ae717fedf.zip/node_modules/@types/glob/",\
@@ -6080,7 +6069,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@svgr/webpack", "npm:6.5.1"],\
             ["@tanstack/react-query", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:4.24.10"],\
             ["@types/cookie", "npm:0.5.1"],\
-            ["@types/fontfaceobserver", "npm:2.1.0"],\
             ["@types/gtag.js", "npm:0.0.12"],\
             ["@types/node", "npm:18.11.17"],\
             ["@types/react", "npm:18.0.26"],\
@@ -6096,7 +6084,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:8.6.0"],\
             ["eslint-plugin-jsx-a11y", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:6.7.1"],\
             ["eslint-plugin-simple-import-sort", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:8.0.0"],\
-            ["fontfaceobserver", "npm:2.3.0"],\
             ["husky", "npm:8.0.2"],\
             ["lint-staged", "npm:13.1.0"],\
             ["next", "virtual:1639ec265eab04cb5bd53e88e452648589997b69442f4cf054dd7858e2048b885d5529568b38bb2c19667f248a065f3e0fb3d4957edc1bcde7217ab8893a7da4#npm:13.0.6"],\
@@ -7678,15 +7665,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/debug",\
             "debug"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["fontfaceobserver", [\
-        ["npm:2.3.0", {\
-          "packageLocation": "./.yarn/cache/fontfaceobserver-npm-2.3.0-fe7e521e97-5f14715974.zip/node_modules/fontfaceobserver/",\
-          "packageDependencies": [\
-            ["fontfaceobserver", "npm:2.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\

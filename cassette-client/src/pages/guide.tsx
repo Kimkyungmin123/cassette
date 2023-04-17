@@ -32,7 +32,13 @@ const Guide = () => {
         <ContentZone>
           <Content>
             <div>
-              <TapeSVG width="27px" height="25px" title="" date="" />
+              <TapeSVG
+                width="27px"
+                height="25px"
+                title=""
+                date=""
+                color="cassette_orange"
+              />
               <h2>Voice Tape는 어떤 서비스예요?</h2>
             </div>
             <p>
@@ -44,7 +50,13 @@ const Guide = () => {
           </Content>
           <Content>
             <div>
-              <TapeSVG width="27px" height="25px" title="" date="" />
+              <TapeSVG
+                width="27px"
+                height="25px"
+                title=""
+                date=""
+                color="cassette_orange"
+              />
               <h2>Voice Tape는 어떻게 이용해요?</h2>
             </div>
             <ol>
@@ -65,7 +77,13 @@ const Guide = () => {
           </Content>
           <Content>
             <div>
-              <TapeSVG width="27px" height="25px" title="" date="" />
+              <TapeSVG
+                width="27px"
+                height="25px"
+                title=""
+                date=""
+                color="cassette_orange"
+              />
               <h2>Voice Tape를 매일 듣고 싶으신가요?</h2>
             </div>
             <p>

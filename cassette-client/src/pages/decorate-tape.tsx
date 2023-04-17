@@ -5,7 +5,7 @@ import TapeSVG from 'components/tape/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';
 import { useRouter } from 'next/router';
-import { useColorStore, useResponsUserStore, useUserStore } from 'store';
+import { useUserStore } from 'store';
 import { DecoContainer, DecoZone, Middie } from 'styles/decorate-tape';
 import { Color } from 'types';
 import subInstance from 'utils/api/sub';
@@ -20,9 +20,14 @@ export const getServerSideProps = withAuthServerSideProps(() => {
 });
 
 const DecorateTape = () => {
-  const { tapeColor, setTapeColor } = useColorStore();
-  const { userNickname, tapename, date } = useUserStore();
-  const { setResponsUser } = useResponsUserStore();
+  const {
+    userNickname,
+    tapename,
+    date,
+    setResponsUser,
+    tapeColor,
+    setTapeColor,
+  } = useUserStore();
 
   const { isLoading, setIsLoading } = useLoading();
 

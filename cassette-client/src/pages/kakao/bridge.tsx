@@ -1,15 +1,14 @@
 import Roading from 'components/loading';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useColorStore, useResponsUserStore } from 'store';
+import { useUserStore } from 'store';
 import mainInstance from 'utils/api/main';
 import { setAuthToken } from 'utils/storage/authCookie';
 
 const Bridge = () => {
   const router = useRouter();
   const { code } = router.query;
-  const { setResponsUser } = useResponsUserStore();
-  const { setTapeColor } = useColorStore();
+  const { setResponsUser, setTapeColor } = useUserStore();
 
   useEffect(() => {
     if (code) {

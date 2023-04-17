@@ -3,6 +3,7 @@ import Copy from '@icon/copy.svg';
 import { useQuery } from '@tanstack/react-query';
 import AudioPlayer from 'components/audio';
 import Button from 'components/button';
+import MenuLayout from 'components/menu';
 import { SpinnerView } from 'components/spinner';
 import Tape from 'components/tape';
 import EmptyTape from 'components/tape/emptyTape';
@@ -33,7 +34,6 @@ import downloadFile from 'utils/audio/download';
 import date from 'utils/format/date';
 import { withPrefetchServerSideProps } from 'utils/ssr/withData';
 
-const MenuLayout = dynamic(() => import('components/menu'));
 const Modal = dynamic(() => import('components/modal'));
 const ModalPortal = dynamic(() => import('components/modal/portal'));
 const Cry = dynamic(() => import('@icon/cry.svg'));
