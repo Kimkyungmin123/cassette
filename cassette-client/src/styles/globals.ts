@@ -26,12 +26,12 @@ export const global = css`
   html {
     box-sizing: border-box;
     background: ${theme.colors.background};
+    background-image: url('../../assets/backgroundImg.svg');
   }
 
   body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
-    background-image: url('../../assets/backgroundImg.svg');
   }
 
   #__next {
