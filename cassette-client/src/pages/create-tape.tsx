@@ -36,7 +36,12 @@ const CreateTape = () => {
         <Title name="닉네임" />
       </Box>
       <Box margin="0 0 44px 0">
-        <TapeSVG title="테이프의 제목이 여기에 적혀요!" date={date} sec="144" />
+        <TapeSVG
+          title="테이프의 제목이 여기에 적혀요!"
+          date={date}
+          sec="144"
+          color={'cassette_orange'}
+        />
       </Box>
       <InputBox>
         <Input
