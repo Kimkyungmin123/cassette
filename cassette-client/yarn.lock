@@ -2240,13 +2240,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fontfaceobserver@npm:^2":
-  version: 2.1.0
-  resolution: "@types/fontfaceobserver@npm:2.1.0"
-  checksum: 19bf653d82f91e86f32cd3f2df2988495b96d8ad5be5a625b7dad06a1a01a9add76607f8b8f821c50aad1f45f4d40433bec48463d60c7e9fa05a02e9e8469b66
-  languageName: node
-  linkType: hard
-
 "@types/glob@npm:^7.1.1":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
@@ -3175,7 +3168,6 @@ __metadata:
     "@svgr/webpack": ^6.5.1
     "@tanstack/react-query": ^4.24.10
     "@types/cookie": ^0
-    "@types/fontfaceobserver": ^2
     "@types/gtag.js": ^0.0.12
     "@types/node": ^18.11.17
     "@types/react": ^18.0.26
@@ -3191,7 +3183,6 @@ __metadata:
     eslint-config-prettier: ^8.6.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-simple-import-sort: latest
-    fontfaceobserver: ^2.3.0
     husky: ^8.0.2
     lint-staged: ^13.1.0
     next: 13.0.6
@@ -4443,13 +4434,6 @@ __metadata:
     debug:
       optional: true
   checksum: faa66059b66358ba65c234c2f2a37fcec029dc22775f35d9ad6abac56003268baf41e55f9ee645957b32c7d9f62baf1f0b906e68267276f54ec4b4c597c2b190
-  languageName: node
-  linkType: hard
-
-"fontfaceobserver@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "fontfaceobserver@npm:2.3.0"
-  checksum: 5f14715974203b9d68f299f93a7623afd9d5701572d683e861cdbb7514573ac556f56e9b5d07d2d534e01aed19a3b0bbe568e735e0e5494cbea913fc3f12b856
   languageName: node
   linkType: hard
 

@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { ButtonLayout } from 'components/button/style';
 import Input from 'components/input';
+import MenuLayout from 'components/menu';
 import SpinnerIcon, { SpinnerView } from 'components/spinner';
 import TapeSVG from 'components/tape/tape';
 import { TitleName, TitleWrapper } from 'components/title/styles';
 import { MAX_LENGTH } from 'constants/maxTextLen';
 import useInput from 'hooks/useInput';
 import useLoading from 'hooks/useLoading';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useColorStore, useResponsUserStore, useUserStore } from 'store';
+import { useUserStore } from 'store';
 import subInstance from 'utils/api/sub';
 import date from 'utils/format/date';
 import { withAuthServerSideProps } from 'utils/ssr/withAuth';
@@ -18,17 +18,14 @@ import { withPrefetchServerSideProps } from 'utils/ssr/withData';
 
 import { Box, Info, InputBox } from '../styles/create-tape';
 
-const MenuLayout = dynamic(() => import('components/menu'));
-
 export const getServerSideProps = withAuthServerSideProps(() => {
   withPrefetchServerSideProps('tapeInfo', subInstance.getUserTape);
   return { props: {} };
 });
 
 const ModifyTapeInfo = () => {
-  const { setUserData, userNickname } = useUserStore();
-  const { setResponsUser } = useResponsUserStore();
-  const { setTapeColor } = useColorStore();
+  const { setUserData, userNickname, setTapeColor, setResponsUser } =
+    useUserStore();
 
   const { isLoading, setIsLoading } = useLoading();
 

@@ -1,24 +1,16 @@
 import { Color, WithdrawalType } from 'types';
 
-export interface ColorStore {
-  tapeColor: Color | '';
-
-  setTapeColor: (tapeColor: Color) => void;
-}
-
 export interface UserStore {
   userNickname: string;
   tapename: string;
   date: string;
+  tapeColor: Color | '';
+  userURL: string;
+  tapeId: number;
 
   setUserData: (userNickname: string, tapename: string) => void;
   setDate: (date: string) => void;
-}
-
-export interface ResponseUserStore {
-  userURL: string;
-  tapeId?: number;
-
+  setTapeColor: (tapeColor: Color) => void;
   setResponsUser: (useURL: string, tapeId?: number) => void;
 }
 

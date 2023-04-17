@@ -25,6 +25,10 @@ const nextConfig = withPWA({
   swcMinify: true,
   presets: ['next/babel'],
   productionBrowserSourceMaps: true,
+  i18n: {
+    locales: ['ko'],
+    defaultLocale: 'ko',
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,

@@ -9,7 +9,17 @@ export const BackButtonZone = styled.div`
 `;
 
 export const MakeTapeContainer = styled.div`
-  padding: 143px 24px 92px 24px;
+  height: 100%;
+`;
+
+export const TapeLoading = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+`;
+
+export const TapeContent = styled.div`
+  padding-top: 143px;
 `;
 
 export const WarningZone = styled.div<{ firstEntry: boolean }>`

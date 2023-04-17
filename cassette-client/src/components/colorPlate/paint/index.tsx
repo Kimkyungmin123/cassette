@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useColorStore, useGuestColorStore } from 'store';
+import { useGuestInfoStore, useUserStore } from 'store';
 import { Color } from 'types';
 
 import { CircleStyle, Item } from './style';
@@ -11,9 +11,9 @@ export interface CircleProps {
 
 const Paint = ({ isOwner = true, color }: CircleProps) => {
   const [isColorValue, setIsColorValue] = useState<boolean>(false);
-  const { setTapeColor, tapeColor } = useColorStore();
-  const guestColor = useGuestColorStore().tapeColor;
-  const setGuestColor = useGuestColorStore().setTapeColor;
+  const { setTapeColor, tapeColor } = useUserStore();
+  const { tapeColor: guestColor, setTapeColor: setGuestColor } =
+    useGuestInfoStore();
 
   useEffect(() => {
     isOwner

@@ -1,18 +1,20 @@
 import Left from '@icon/left.svg';
 import Siren from '@icon/siren.svg';
 import { ButtonLayout } from 'components/button/style';
-import SpinnerIcon from 'components/spinner';
+import SpinnerIcon, { SpinnerView } from 'components/spinner';
 import Tape from 'components/tape';
 import Title from 'components/title';
 import useLoading from 'hooks/useLoading';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { useGuestColorStore, useGuestInfoStore, useRecordStore } from 'store';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useGuestInfoStore, useRecordStore } from 'store';
 import { Box } from 'styles/create-tape';
 import {
   BackButtonZone,
   MakeTapeContainer,
+  TapeContent,
+  TapeLoading,
   WarningZone,
 } from 'styles/make-track';
 import theme from 'styles/theme';
@@ -32,10 +34,10 @@ const MakeTrack = () => {
   const [firstEntry, setFirstEntry] = useState<boolean>(true);
   const [isRedording, setIsRedording] = useState<boolean>(false);
   const [fullTape, setFullTape] = useState<boolean>(false);
+  const [isWindow, setIsWindow] = useState<boolean>(false);
 
   const { isGlobalRecording } = useRecordStore();
-  const { date, userNickname, tapename } = useGuestInfoStore();
-  const { tapeColor } = useGuestColorStore();
+  const { date, userNickname, tapename, tapeColor } = useGuestInfoStore();
 
   const { isLoading, setIsLoading } = useLoading();
 
@@ -77,6 +79,10 @@ const MakeTrack = () => {
     }
   };
 
+  useEffect(() => {
+    setIsWindow(true);
+  }, []);
+
   return (
     <MakeTapeContainer>
       <BackButtonZone>
@@ -111,42 +117,52 @@ const MakeTrack = () => {
           />
         )}
       </ModalPortal>
-      <Box margin="0 0 24px 0">
-        <Title name={userNickname} color={theme.colors.white} />
-      </Box>
-      <Box margin="0 0 44px 0">
-        <Tape
-          title={tapename}
-          date={date}
-          sec="144"
-          hasAudio
-          setAudio={setBlob as Dispatch<SetStateAction<Blob>>}
-          isOwner={false}
-          firstEntry={firstEntry}
-          setFirstEntry={setFirstEntry}
-          setIsRedording={setIsRedording}
-        />
-      </Box>
-      <WarningZone firstEntry={firstEntry}>
-        {!firstEntry && isGlobalRecording ? (
-          <>
-            <Siren />
-            <p>
-              테이프 전송하기를 누르면 주인장에게 녹음테이프가
-              <br /> 바로 전송됩니다. 충분히 확인 후 전송해주세요.
-            </p>
-          </>
-        ) : null}
-      </WarningZone>
+      <>
+        {isWindow ? (
+          <TapeContent>
+            <Box margin="0 0 24px 0">
+              <Title name={userNickname} color={theme.colors.white} />
+            </Box>
+            <Box margin="0 0 44px 0">
+              <Tape
+                title={tapename}
+                date={date}
+                sec="144"
+                hasAudio
+                setAudio={setBlob as Dispatch<SetStateAction<Blob>>}
+                isOwner={false}
+                firstEntry={firstEntry}
+                setFirstEntry={setFirstEntry}
+                setIsRedording={setIsRedording}
+              />
+            </Box>
+            <WarningZone firstEntry={firstEntry}>
+              {!firstEntry && isGlobalRecording ? (
+                <>
+                  <Siren />
+                  <p>
+                    테이프 전송하기를 누르면 주인장에게 녹음테이프가
+                    <br /> 바로 전송됩니다. 충분히 확인 후 전송해주세요.
+                  </p>
+                </>
+              ) : null}
+            </WarningZone>
 
-      <ButtonLayout
-        onClick={sendTape}
-        variant="main"
-        disabled={firstEntry || isRedording || isLoading}
-        isLoading={isLoading}
-      >
-        {isLoading ? <SpinnerIcon /> : <span>테이프 전송하기</span>}
-      </ButtonLayout>
+            <ButtonLayout
+              onClick={sendTape}
+              variant="main"
+              disabled={firstEntry || isRedording || isLoading}
+              isLoading={isLoading}
+            >
+              {isLoading ? <SpinnerIcon /> : <span>테이프 전송하기</span>}
+            </ButtonLayout>
+          </TapeContent>
+        ) : (
+          <TapeLoading>
+            <SpinnerView />
+          </TapeLoading>
+        )}
+      </>
     </MakeTapeContainer>
   );
 };

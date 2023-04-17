@@ -1,27 +1,12 @@
 import {
-  ColorStore,
   DropdownStore,
   PlayStore,
   RecordStore,
-  ResponseUserStore,
   TokenStore,
   UserStore,
 } from 'types/store';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-
-export const useColorStore = create<ColorStore>()(
-  persist(
-    (set) => ({
-      tapeColor: '',
-
-      setTapeColor: (value) => {
-        set(() => ({ tapeColor: value }));
-      },
-    }),
-    { name: 'persist' },
-  ),
-);
 
 export const useUserStore = create<UserStore>()(
   persist(
@@ -29,6 +14,9 @@ export const useUserStore = create<UserStore>()(
       userNickname: '',
       tapename: '',
       date: '',
+      tapeColor: '',
+      userURL: '',
+      tapeId: -1,
 
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
@@ -36,22 +24,14 @@ export const useUserStore = create<UserStore>()(
       setDate: (date) => {
         set(() => ({ date }));
       },
-    }),
-    { name: 'persist' },
-  ),
-);
-
-export const useResponsUserStore = create<ResponseUserStore>()(
-  persist(
-    (set) => ({
-      userURL: '',
-      tapeId: -1,
-
+      setTapeColor: (value) => {
+        set(() => ({ tapeColor: value }));
+      },
       setResponsUser: (userURL, tapeId) => {
         set(() => ({ userURL, tapeId }));
       },
     }),
-    { name: 'persist' },
+    { name: 'user' },
   ),
 );
 
@@ -65,25 +45,15 @@ export const tokenStore = create<TokenStore>()(
   })),
 );
 
-export const useGuestColorStore = create<ColorStore>()(
-  persist(
-    (set) => ({
-      tapeColor: '',
-
-      setTapeColor: (value) => {
-        set(() => ({ tapeColor: value }));
-      },
-    }),
-    { name: 'persist' },
-  ),
-);
-
 export const useGuestInfoStore = create<UserStore>()(
   persist(
     (set) => ({
       userNickname: '',
       tapename: '',
       date: '',
+      tapeColor: '',
+      userURL: '',
+      tapeId: -1,
 
       setUserData: (userNickname, tapename) => {
         set(() => ({ userNickname, tapename }));
@@ -91,8 +61,14 @@ export const useGuestInfoStore = create<UserStore>()(
       setDate: (date) => {
         set(() => ({ date }));
       },
+      setTapeColor: (tapeColor) => {
+        set(() => ({ tapeColor }));
+      },
+      setResponsUser: (userURL, tapeId) => {
+        set(() => ({ userURL, tapeId }));
+      },
     }),
-    { name: 'persist' },
+    { name: 'guest' },
   ),
 );
 
