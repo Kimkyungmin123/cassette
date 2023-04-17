@@ -31,11 +31,11 @@ export const global = css`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
+    background-image: url('../../assets/backgroundImg.svg');
   }
 
   #__next {
     width: 100%;
-    background-image: url('../../assets/backgroundImg.svg');
   }
 
   h1,
