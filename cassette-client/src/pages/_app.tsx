@@ -4,17 +4,15 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import Layout from 'components/layout';
 import gtag from 'lib/gtag';
 import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { global } from 'styles/globals';
 import theme from 'styles/theme';
-
-const Layout = dynamic(() => import('components/layout'));
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();

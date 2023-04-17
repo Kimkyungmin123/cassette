@@ -16,6 +16,7 @@ const colors = {
   white: '#FFFFFF',
   mint: '#4DFFEB',
 
+  background: '#242729',
   color_pallet: '#FCFCEE',
   login_kakao: '#FEE500',
   disabled: '#9C9C89', // main_50%
