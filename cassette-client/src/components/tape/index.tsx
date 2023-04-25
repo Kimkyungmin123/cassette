@@ -1,7 +1,7 @@
 import RecordIcon from '@icon/record.svg';
 import StopIcon from '@icon/stop.svg';
+import AudioPlayer from 'components/audio';
 import useAudio from 'hooks/useAudio';
-import dynamic from 'next/dynamic';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
 import { usePlayStore, useRecordStore } from 'store';
@@ -27,8 +27,6 @@ interface TapeProps extends TapeSvgProps {
   setFirstEntry?: Dispatch<SetStateAction<boolean>>;
   setIsRedording?: Dispatch<SetStateAction<boolean>>;
 }
-
-const AudioPlayer = dynamic(() => import('components/audio'));
 
 const Tape = ({
   hasAudio,

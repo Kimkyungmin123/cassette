@@ -276,7 +276,7 @@ const CreateTapeCompleted = () => {
 
           {tapeData?.tracks.length < 3 && (
             <PopupText>
-              <Tape width={'25'} height={'20'} />
+              <Tape width={'25'} height={'20'} color={'cassette_orange'} />
               <Box margin={'0 0 0 4px'}>
                 X 3 테이프가 최소 3개가 모여야 들을 수 있어요! <br />
                 친구들에게 더 공유해볼까요?

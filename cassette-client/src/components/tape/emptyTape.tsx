@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { GuestTrack } from 'styles/create-tape-completed';
 
 import { EmptyTapeZone, TapeName } from './style';
@@ -10,15 +9,7 @@ interface EmptyTapeProps {
 }
 
 const EmptyTape = ({ emptyNum, MaxNum, isShown }: EmptyTapeProps) => {
-  const [isMax, setIsMax] = useState<number>();
-  const [isEmpty, setIsEmpty] = useState<number>();
-
-  useEffect(() => {
-    setIsMax(MaxNum);
-    setIsEmpty(emptyNum);
-  }, [emptyNum, MaxNum]);
-
-  const getEmptyTape = (emptyNum: number, MaxNum: number) => {
+  const getEmptyTape = () => {
     const arr = [];
     for (let i = 0; i < MaxNum - emptyNum; i++) {
       arr.push(
@@ -36,7 +27,7 @@ const EmptyTape = ({ emptyNum, MaxNum, isShown }: EmptyTapeProps) => {
     return arr;
   };
 
-  return <>{getEmptyTape(isEmpty as number, isMax as number)}</>;
+  return <>{getEmptyTape()}</>;
 };
 
 export default EmptyTape;

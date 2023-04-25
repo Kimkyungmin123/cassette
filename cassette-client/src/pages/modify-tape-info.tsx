@@ -24,7 +24,7 @@ export const getServerSideProps = withAuthServerSideProps(() => {
 });
 
 const ModifyTapeInfo = () => {
-  const { setUserData, userNickname, setTapeColor, setResponsUser } =
+  const { setUserData, userNickname, setTapeColor, setResponsUser, setDate } =
     useUserStore();
 
   const { isLoading, setIsLoading } = useLoading();
@@ -53,6 +53,7 @@ const ModifyTapeInfo = () => {
       setResponsUser(tapeInfo['tapeLink'], tapeInfo['id']);
       setModifiedUserName(tapeInfo['name']);
       setModifiedTapeTitle(tapeInfo['title']);
+      setDate(date.formattedDate(tapeInfo['createAt']));
     }
   }, [tapeInfo]);
 
